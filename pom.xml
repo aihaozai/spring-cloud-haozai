@@ -20,6 +20,7 @@
         <module>spring-cloud-base</module>
         <module>spring-cloud-auth</module>
         <module>spring-cloud-gateway</module>
+        <module>spring-cloud-elasticsearch</module>
     </modules>
 
     <properties>
