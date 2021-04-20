@@ -1,0 +1,32 @@
+server:
+  port: 7000
+
+spring:
+  profiles:
+    active: dev,redis
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+      routes:
+        - id: auth
+          # 目标服务地址（uri：地址，请求转发后的地址）
+          uri: http://localhost:7001/auth
+          # 路由条件（predicates：断言，匹配 HTTP 请求内容）
+          predicates:
+            ## 转发地址格式为 uri/archive
+            - Path=/auth/**
+        - id: route1
+          # 目标服务地址（uri：地址，请求转发后的地址）
+          uri: http://localhost:7001/b
+          # 路由条件（predicates：断言，匹配 HTTP 请求内容）
+          predicates:
+            ## 转发地址格式为 uri/archive
+            - Path=/b/**
+
+logging:
+  level:
+    org.springframework.security: DEBUG
