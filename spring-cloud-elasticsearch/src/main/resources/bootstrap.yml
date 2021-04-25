@@ -1,0 +1,24 @@
+server:
+  port: 7002
+  servlet:
+    context-path: /elasticsearch
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: cloud-elasticsearch
+
+#swagger扫描配置
+swagger:
+  doc:
+    enable: false
+    basePackage:
+    title:
+    description:
+    termsOfServiceUrl:
+    version: 1.0
+
+logging:
+  level:
+    org.springframework.security: DEBUG
