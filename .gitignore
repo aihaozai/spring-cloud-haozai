@@ -3,9 +3,11 @@
 /target/
 **/target/
 **/src/test/
+
 .idea
 # Log file
 *.log
+*.iml
 
 # BlueJ files
 *.ctxt
