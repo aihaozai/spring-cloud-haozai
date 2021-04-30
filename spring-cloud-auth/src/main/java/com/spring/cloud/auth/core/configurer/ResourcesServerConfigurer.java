@@ -1,4 +1,4 @@
-package com.spring.cloud.auth.configurer;
+package com.spring.cloud.auth.core.configurer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;

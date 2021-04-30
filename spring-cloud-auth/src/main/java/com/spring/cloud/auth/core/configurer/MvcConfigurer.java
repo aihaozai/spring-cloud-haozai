@@ -1,4 +1,4 @@
-package com.spring.cloud.auth.configurer;
+package com.spring.cloud.auth.core.configurer;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

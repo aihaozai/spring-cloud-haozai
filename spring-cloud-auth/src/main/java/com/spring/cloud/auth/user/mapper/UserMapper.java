@@ -1,9 +1,9 @@
-package com.spring.cloud.auth.mapper;
+package com.spring.cloud.auth.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spring.cloud.auth.entity.User;
+import com.spring.cloud.auth.user.entity.User;
 
 /**
  * @author haozai

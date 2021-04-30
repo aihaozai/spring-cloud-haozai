@@ -1,5 +1,6 @@
-package com.spring.cloud.auth.entity;
+package com.spring.cloud.auth.user.entity;
 
+import com.spring.cloud.auth.entity.Role;
 import spring.cloud.base.core.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

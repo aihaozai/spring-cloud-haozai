@@ -1,11 +1,11 @@
-package com.spring.cloud.auth.service;
+package com.spring.cloud.auth.user.service;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.spring.cloud.auth.entity.User;
-import com.spring.cloud.auth.mapper.UserMapper;
+import com.spring.cloud.auth.user.entity.User;
+import com.spring.cloud.auth.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserService extends ServiceImpl<UserMapper, User> {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService{
 
     public IPage<User> selectUserPage(Page<User> page) {
-        return this.baseMapper.selectUserPage(page);
+        return this.baseMapper.selectPage(page,null);
     }
+
 }

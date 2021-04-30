@@ -1,4 +1,4 @@
-package com.spring.cloud.auth.service;
+package com.spring.cloud.auth.core.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

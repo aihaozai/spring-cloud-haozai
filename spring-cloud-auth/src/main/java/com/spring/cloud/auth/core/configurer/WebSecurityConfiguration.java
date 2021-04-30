@@ -1,7 +1,7 @@
-package com.spring.cloud.auth.configurer;
+package com.spring.cloud.auth.core.configurer;
 
 
-import com.spring.cloud.auth.service.UserServiceDetailImpl;
+import com.spring.cloud.auth.core.service.UserServiceDetailImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

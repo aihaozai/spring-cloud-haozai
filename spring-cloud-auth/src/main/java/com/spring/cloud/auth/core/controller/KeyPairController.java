@@ -1,4 +1,4 @@
-package com.spring.cloud.auth.controller;
+package com.spring.cloud.auth.core.controller;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
