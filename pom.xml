@@ -21,6 +21,7 @@
         <module>spring-cloud-auth</module>
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-elasticsearch</module>
+        <module>spring-cloud-fund</module>
     </modules>
 
     <properties>

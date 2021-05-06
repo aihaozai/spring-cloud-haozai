@@ -1,0 +1,30 @@
+server:
+  port: 7003
+  servlet:
+    context-path: /fund
+
+spring:
+  profiles:
+    active: dev,dataSource
+  application:
+    name: cloud-fund
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name:  com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://localhost:3306/cloud_fund?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+
+#swagger扫描配置
+swagger:
+  doc:
+    enable: false
+    basePackage:
+    title:
+    description:
+    termsOfServiceUrl:
+    version: 1.0
+
+logging:
+  level:
+    org.springframework.security: DEBUG

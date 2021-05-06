@@ -1,9 +1,9 @@
 package com.spring.cloud.auth.entity;
 
-import spring.cloud.base.core.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import spring.cloud.base.datasource.entity.BaseEntity;
 
 /**
  * @author haozai

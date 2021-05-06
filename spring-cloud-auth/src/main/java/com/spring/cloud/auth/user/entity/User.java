@@ -1,10 +1,11 @@
 package com.spring.cloud.auth.user.entity;
 
 import com.spring.cloud.auth.entity.Role;
-import spring.cloud.base.core.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
+import spring.cloud.base.datasource.entity.BaseEntity;
+
 import java.io.Serializable;
 import java.util.List;
 

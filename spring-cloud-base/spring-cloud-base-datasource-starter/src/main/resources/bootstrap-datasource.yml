@@ -17,7 +17,7 @@ mybatis-plus:
   mapperLocations: classpath*:com/spring/cloud/**/mapper/*Mapper.xml
   #  通过父类（或实现接口）的方式来限定扫描实体  typeAliasesPackage  typeAliasesSuperType 配合一起使用
   typeAliasesPackage: com.spring.cloud.**.entity
-  typeAliasesSuperType: spring.cloud.base.core.entity.BaseEntity
+  typeAliasesSuperType: spring.cloud.base.datasource.entity.BaseEntity
 
   configuration: # MyBatis 原生支持的配置
     # 是否开启自动驼峰命名规则（camel case）映射
