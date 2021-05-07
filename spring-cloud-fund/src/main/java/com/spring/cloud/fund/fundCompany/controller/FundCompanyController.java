@@ -29,7 +29,7 @@ public class FundCompanyController{
     private final IFundService iFundService;
 
     @GetMapping("/addAllFund")
-    public void addAllFund() throws IOException {
+    public void addAllFund() {
         List<FundCompany> fundCompanyList = iFundCompanyService.list();
         for (FundCompany fundCompany: fundCompanyList){
             iFundService.saveBatch(FundSearchUtil.getFundList(fundCompany.getCompanyCode()));
