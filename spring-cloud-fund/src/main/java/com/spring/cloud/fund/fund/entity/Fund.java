@@ -23,4 +23,8 @@ public class Fund extends BaseEntity implements Serializable  {
     private String fundName;
 
     private String fundType;
+
+    private String companyCode;
+
+    private String companyName;
 }
