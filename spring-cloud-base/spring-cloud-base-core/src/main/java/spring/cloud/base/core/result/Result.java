@@ -43,7 +43,8 @@ public class Result<T> implements Serializable {
         Result<T> result = new Result<>();
         result.setSuccess(ResultCodeEnum.SUCCESS.getSuccess())
         .setCode(ResultCodeEnum.SUCCESS.getCode())
-        .setMessage(ResultCodeEnum.SUCCESS.getMessage());
-        return result.setData(data);
+        .setMessage(ResultCodeEnum.SUCCESS.getMessage())
+        .setData(data);
+        return result;
     }
 }

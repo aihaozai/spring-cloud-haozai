@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author haozai
@@ -36,7 +37,7 @@ public class FundSearchUtil {
     public static List<Fund>  getFundList(String companyCode){
         log.info("获取基金开始----公司编号："+companyCode);
         Document doc = DocumentUtil.getDocument(String.format(FUND_URL,companyCode));
-        Elements html = doc.getElementById("kfsFundNetWrap").select("tbody").select("tr");
+        Elements html = Objects.requireNonNull(doc).getElementById("kfsFundNetWrap").select("tbody").select("tr");
         List<Fund> fundList = new ArrayList<>();
         String name  =doc.getElementsByClass("ttjj-panel-main-title").html();
         for(Element element : html){
@@ -64,7 +65,7 @@ public class FundSearchUtil {
     public static List<FundCompany>  getFundCompanyList(){
         log.info("获取基金公司开始");
         Document doc = DocumentUtil.getDocument(FUND_COMPANY_URL);
-        Elements html = doc.getElementById("companyTable").select("tbody").select("tr");
+        Elements html = Objects.requireNonNull(doc).getElementById("companyTable").select("tbody").select("tr");
         List<FundCompany> fundCompanyList = new ArrayList<>();
         for(Element element : html){
             if(element.html().contains("暂无数据")){

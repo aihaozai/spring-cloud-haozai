@@ -1,13 +1,18 @@
 package com.spring.cloud.fund.fund.controller;
 
+import com.spring.cloud.fund.core.dto.FundDetailDataDto;
+import com.spring.cloud.fund.core.dto.FundRealDataDto;
+import com.spring.cloud.fund.core.util.FundDataUtil;
 import com.spring.cloud.fund.fund.service.IFundService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import spring.cloud.base.core.result.Result;
 
-import java.io.IOException;
+import javax.script.ScriptException;
 
 
 /**
@@ -22,10 +27,9 @@ public class FundController{
 
     private final IFundService iFundService;
 
-    @GetMapping("/te")
-    public void te() throws IOException {
-
-
+    @GetMapping("/getDetailDataChart")
+    public Result<FundDetailDataDto> getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
+        return Result.ok(FundDataUtil.getFundDetailList(fundCode));
     }
 
 }
