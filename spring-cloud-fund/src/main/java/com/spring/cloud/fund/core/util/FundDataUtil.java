@@ -8,44 +8,53 @@ import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * @author haozai
  * @date 2021/5/7 13:59
  */
 @Slf4j
+@Component
 public class FundDataUtil {
 
     /**
      * 基金
      */
     private final static String FUND_URL = "http://fundgz.1234567.com.cn/js/%s.js";
-
     /**
      * 基金详细
      */
     private final static String FUND_DETAIL_URL = "http://fund.eastmoney.com/pingzhongdata/%s.js";
 
-    private final static RestTemplate restTemplate = new RestTemplate();
+    private final static RestTemplate REST_TEMPLATE = new RestTemplate();
 
-    public static FundRealDataDto getFundList(String fundCode){
-        restTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
-        String data = response.getBody().replace("jsonpgz(","").replace(");","");
-        FundRealDataDto fundDataDto = JSONObject.parseObject(data, FundRealDataDto.class);
-        return fundDataDto;
+    private final static String  PATTERN = "jsonpgz\\(|\\);";
 
+    static {
+        REST_TEMPLATE.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
     }
 
-    public static FundDetailDataDto getFundDetailList(String fundCode) throws ScriptException {
-        restTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
+    public  FundRealDataDto getFundList(String fundCode){
+        ResponseEntity<String> response = REST_TEMPLATE.getForEntity(String.format(FUND_URL,fundCode), String.class );
+        String data = Objects.requireNonNull(response.getBody()).replaceAll(PATTERN,"");
+        return JSONObject.parseObject(data, FundRealDataDto.class);
+    }
+
+    public  String getFundListString(String fundCode){
+        ResponseEntity<String> response = REST_TEMPLATE.getForEntity(String.format(FUND_URL,fundCode), String.class );
+        return Objects.requireNonNull(response.getBody()).replaceAll(PATTERN,"");
+    }
+
+    public FundDetailDataDto getFundDetailList(String fundCode) throws ScriptException {
+        ResponseEntity<String> response = REST_TEMPLATE.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
         ScriptEngineManager engineManager = new ScriptEngineManager();
         ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
         engineByName.eval(response.getBody());
@@ -68,10 +77,10 @@ public class FundDataUtil {
 
     }
 
-    public static void main(String[] args) throws ScriptException {
-        String[] arr = new String[]{"519674","005693","320007","008087","001717"};
-        for (String code :arr){
-            System.out.println(getFundDetailList(code).toString());
-        }
-    }
+//    public static void main(String[] args) throws ScriptException {
+//        String[] arr = new String[]{"519674","005693","320007","008087","001717"};
+//        for (String code :arr){
+//            System.out.println(getFundDetailList(code).toString());
+//        }
+//    }
 }
