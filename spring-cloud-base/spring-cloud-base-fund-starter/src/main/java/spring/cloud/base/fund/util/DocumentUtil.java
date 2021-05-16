@@ -1,9 +1,8 @@
-package com.spring.cloud.fund.core.util;
+package spring.cloud.base.fund.util;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 import java.io.IOException;
 
 /**
@@ -14,7 +13,7 @@ public class DocumentUtil {
     /**
      * 设置连接超时时间，单位ms
      */
-    private static int TIME  = 10000;
+    private final static int TIME  = 10000;
 
     public static Document getDocument(String url) {
         try {

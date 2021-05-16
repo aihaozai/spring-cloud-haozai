@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import spring.cloud.base.fund.util.DocumentUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

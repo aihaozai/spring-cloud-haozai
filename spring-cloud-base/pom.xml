@@ -21,10 +21,12 @@
         <module>spring-cloud-base-datasource-starter</module>
         <module>spring-cloud-base-redis-starter</module>
         <module>spring-cloud-base-swagger-starter</module>
+        <module>spring-cloud-base-fund-starter</module>
     </modules>
     <properties>
         <starter-thymeleaf.version>2.3.1.RELEASE</starter-thymeleaf.version>
         <lang3.version>3.9</lang3.version>
+        <fastjson.version>1.2.76</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +47,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
     </dependencies>
 </project>

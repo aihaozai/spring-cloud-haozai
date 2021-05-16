@@ -1,21 +1,20 @@
-package com.spring.cloud.fund.core.util;
+package spring.cloud.base.fund.util;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.spring.cloud.fund.core.dto.FundDetailDataDto;
-import com.spring.cloud.fund.core.dto.FundRealDataDto;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import spring.cloud.base.fund.dto.FundDetailDataDto;
+import spring.cloud.base.fund.dto.FundRealDataDto;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 /**
  * @author haozai
@@ -23,6 +22,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
+@AllArgsConstructor
 public class FundDataUtil {
 
     /**
@@ -34,27 +34,29 @@ public class FundDataUtil {
      */
     private final static String FUND_DETAIL_URL = "http://fund.eastmoney.com/pingzhongdata/%s.js";
 
-    private final static RestTemplate REST_TEMPLATE = new RestTemplate();
-
     private final static String  PATTERN = "jsonpgz\\(|\\);";
 
-    static {
-        REST_TEMPLATE.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
-    }
+    private final RestTemplate restTemplate;
 
-    public  FundRealDataDto getFundList(String fundCode){
-        ResponseEntity<String> response = REST_TEMPLATE.getForEntity(String.format(FUND_URL,fundCode), String.class );
-        String data = Objects.requireNonNull(response.getBody()).replaceAll(PATTERN,"");
+    public FundRealDataDto getFundList(String fundCode){
+        ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
+        if(StringUtils.isEmpty(response.getBody())){
+            return null;
+        }
+        String data = response.getBody().replaceAll(PATTERN,"");
         return JSONObject.parseObject(data, FundRealDataDto.class);
     }
 
     public  String getFundListString(String fundCode){
-        ResponseEntity<String> response = REST_TEMPLATE.getForEntity(String.format(FUND_URL,fundCode), String.class );
-        return Objects.requireNonNull(response.getBody()).replaceAll(PATTERN,"");
+        ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
+        if(StringUtils.isEmpty(response.getBody())){
+            return null;
+        }
+        return response.getBody().replaceAll(PATTERN,"");
     }
 
     public FundDetailDataDto getFundDetailList(String fundCode) throws ScriptException {
-        ResponseEntity<String> response = REST_TEMPLATE.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
+        ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
         ScriptEngineManager engineManager = new ScriptEngineManager();
         ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
         engineByName.eval(response.getBody());

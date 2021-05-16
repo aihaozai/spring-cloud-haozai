@@ -1,7 +1,7 @@
-package com.spring.cloud.fund.core.dto;
+package spring.cloud.base.fund.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class FundRealDataDto {
     /**
      * 净值日期
      */
-    private Date jzrq;
+    private String jzrq;
 
     /**
      * 当日净值
@@ -47,5 +47,5 @@ public class FundRealDataDto {
     /**
      * 估值时间
      */
-    private Date gztime;
+    private String gztime;
 }

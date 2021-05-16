@@ -1,4 +1,4 @@
-package com.spring.cloud.fund.core.configurer;
+package com.spring.cloud.fund.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,9 +1,6 @@
 package com.spring.cloud.fund.fund.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.spring.cloud.fund.core.dto.FundDetailDataDto;
-import com.spring.cloud.fund.core.dto.FundRealDataDto;
-import com.spring.cloud.fund.core.util.FundDataUtil;
+
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
 import io.swagger.annotations.Api;
@@ -14,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import spring.cloud.base.core.result.Result;
+import spring.cloud.base.fund.dto.FundDetailDataDto;
+import spring.cloud.base.fund.util.FundDataUtil;
 
 import javax.script.ScriptException;
 import java.util.List;
@@ -39,16 +38,9 @@ public class FundController{
         return Result.ok(fundDataUtil.getFundDetailList(fundCode));
     }
 
-    @GetMapping("/searchFundRealData")
-    public Result searchFundRealData(){
+    @GetMapping("/selectFund")
+    public Result<List<Fund>> selectFund(){
         List<Fund> fundList = iFundService.list();
-        long time = System.currentTimeMillis();
-        fundList.parallelStream().forEach(f->{
-            fundDataUtil.getFundListString(f.getFundCode());
-           // log.info(f.getFundCode()+"=>{}", JSON.toJSON(fundDataUtil.getFundList(f.getFundCode())));
-        });
-        log.info("爬取基金实时数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
-        return Result.ok();
+        return Result.ok(fundList);
     }
-
 }

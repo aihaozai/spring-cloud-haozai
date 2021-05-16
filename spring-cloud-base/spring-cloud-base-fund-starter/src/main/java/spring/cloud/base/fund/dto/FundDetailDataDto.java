@@ -1,4 +1,4 @@
-package com.spring.cloud.fund.core.dto;
+package spring.cloud.base.fund.dto;
 
 import com.alibaba.fastjson.JSONArray;
 import lombok.Data;
