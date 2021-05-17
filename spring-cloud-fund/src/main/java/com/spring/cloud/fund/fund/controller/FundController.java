@@ -35,7 +35,7 @@ public class FundController{
 
     @GetMapping("/getDetailDataChart")
     public Result<FundDetailDataDto> getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
-        return Result.ok(fundDataUtil.getFundDetailList(fundCode));
+        return Result.ok(fundDataUtil.getFundDetailDataDto(fundCode));
     }
 
     @GetMapping("/selectFund")

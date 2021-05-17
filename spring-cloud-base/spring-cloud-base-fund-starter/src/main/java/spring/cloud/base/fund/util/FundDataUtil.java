@@ -38,7 +38,7 @@ public class FundDataUtil {
 
     private final RestTemplate restTemplate;
 
-    public FundRealDataDto getFundList(String fundCode){
+    public FundRealDataDto getFundRealDataDto(String fundCode){
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
         if(StringUtils.isEmpty(response.getBody())){
             return null;
@@ -47,7 +47,7 @@ public class FundDataUtil {
         return JSONObject.parseObject(data, FundRealDataDto.class);
     }
 
-    public  String getFundListString(String fundCode){
+    public  String getFundRealData(String fundCode){
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
         if(StringUtils.isEmpty(response.getBody())){
             return null;
@@ -55,7 +55,7 @@ public class FundDataUtil {
         return response.getBody().replaceAll(PATTERN,"");
     }
 
-    public FundDetailDataDto getFundDetailList(String fundCode) throws ScriptException {
+    public FundDetailDataDto getFundDetailDataDto(String fundCode) throws ScriptException {
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
         ScriptEngineManager engineManager = new ScriptEngineManager();
         ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
@@ -79,10 +79,4 @@ public class FundDataUtil {
 
     }
 
-//    public static void main(String[] args) throws ScriptException {
-//        String[] arr = new String[]{"519674","005693","320007","008087","001717"};
-//        for (String code :arr){
-//            System.out.println(getFundDetailList(code).toString());
-//        }
-//    }
 }

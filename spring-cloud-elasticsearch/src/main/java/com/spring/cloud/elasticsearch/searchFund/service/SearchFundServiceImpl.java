@@ -82,7 +82,7 @@ public class SearchFundServiceImpl implements ISearchFundService {
         fundList.forEach(l->
             threadPool.execute(() -> {
                 try {
-                    FundRealDataDto data = fundDataUtil.getFundList(l.getFundCode());
+                    FundRealDataDto data = fundDataUtil.getFundRealDataDto(l.getFundCode());
                     if(ObjectUtils.isNotEmpty(data)){
                         result.put(l.getFundCode()+INDEX+date,data);
                     }
