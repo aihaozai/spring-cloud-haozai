@@ -10,3 +10,5 @@ spring:
         server-addr: http://127.0.0.1:8848 #nacos注册地址
         file-extension: yml #配置文件后缀支持 txt json yaml xml html Properties 格式 大家更加喜欢来
         group: DEFAULT_GROUP # 分组 （配置组管理，不强制）
+        shared-configs: base-fund.yml
+        refresh-enabled: true
