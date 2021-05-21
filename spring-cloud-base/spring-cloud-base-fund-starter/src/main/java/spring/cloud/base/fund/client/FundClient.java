@@ -1,8 +1,11 @@
 package spring.cloud.base.fund.client;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import spring.cloud.base.fund.dto.FundDto;
 import spring.cloud.base.fund.result.Result;
 
@@ -17,8 +20,9 @@ import java.util.List;
 public interface FundClient {
     /**
      * 查询基金
+     * @param jsonObject
      * @return
      */
-    @GetMapping("/selectFund")
-    Result<List<FundDto>> selectFund();
+    @PostMapping("/selectFund")
+    Result<List<FundDto>> selectFund(@RequestBody JSONObject jsonObject);
 }

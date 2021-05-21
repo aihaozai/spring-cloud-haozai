@@ -107,7 +107,7 @@ public class SearchFundServiceImpl implements ISearchFundService {
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout("20s");
         for (Map.Entry<String, FundRealDataDto> entry : data.entrySet()) {
-            bulkRequest.add(new IndexRequest(entry.getKey()).id(entry.getValue().getJzrq())
+            bulkRequest.add(new IndexRequest(entry.getKey()).id(entry.getValue().getGztime())
                     .source(JSON.toJSONString(entry.getValue()), XContentType.JSON));
         }
         BulkResponse bulkResponse = client.bulk(bulkRequest, RequestOptions.DEFAULT);

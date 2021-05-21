@@ -12,7 +12,12 @@ public enum QueryEnum {
     /**
      * 模糊查询
      */
-    LIKE("Like");
+    LIKE("@Like"),
+
+    /**
+     *  In查询
+     */
+    IN("@In");
 
     private final String keyword;
 

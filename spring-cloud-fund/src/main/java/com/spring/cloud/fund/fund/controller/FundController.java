@@ -1,16 +1,16 @@
 package com.spring.cloud.fund.fund.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.core.result.Result;
+import spring.cloud.base.datasource.util.QueryUtil;
 import spring.cloud.base.fund.dto.FundDetailDataDto;
 import spring.cloud.base.fund.util.FundDataUtil;
 
@@ -38,9 +38,9 @@ public class FundController{
         return Result.ok(fundDataUtil.getFundDetailDataDto(fundCode));
     }
 
-    @GetMapping("/selectFund")
-    public Result<List<Fund>> selectFund(){
-        List<Fund> fundList = iFundService.list();
+    @PostMapping("/selectFund")
+    public Result<List<Fund>> selectFund(@RequestBody JSONObject jsonObject){
+        List<Fund> fundList = iFundService.list(QueryUtil.setQuery(jsonObject, new QueryWrapper()));
         return Result.ok(fundList);
     }
 }
