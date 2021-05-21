@@ -49,7 +49,7 @@ public class SearchFundController {
 
     @GetMapping("/createFundIndex")
     public Result createFundIndex(){
-        searchFundJobHandler.createfundIndexJobHandler();
+        searchFundJobHandler.createFundIndexJobHandler();
         return Result.ok();
     }
 }
