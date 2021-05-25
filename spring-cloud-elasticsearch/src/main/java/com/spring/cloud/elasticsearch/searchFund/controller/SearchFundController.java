@@ -52,4 +52,13 @@ public class SearchFundController {
         searchFundJobHandler.createFundIndexJobHandler();
         return Result.ok();
     }
+
+    @GetMapping("/getFundRealData")
+    public Result getFundRealData() throws IOException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("fund_code@In",fundCodeList);
+        List<FundDto> fundList = fundClient.selectFund(jsonObject).getData();
+        iSearchFundService.getFundRealData(fundList);
+        return Result.ok();
+    }
 }

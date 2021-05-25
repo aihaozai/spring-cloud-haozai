@@ -24,4 +24,10 @@ public interface ISearchFundService{
      * @param fundList
      */
     void createFundIndex(List<FundDto> fundList);
+
+    /**
+     * 获取基金实时数据
+     * @param fundList
+     */
+    void getFundRealData(List<FundDto> fundList) throws IOException;
 }
