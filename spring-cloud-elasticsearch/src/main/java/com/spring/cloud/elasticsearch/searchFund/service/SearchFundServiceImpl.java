@@ -22,6 +22,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
 import spring.cloud.base.fund.dto.FundDto;
 import spring.cloud.base.fund.dto.FundRealDataDto;
+import spring.cloud.base.fund.service.IBaseSearchFundService;
 import spring.cloud.base.fund.util.FundDataUtil;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ import static com.spring.cloud.elasticsearch.constant.ElasticSearchConstant.*;
 @AllArgsConstructor
 public class SearchFundServiceImpl implements ISearchFundService {
 
-    private final FundDataUtil fundDataUtil;
+    private final IBaseSearchFundService baseSearchFundService;
 
     private final ElasticSearchService elasticSearchService;
 
@@ -52,18 +53,8 @@ public class SearchFundServiceImpl implements ISearchFundService {
     @Override
     public void searchFundRealData(List<FundDto> fundList) throws IOException {
         long time = System.currentTimeMillis();
-        ExecutorService threadPool = Executors.newFixedThreadPool(100);
-        AtomicInteger num = new AtomicInteger();
-        Map<String,FundRealDataDto> result = new HashMap<>();
-        this.executeSearch(threadPool,fundList,num,result);
-        threadPool.shutdown();
-        while(true){
-            if(threadPool.isTerminated()){
-                log.info("失败数量："+num.get()+"爬取基金实时数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
-                break;
-            }
-        }
-        time = System.currentTimeMillis();
+        List<String> fundCodeList = fundList.stream().map(FundDto::getFundCode).collect(Collectors.toList());
+        List<FundRealDataDto> result = baseSearchFundService.searchFundRealData(fundCodeList,FundRealDataDto.class);
         this.insertFundData(result);
         log.info("插入数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
     }
@@ -93,9 +84,7 @@ public class SearchFundServiceImpl implements ISearchFundService {
 
         searchSourceBuilder.from(0).size(9000);
 
-        // 用于是否需要过滤
-        String[] includeFields = new String[]{SOURCE,"id"};
-
+        //过滤字段
         String[] excludes = new String[]{"dwjz","jzrq","dwjz"};
 
         searchSourceBuilder.fetchSource(null,  excludes);
@@ -116,45 +105,15 @@ public class SearchFundServiceImpl implements ISearchFundService {
         System.out.println(totalHits);
     }
 
-    private void executeSearch(ExecutorService threadPool, List<FundDto> fundList,
-                               AtomicInteger num, Map<String,FundRealDataDto> result){
+    private void insertFundData(List<FundRealDataDto> data) throws IOException {
         String date = DateUtil.format(new Date(),NORM_DATE_PATTERN);
-        List<FundDto> lastList = new ArrayList<>();
-        num.getAndSet(fundList.size());
-        fundList.forEach(l->
-            threadPool.execute(() -> {
-                try {
-                    FundRealDataDto data = fundDataUtil.getFundRealDataDto(l.getFundCode());
-                    if(ObjectUtils.isNotEmpty(data)){
-                        result.put(l.getFundCode()+ INDEX + date, data);
-                    }
-                    log.debug(l.getFundCode() + "=>{}", data);
-                } catch (Exception e) {
-                    lastList.add(l);
-                }
-                num.getAndDecrement();
-            }
-        ));
-        while(true){
-            if(num.get()==0){
-                break;
-            }
-        }
-        if(CollectionUtil.isNotEmpty(lastList)){
-            this.executeSearch(threadPool,lastList,num,result);
-        }
-    }
-
-    private void insertFundData(Map<String,FundRealDataDto> data) throws IOException {
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout("10s");
-        for (Map.Entry<String, FundRealDataDto> entry : data.entrySet()) {
-            bulkRequest.add(
-                        new IndexRequest(entry.getKey())
-                        .id(entry.getValue().getGztime())
-                        .source(JSON.toJSONString(entry.getValue()), XContentType.JSON)
-            );
-        }
+        data.forEach(d-> bulkRequest.add(
+                new IndexRequest(d.getFundcode()+ INDEX + date)
+                        .id(d.getGztime())
+                        .source(JSON.toJSONString(d), XContentType.JSON)
+        ));
         BulkResponse bulkResponse = client.bulk(bulkRequest, RequestOptions.DEFAULT);
         log.info("成功：{},原因：{}",bulkResponse.hasFailures(),bulkResponse.buildFailureMessage());
     }

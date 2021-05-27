@@ -38,13 +38,13 @@ public class FundDataUtil {
 
     private final RestTemplate restTemplate;
 
-    public FundRealDataDto getFundRealDataDto(String fundCode){
+    public <T> T getFundRealData(String fundCode,Class<T> clazz){
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
         if(StringUtils.isEmpty(response.getBody())){
             return null;
         }
         String data = response.getBody().replaceAll(PATTERN,"");
-        return JSONObject.parseObject(data, FundRealDataDto.class);
+        return  JSONObject.parseObject(data, clazz);
     }
 
     public  String getFundRealData(String fundCode){
