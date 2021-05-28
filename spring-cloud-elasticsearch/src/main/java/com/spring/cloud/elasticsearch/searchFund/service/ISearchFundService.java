@@ -1,7 +1,5 @@
 package com.spring.cloud.elasticsearch.searchFund.service;
 
-import spring.cloud.base.fund.dto.FundDto;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -14,20 +12,20 @@ public interface ISearchFundService{
 
     /**
      * 爬取实时基金
-     * @param fundList
+     * @param fundCodeList
      * @throws IOException
      */
-    void searchFundRealData(List<FundDto> fundList) throws IOException;
+    void searchFundRealData(List<String> fundCodeList) throws IOException;
 
     /**
      * 创建基金索引
-     * @param fundList
+     * @param fundCodeList
      */
-    void createFundIndex(List<FundDto> fundList);
+    void createFundIndex(List<String> fundCodeList);
 
     /**
      * 获取基金实时数据
-     * @param fundList
+     * @param fundCodeList
      */
-    void getFundRealData(List<FundDto> fundList) throws IOException;
+    void getFundRealData(List<String> fundCodeList) throws IOException;
 }

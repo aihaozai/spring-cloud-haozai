@@ -1,7 +1,5 @@
 package spring.cloud.base.fund.service;
 
-import spring.cloud.base.fund.dto.FundDto;
-
 import java.io.IOException;
 import java.util.List;
 

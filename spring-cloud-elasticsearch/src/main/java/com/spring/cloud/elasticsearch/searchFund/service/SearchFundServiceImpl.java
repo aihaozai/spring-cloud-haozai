@@ -1,12 +1,10 @@
 package com.spring.cloud.elasticsearch.searchFund.service;
 
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.spring.cloud.elasticsearch.core.service.ElasticSearchService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -20,20 +18,15 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
-import spring.cloud.base.fund.dto.FundDto;
 import spring.cloud.base.fund.dto.FundRealDataDto;
 import spring.cloud.base.fund.service.IBaseSearchFundService;
-import spring.cloud.base.fund.util.FundDataUtil;
-
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
-
 import static cn.hutool.core.date.DatePattern.NORM_DATE_PATTERN;
-import static com.spring.cloud.elasticsearch.constant.ElasticSearchConstant.*;
+import static com.spring.cloud.elasticsearch.constant.ElasticSearchConstant.INDEX;
+import static com.spring.cloud.elasticsearch.constant.ElasticSearchConstant.SPLIT;
 
 /**
  * @author haozai
@@ -51,20 +44,19 @@ public class SearchFundServiceImpl implements ISearchFundService {
     private final RestHighLevelClient client;
 
     @Override
-    public void searchFundRealData(List<FundDto> fundList) throws IOException {
+    public void searchFundRealData(List<String> fundCodeList) throws IOException {
         long time = System.currentTimeMillis();
-        List<String> fundCodeList = fundList.stream().map(FundDto::getFundCode).collect(Collectors.toList());
         List<FundRealDataDto> result = baseSearchFundService.searchFundRealData(fundCodeList,FundRealDataDto.class);
         this.insertFundData(result);
         log.info("插入数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
     }
 
     @Override
-    public void createFundIndex(List<FundDto> fundList) {
+    public void createFundIndex(List<String> fundCodeList) {
         String date = DateUtil.format(new Date(),NORM_DATE_PATTERN);
-        fundList.parallelStream().forEach(f->{
+        fundCodeList.parallelStream().forEach(f->{
             try {
-                elasticSearchService.createIndex(f.getFundCode() + INDEX + date);
+                elasticSearchService.createIndex(f + INDEX + date);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -72,9 +64,9 @@ public class SearchFundServiceImpl implements ISearchFundService {
     }
 
     @Override
-    public void getFundRealData(List<FundDto> fundList) throws IOException {
+    public void getFundRealData(List<String> fundList) throws IOException {
         String date = DateUtil.format(new Date(),NORM_DATE_PATTERN);
-        String codes = fundList.stream().map(FundDto::getFundCode).collect(Collectors.joining(INDEX + date + SPLIT))+INDEX + date;
+        String codes = fundList.stream().collect(Collectors.joining(String.format("%s%s%s", INDEX, date, SPLIT)))+INDEX + date;
 
         // 搜索请求对象
         SearchRequest searchRequest = new SearchRequest().indices(codes.split(SPLIT));

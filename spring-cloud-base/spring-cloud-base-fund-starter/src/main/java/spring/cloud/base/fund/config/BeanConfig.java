@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
  * @date 2021/5/13  23:37
  */
 @Configuration
-@ComponentScan(basePackages = {"spring.cloud.base.fund.util"})
+@ComponentScan(basePackages = {"spring.cloud.base.fund.util","spring.cloud.base.fund.service"})
 @EnableFeignClients("spring.cloud.base.fund.client")
 public class BeanConfig {
     private final static int TIME_OUT = 10000;
