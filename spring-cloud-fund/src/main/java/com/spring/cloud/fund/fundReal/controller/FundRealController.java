@@ -50,18 +50,15 @@ public class FundRealController{
 
         List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
         List<FundReal> searchResult = baseSearchFundService.searchFundRealData(fundList, FundReal.class);
-        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
-        FundRealMapper mapper = sqlSession.getMapper(FundRealMapper.class);
+      //  SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
+       //FundRealMapper mapper = sqlSession.getMapper(FundRealMapper.class);
         long begin=System.currentTimeMillis();
-        searchResult.forEach(f->{
-            if(ObjectUtils.isNotEmpty(f)){
-                mapper.insert(f);
-            }
-        });
+        searchResult = searchResult.stream().filter(f->ObjectUtils.isNotEmpty(f)).collect(Collectors.toList());
+        iFundRealService.insertBatch(searchResult);
         long end=System.currentTimeMillis();
         System.out.println(end-begin);
-        sqlSession.commit();
-        sqlSession.close();
+        //sqlSession.commit();
+        //sqlSession.close();
         return Result.ok();
     }
 
