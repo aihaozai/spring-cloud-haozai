@@ -1,5 +1,6 @@
 package com.spring.cloud.fund.fundReal.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundReal.entity.FundReal;
@@ -19,7 +20,9 @@ import spring.cloud.base.core.result.Result;
 import spring.cloud.base.fund.service.IBaseSearchFundService;
 
 import java.io.IOException;
+import java.sql.Wrapper;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,4 +65,19 @@ public class FundRealController{
         return Result.ok();
     }
 
+    @GetMapping("/getFundRealData")
+    public Result getFundRealData(){
+        QueryWrapper<Fund> fundQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<FundReal> fundRealQueryWrapper = new QueryWrapper<>();
+        fundQueryWrapper.in("fund_code",fundCodeList);
+        fundRealQueryWrapper.in("fundcode",fundCodeList);
+        List<Fund> fundList = iFundService.list(fundQueryWrapper);
+        List<FundReal> fundRealList = iFundRealService.list(fundRealQueryWrapper);
+        fundList.forEach(f->
+            f.setFundRealList(fundRealList.stream()
+                .filter(c->f.getFundCode().equals(c.getFundcode()))
+                    .sorted(Comparator.comparing(FundReal::getGztime)).collect(Collectors.toList()))
+        );
+        return Result.ok(fundList);
+    }
 }

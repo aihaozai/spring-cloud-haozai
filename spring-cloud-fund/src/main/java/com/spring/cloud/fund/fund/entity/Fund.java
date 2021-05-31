@@ -1,11 +1,15 @@
 package com.spring.cloud.fund.fund.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.spring.cloud.fund.fundReal.entity.FundReal;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import spring.cloud.base.datasource.entity.BaseEntity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author haozai
@@ -27,4 +31,7 @@ public class Fund extends BaseEntity implements Serializable  {
     private String companyCode;
 
     private String companyName;
+
+    @TableField(exist = false)
+    private List<FundReal> fundRealList;
 }

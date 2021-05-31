@@ -1,12 +1,18 @@
 package com.spring.cloud.fund.fundReal.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 import spring.cloud.base.datasource.entity.BaseEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
+import static cn.hutool.core.date.DatePattern.NORM_DATETIME_MINUTE_PATTERN;
+
 
 /**
  * @author haozai
@@ -16,6 +22,7 @@ import java.util.Date;
 @Data
 @TableName("fund_real")
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 public class FundReal extends BaseEntity {
 
     /**
@@ -51,5 +58,6 @@ public class FundReal extends BaseEntity {
     /**
      * 估值时间
      */
+    @JsonFormat(pattern = NORM_DATETIME_MINUTE_PATTERN ,timezone = "GMT+8")
     private Date gztime;
 }
