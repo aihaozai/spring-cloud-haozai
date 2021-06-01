@@ -4,24 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundReal.entity.FundReal;
-import com.spring.cloud.fund.fundReal.mapper.FundRealMapper;
 import com.spring.cloud.fund.fundReal.service.IFundRealService;
+import com.spring.cloud.fund.handler.SearchFundJobHandler;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.cloud.base.core.result.Result;
-import spring.cloud.base.fund.service.IBaseSearchFundService;
-
-import java.io.IOException;
-import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -42,13 +34,11 @@ public class FundRealController{
     @Value("${search.fundCode}")
     private ArrayList<String> fundCodeList;
 
+    private final IFundService iFundService;
+
     private final SearchFundJobHandler searchFundJobHandler;
 
     private final IFundRealService iFundRealService;
-
-    private final IBaseSearchFundService baseSearchFundService;
-
-    private final SqlSessionFactory sqlSessionFactory;
 
     @GetMapping("/addFundRealData")
     public Result addFundRealData() throws Exception {

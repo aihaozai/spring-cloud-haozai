@@ -10,7 +10,6 @@
             (#{fundReal.id}, #{fundReal.fundcode}, #{fundReal.name},
             #{fundReal.jzrq}, #{fundReal.dwjz}, #{fundReal.gsz},
             #{fundReal.gszzl}, #{fundReal.gztime},#{fundReal.searchtime})
-
         </foreach >
 
     </insert>
