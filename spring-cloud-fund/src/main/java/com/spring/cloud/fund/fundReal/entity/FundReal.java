@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import spring.cloud.base.datasource.entity.BaseEntity;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static cn.hutool.core.date.DatePattern.NORM_DATETIME_MINUTE_PATTERN;
@@ -24,6 +25,8 @@ import static cn.hutool.core.date.DatePattern.NORM_DATETIME_MINUTE_PATTERN;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class FundReal extends BaseEntity {
+
+    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * 基金代码
@@ -60,4 +63,9 @@ public class FundReal extends BaseEntity {
      */
     @JsonFormat(pattern = NORM_DATETIME_MINUTE_PATTERN ,timezone = "GMT+8")
     private Date gztime;
+
+    /**
+     * 爬取日期
+     */
+    private String searchtime = df.format(new Date());
 }

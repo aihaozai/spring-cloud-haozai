@@ -4,12 +4,12 @@
 
     <insert id="insertBatch" parameterType="com.spring.cloud.fund.fundReal.entity.FundReal" useGeneratedKeys="true">
 
-        INSERT INTO fund_real ( id, fundcode, name, jzrq, dwjz, gsz, gszzl, gztime ) VALUES
+        REPLACE INTO fund_real ( id, fundcode, name, jzrq, dwjz, gsz, gszzl, gztime, searchtime ) VALUES
 
         <foreach collection ="list" item="fundReal" separator =",">
             (#{fundReal.id}, #{fundReal.fundcode}, #{fundReal.name},
             #{fundReal.jzrq}, #{fundReal.dwjz}, #{fundReal.gsz},
-            #{fundReal.gszzl}, #{fundReal.gztime})
+            #{fundReal.gszzl}, #{fundReal.gztime},#{fundReal.searchtime})
 
         </foreach >
 

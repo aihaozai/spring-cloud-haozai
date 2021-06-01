@@ -8,6 +8,7 @@ import com.spring.cloud.fund.fundReal.mapper.FundRealMapper;
 import com.spring.cloud.fund.fundReal.service.IFundRealService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
  * @author haozai
  * @date 2021/5/28  15:13
  */
+@Slf4j
 @Api("基金实时控制器")
 @RequestMapping("/fundReal")
 @RestController
@@ -40,7 +42,7 @@ public class FundRealController{
     @Value("${search.fundCode}")
     private ArrayList<String> fundCodeList;
 
-    private final IFundService iFundService;
+    private final SearchFundJobHandler searchFundJobHandler;
 
     private final IFundRealService iFundRealService;
 
@@ -50,18 +52,7 @@ public class FundRealController{
 
     @GetMapping("/addFundRealData")
     public Result addFundRealData() throws Exception {
-
-        List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
-        List<FundReal> searchResult = baseSearchFundService.searchFundRealData(fundList, FundReal.class);
-      //  SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
-       //FundRealMapper mapper = sqlSession.getMapper(FundRealMapper.class);
-        long begin=System.currentTimeMillis();
-        searchResult = searchResult.stream().filter(f->ObjectUtils.isNotEmpty(f)).collect(Collectors.toList());
-        iFundRealService.insertBatch(searchResult);
-        long end=System.currentTimeMillis();
-        System.out.println(end-begin);
-        //sqlSession.commit();
-        //sqlSession.close();
+        searchFundJobHandler.searchFundRealData();
         return Result.ok();
     }
 
