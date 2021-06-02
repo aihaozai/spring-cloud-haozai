@@ -28,14 +28,11 @@ swagger:
 ##xxl-job
 xxl:
   job:
-    admin:
-      addresses: http://127.0.0.1:8080/xxl-job-admin
-    executor:
-      appname: cloud-fund-job
-      ip: 127.0.0.1
-      port: 9889
-      logpath:
-      logretentiondays: 0
+    appName: cloud-fund-job
+    ip: 127.0.0.1
+    port: 9889
+    logPath:
+    logRetentionDays: 0
     accessToken:
 
 logging:

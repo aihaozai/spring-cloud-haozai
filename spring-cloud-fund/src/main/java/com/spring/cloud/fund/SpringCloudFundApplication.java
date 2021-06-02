@@ -4,7 +4,11 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import spring.cloud.base.core.annotation.EnableXxlJob;
+import spring.cloud.base.swagger.starter.annotation.EnableSwagger;
 
+@EnableSwagger
+@EnableXxlJob
 @MapperScan("com.spring.cloud.fund.**.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication

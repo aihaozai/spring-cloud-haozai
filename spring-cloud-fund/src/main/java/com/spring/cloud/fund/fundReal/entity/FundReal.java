@@ -67,5 +67,10 @@ public class FundReal extends BaseEntity {
     /**
      * 爬取日期
      */
-    private String searchtime = df.format(new Date());
+    private String searchtime;
+
+    public void setGztime(Date gztime) {
+        this.gztime = gztime;
+        this.searchtime = df.format(gztime);
+    }
 }

@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import spring.cloud.base.fund.dto.FundDetailDataDto;
-import spring.cloud.base.fund.dto.FundRealDataDto;
+import spring.cloud.base.fund.dto.FundDetailDataDTO;
+
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -55,15 +55,15 @@ public class FundDataUtil {
         return response.getBody().replaceAll(PATTERN,"");
     }
 
-    public FundDetailDataDto getFundDetailDataDto(String fundCode) throws ScriptException {
+    public FundDetailDataDTO getFundDetailDataDTO(String fundCode) throws ScriptException {
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
         ScriptEngineManager engineManager = new ScriptEngineManager();
         ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
         engineByName.eval(response.getBody());
         ScriptObjectMirror o = (ScriptObjectMirror)engineByName.get("Data_netWorthTrend");
         ScriptObjectMirror o1 = (ScriptObjectMirror)engineByName.get("Data_ACWorthTrend");
-        FundDetailDataDto fundDetailDataDto = new FundDetailDataDto();
-        fundDetailDataDto.setFS_name(engineByName.get("fS_name").toString())
+        FundDetailDataDTO fundDetailDataDTO = new FundDetailDataDTO();
+        fundDetailDataDTO.setFS_name(engineByName.get("fS_name").toString())
                 .setFS_code(engineByName.get("fS_code").toString())
                 .setFund_sourceRate(engineByName.get("fund_sourceRate").toString())
                 .setFund_Rate(engineByName.get("fund_Rate").toString())
@@ -75,7 +75,7 @@ public class FundDataUtil {
                 .setSyl_1y(engineByName.get("syl_1y").toString())
         .setData_netWorthTrend(JSONArray.parseArray(JSONArray.toJSON(o.values()).toString()))
         .setData_ACWorthTrend(JSONArray.parseArray(JSONArray.toJSON(o1.values()).toString()));
-        return fundDetailDataDto;
+        return fundDetailDataDTO;
 
     }
 

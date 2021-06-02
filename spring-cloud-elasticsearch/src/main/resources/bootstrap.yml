@@ -9,27 +9,14 @@ spring:
   application:
     name: cloud-elasticsearch
 
-##swagger扫描配置
-swagger:
-  doc:
-    enable: false
-    basePackage:
-    title:
-    description:
-    termsOfServiceUrl:
-    version: 1.0
-
 ##xxl-job
 xxl:
   job:
-    admin:
-      addresses: http://127.0.0.1:8080/xxl-job-admin
-    executor:
-      appname: cloud-elasticsearch-job
-      ip: 127.0.0.1
-      port: 9888
-      logpath:
-      logretentiondays: 30
+    appName: cloud-elasticsearch-job
+    ip: 127.0.0.1
+    port: 9888
+    logPath:
+    logRetentionDays: 0
     accessToken:
 
 logging:

@@ -12,7 +12,7 @@ import java.util.Date;
  * @description 基金实时数据
  */
 @Data
-public class FundRealDataDto {
+public class FundRealDataDTO {
 
     /**
      * 基金代码

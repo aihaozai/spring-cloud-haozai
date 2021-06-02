@@ -12,3 +12,7 @@ spring:
         group: DEFAULT_GROUP # 分组 （配置组管理，不强制）
         shared-configs: base-fund.yml
         refresh-enabled: true
+##xxl-job
+xxl:
+  job:
+    adminAddresses: http://1.117.205.58:8989/xxl-job-admin

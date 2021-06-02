@@ -18,7 +18,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
-import spring.cloud.base.fund.dto.FundRealDataDto;
+import spring.cloud.base.fund.dto.FundRealDataDTO;
 import spring.cloud.base.fund.service.IBaseSearchFundService;
 import java.io.IOException;
 import java.util.Date;
@@ -46,7 +46,7 @@ public class SearchFundServiceImpl implements ISearchFundService {
     @Override
     public void searchFundRealData(List<String> fundCodeList) throws IOException {
         long time = System.currentTimeMillis();
-        List<FundRealDataDto> result = baseSearchFundService.searchFundRealData(fundCodeList,FundRealDataDto.class);
+        List<FundRealDataDTO> result = baseSearchFundService.searchFundRealData(fundCodeList,FundRealDataDTO.class);
         this.insertFundData(result);
         log.info("插入数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
     }
@@ -97,7 +97,7 @@ public class SearchFundServiceImpl implements ISearchFundService {
         System.out.println(totalHits);
     }
 
-    private void insertFundData(List<FundRealDataDto> data) throws IOException {
+    private void insertFundData(List<FundRealDataDTO> data) throws IOException {
         String date = DateUtil.format(new Date(),NORM_DATE_PATTERN);
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout("10s");

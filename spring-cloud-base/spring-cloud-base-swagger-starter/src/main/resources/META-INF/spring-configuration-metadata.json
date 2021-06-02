@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "swagger.doc.enable",
+      "type": "java.lang.Boolean",
+      "description": "Description for swagger.doc.enable."
+    },
+    {
+      "name": "swagger.doc.basePackage",
+      "type": "java.lang.String",
+      "description": "Description for swagger.doc.basePackage."
+    },
+    {
+      "name": "swagger.doc.title",
+      "type": "java.lang.String",
+      "description": "Description for swagger.doc.title."
+    },
+    {
+      "name": "swagger.doc.description",
+      "type": "java.lang.String",
+      "description": "Description for swagger.doc.description."
+    },
+    {
+      "name": "swagger.doc.termsOfServiceUrl",
+      "type": "java.lang.String",
+      "description": "Description for swagger.doc.termsOfServiceUrl."
+    },
+    {
+      "name": "swagger.doc.version",
+      "type": "java.lang.String",
+      "description": "Description for swagger.doc.version."
+    }
+  ] }

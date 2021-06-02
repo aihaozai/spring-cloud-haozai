@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.core.result.Result;
 import spring.cloud.base.datasource.util.QueryUtil;
-import spring.cloud.base.fund.dto.FundDetailDataDto;
+import spring.cloud.base.fund.dto.FundDetailDataDTO;
 import spring.cloud.base.fund.util.FundDataUtil;
 
 import javax.script.ScriptException;
@@ -34,8 +34,8 @@ public class FundController{
     private final FundDataUtil fundDataUtil;
 
     @GetMapping("/getDetailDataChart")
-    public Result<FundDetailDataDto> getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
-        return Result.ok(fundDataUtil.getFundDetailDataDto(fundCode));
+    public Result<FundDetailDataDTO> getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
+        return Result.ok(fundDataUtil.getFundDetailDataDTO(fundCode));
     }
 
     @PostMapping("/selectFund")

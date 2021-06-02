@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class FundDetailDataDto {
+public class FundDetailDataDTO {
 
     /**
      * 基金名称
