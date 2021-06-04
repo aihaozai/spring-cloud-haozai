@@ -1,5 +1,7 @@
 package com.spring.cloud.fund.fundReal.entity;
 
+import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static cn.hutool.core.date.DatePattern.NORM_DATETIME_MINUTE_PATTERN;
+import static cn.hutool.core.date.DatePattern.NORM_DATE_PATTERN;
 
 
 /**
@@ -25,8 +28,6 @@ import static cn.hutool.core.date.DatePattern.NORM_DATETIME_MINUTE_PATTERN;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 public class FundReal extends BaseEntity {
-
-    private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * 基金代码
@@ -71,6 +72,6 @@ public class FundReal extends BaseEntity {
 
     public void setGztime(Date gztime) {
         this.gztime = gztime;
-        this.searchtime = df.format(gztime);
+        this.searchtime = DateUtil.format(gztime,NORM_DATE_PATTERN);
     }
 }
