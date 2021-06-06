@@ -35,7 +35,7 @@ public class SearchFundJobHandler {
         List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
         List<FundReal> searchResult = baseSearchFundService.searchFundRealData(fundList, FundReal.class);
         long begin=System.currentTimeMillis();
-        searchResult = searchResult.stream().filter(f-> ObjectUtils.isNotEmpty(f)).collect(Collectors.toList());
+        searchResult = searchResult.stream().filter(ObjectUtils::isNotEmpty).collect(Collectors.toList());
         iFundRealService.insertBatch(searchResult);
         long end=System.currentTimeMillis();
         log.info("基金数据更新完毕，耗时：{}",end-begin);
