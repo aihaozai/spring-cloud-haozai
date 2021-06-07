@@ -13,4 +13,10 @@
         </foreach >
 
     </insert>
+
+    <select id="queryLastDate" resultType="string">
+
+        SELECT searchtime FROM fund_real GROUP BY searchtime ORDER BY searchtime DESC LIMIT 0,1
+
+    </select>
 </mapper>

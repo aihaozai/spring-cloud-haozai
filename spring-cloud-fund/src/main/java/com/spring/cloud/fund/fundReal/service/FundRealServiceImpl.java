@@ -23,4 +23,9 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
     public void insertBatch(List<FundReal> fundRealList) {
         this.fundRealMapper.insertBatch(fundRealList);
     }
+
+    @Override
+    public String queryLastDate() {
+        return  this.fundRealMapper.queryLastDate();
+    }
 }

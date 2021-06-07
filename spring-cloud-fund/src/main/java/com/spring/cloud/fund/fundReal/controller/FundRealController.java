@@ -48,10 +48,13 @@ public class FundRealController{
 
     @GetMapping("/getFundRealData")
     public Result getFundRealData(){
+        String date = iFundRealService.queryLastDate();
         QueryWrapper<Fund> fundQueryWrapper = new QueryWrapper<>();
         QueryWrapper<FundReal> fundRealQueryWrapper = new QueryWrapper<>();
         fundQueryWrapper.in("fund_code",fundCodeList);
         fundRealQueryWrapper.in("fundcode",fundCodeList);
+        fundRealQueryWrapper.eq("searchtime",date);
+
         List<Fund> fundList = iFundService.list(fundQueryWrapper);
         List<FundReal> fundRealList = iFundRealService.list(fundRealQueryWrapper);
         fundList.forEach(f->

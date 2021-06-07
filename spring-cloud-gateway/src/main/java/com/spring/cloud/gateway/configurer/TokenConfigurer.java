@@ -1,10 +1,8 @@
 package com.spring.cloud.gateway.configurer;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -20,7 +18,6 @@ public class TokenConfigurer {
     /**
      * redis
      */
-    @Qualifier("connectionFactory")
     private final RedisConnectionFactory redisConnectionFactory;
 
     /**

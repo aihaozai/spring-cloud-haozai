@@ -1,7 +1,6 @@
 package spring.cloud.base.security.starter.configurer;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -29,7 +28,6 @@ public class TokenConfigurer {
     /**
      * redis
      */
-    @Qualifier("connectionFactory")
     private final RedisConnectionFactory redisConnectionFactory;
 
     /**

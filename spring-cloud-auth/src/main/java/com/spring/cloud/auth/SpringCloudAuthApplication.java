@@ -4,7 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@MapperScan("com.spring.cloud.auth.mapper")
+@MapperScan("com.spring.cloud.auth.**.mapper")
 @SpringBootApplication
 public class SpringCloudAuthApplication {
 

@@ -15,4 +15,10 @@ public interface IFundRealService  extends IService<FundReal> {
      * @param fundRealList
      */
     void insertBatch(List<FundReal> fundRealList);
+
+    /**
+     * 查询最新的基金日期
+     * @return
+     */
+    String queryLastDate();
 }
