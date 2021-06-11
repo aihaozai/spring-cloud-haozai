@@ -1,27 +1,23 @@
-package com.spring.cloud.fund.fund.entity;
+package com.spring.cloud.fund.fundDetail.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.spring.cloud.fund.fundReal.entity.FundReal;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import spring.cloud.base.datasource.entity.BaseEntity;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author haozai
- * @description 基金表
- * @date 2021/5/06  15:13
+ * @description 基金详细表
+ * @date 2021/6/09  17:37
  */
 @Data
-@TableName("fund")
+@TableName("fund_detail")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class Fund extends BaseEntity implements Serializable  {
-    private static final long serialVersionUID = 1L;
+public class FundDetail extends BaseEntity implements Serializable  {
 
     private String fundCode;
 
@@ -33,6 +29,23 @@ public class Fund extends BaseEntity implements Serializable  {
 
     private String companyName;
 
-    @TableField(exist = false)
-    private List<FundReal> fundRealList;
+    /**
+     *近一年收益率
+     */
+    private String oneN;
+
+    /**
+     *近6月收益率
+     */
+    private String sixY;
+
+    /**
+     *近三月收益率
+     */
+    private String threeY;
+
+    /**
+     *近一月收益率
+     */
+    private String oneY;
 }

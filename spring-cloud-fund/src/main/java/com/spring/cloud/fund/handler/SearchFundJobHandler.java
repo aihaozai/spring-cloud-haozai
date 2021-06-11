@@ -2,6 +2,8 @@ package com.spring.cloud.fund.handler;
 
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
+import com.spring.cloud.fund.fundDetail.entity.FundDetail;
+import com.spring.cloud.fund.fundDetail.service.IFundDetailService;
 import com.spring.cloud.fund.fundReal.entity.FundReal;
 import com.spring.cloud.fund.fundReal.service.IFundRealService;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -30,6 +32,8 @@ public class SearchFundJobHandler {
 
     private final IBaseSearchFundService baseSearchFundService;
 
+    private final IFundDetailService iFundDetailService;
+
     @XxlJob("searchFundRealData")
     public void searchFundRealData() throws IOException {
         List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
@@ -39,5 +43,15 @@ public class SearchFundJobHandler {
         iFundRealService.insertBatch(searchResult);
         long end=System.currentTimeMillis();
         log.info("基金数据更新完毕，耗时：{}",end-begin);
+    }
+
+    @XxlJob("searchFundDetailData")
+    public void searchFundDetailData() {
+        List<Fund> fundList = iFundService.list();
+        List<FundDetail> fundDetailList = iFundDetailService.searchFundDetailData(fundList);
+        long begin=System.currentTimeMillis();
+        iFundDetailService.insertBatch(fundDetailList);
+        long end=System.currentTimeMillis();
+        log.info("基金详细数据更新完毕，耗时：{}",end-begin);
     }
 }

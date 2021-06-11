@@ -38,6 +38,10 @@ public class FundDataUtil {
 
     private final RestTemplate restTemplate;
 
+    private final ScriptEngineManager engineManager = new ScriptEngineManager();
+
+    private final ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
+
     public <T> T getFundRealData(String fundCode,Class<T> clazz){
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
         if(StringUtils.isEmpty(response.getBody())){
@@ -57,8 +61,6 @@ public class FundDataUtil {
 
     public FundDetailDataDTO getFundDetailDataDTO(String fundCode) throws ScriptException {
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
-        ScriptEngineManager engineManager = new ScriptEngineManager();
-        ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
         engineByName.eval(response.getBody());
         ScriptObjectMirror o = (ScriptObjectMirror)engineByName.get("Data_netWorthTrend");
         ScriptObjectMirror o1 = (ScriptObjectMirror)engineByName.get("Data_ACWorthTrend");
@@ -79,4 +81,23 @@ public class FundDataUtil {
 
     }
 
+    public FundDetailDataDTO getFundDetailDataDTOMin(String fundCode) throws ScriptException {
+        ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_DETAIL_URL,fundCode), String.class );
+        String context = response.getBody();
+        context = context.substring(0,context.indexOf("/*股票仓位测算图*/"));
+        engineByName.eval(context);
+        FundDetailDataDTO fundDetailDataDTO = new FundDetailDataDTO();
+        fundDetailDataDTO.setFS_name(engineByName.get("fS_name").toString())
+                .setFS_code(engineByName.get("fS_code").toString())
+                .setFund_sourceRate(engineByName.get("fund_sourceRate").toString())
+                .setFund_Rate(engineByName.get("fund_Rate").toString())
+                .setFund_minsg(engineByName.get("fund_minsg").toString())
+                .setZqCodesNew(engineByName.get("zqCodesNew").toString())
+                .setSyl_1n(engineByName.get("syl_1n").toString())
+                .setSyl_6y(engineByName.get("syl_6y").toString())
+                .setSyl_3y(engineByName.get("syl_3y").toString())
+                .setSyl_1y(engineByName.get("syl_1y").toString());
+        return fundDetailDataDTO;
+
+    }
 }

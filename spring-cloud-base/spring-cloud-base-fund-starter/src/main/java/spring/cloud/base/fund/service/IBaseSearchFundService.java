@@ -8,6 +8,7 @@ import java.util.List;
  * @date 2021/5/27  22:03
  */
 public interface IBaseSearchFundService {
+
     /**
      * 爬取实时基金
      * @param fundList

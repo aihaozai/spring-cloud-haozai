@@ -1,16 +1,15 @@
 package spring.cloud.base.fund.service;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.thread.ThreadFactoryBuilder;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import spring.cloud.base.fund.util.FundDataUtil;
-
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -28,7 +27,9 @@ public class BaseSearchFundServiceImpl implements IBaseSearchFundService{
     @Override
     public <T> List<T>  searchFundRealData(List<String> fundList, Class<T> clazz) throws IOException {
         long time = System.currentTimeMillis();
-        ExecutorService threadPool = Executors.newFixedThreadPool(100);
+        ExecutorService threadPool = new ThreadPoolExecutor(100,200,200L,
+                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
+
         AtomicInteger num = new AtomicInteger();
         List<T> result =new ArrayList<>();
         this.executeSearch(threadPool,fundList,num,result,clazz);

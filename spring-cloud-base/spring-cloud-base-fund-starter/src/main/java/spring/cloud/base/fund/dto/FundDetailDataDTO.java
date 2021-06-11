@@ -72,4 +72,5 @@ public class FundDetailDataDTO {
      * 累计净值走势
      */
     private JSONArray data_ACWorthTrend;
+
 }
