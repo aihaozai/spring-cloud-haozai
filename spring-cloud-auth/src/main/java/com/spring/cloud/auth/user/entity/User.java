@@ -1,8 +1,11 @@
 package com.spring.cloud.auth.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.spring.cloud.auth.entity.Role;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import org.springframework.security.core.userdetails.UserDetails;
 import spring.cloud.base.datasource.entity.BaseEntity;
 
@@ -16,6 +19,7 @@ import java.util.List;
  */
 @Data
 @TableName("user")
+@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity implements UserDetails, Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -25,25 +29,26 @@ public class User extends BaseEntity implements UserDetails, Serializable{
 
     private String password;
 
+    @TableField(exist = false)
     private List<Role> authorities;
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

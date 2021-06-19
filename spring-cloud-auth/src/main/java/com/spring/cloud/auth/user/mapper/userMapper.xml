@@ -7,7 +7,7 @@
         id, username, password
     </sql>
 
-    <select id="selectUserPage" resultType="User">
+    <select id="selectUserPage" resultType="com.spring.cloud.auth.user.entity.User">
         SELECT * FROM user
     </select>
 </mapper>
