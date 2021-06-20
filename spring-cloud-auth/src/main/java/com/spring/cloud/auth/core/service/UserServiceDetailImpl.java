@@ -4,22 +4,13 @@ import com.spring.cloud.auth.user.entity.User;
 import com.spring.cloud.auth.user.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.HashSet;
+import spring.cloud.base.core.entity.AuthUser;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -40,10 +31,7 @@ public class UserServiceDetailImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findUserByUsername(username.trim());
         Objects.requireNonNull(user,this.message.getMessage("AuthenticationProvider.badUser",  null, Locale.getDefault()));
-        //DaoAuthenticationProvider
-        //            Collection<GrantedAuthority> authorities = new HashSet<>();
-//            authorities.add(new SimpleGrantedAuthority("admin"));
-        return user;
+        return new AuthUser(user.getUsername(),user.getPassword(),AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
     }
 
     public static void main(String[] args) {

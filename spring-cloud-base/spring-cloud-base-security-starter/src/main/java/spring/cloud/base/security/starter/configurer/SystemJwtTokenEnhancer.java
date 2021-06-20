@@ -5,7 +5,6 @@ import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ public class SystemJwtTokenEnhancer implements TokenEnhancer {
         final Map<String, Object> additionalInformation = new HashMap<>(1);
         additionalInformation.put("userName", userName);
         additionalInformation.put("address", "广东省");
+        additionalInformation.put("expireAt",accessToken.getExpiration());
         DefaultOAuth2AccessToken auth2AccessToken = (DefaultOAuth2AccessToken) accessToken;
         auth2AccessToken.setAdditionalInformation(additionalInformation);
         return auth2AccessToken;

@@ -1,4 +1,4 @@
-package com.spring.cloud.auth.entity;
+package com.spring.cloud.auth.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
