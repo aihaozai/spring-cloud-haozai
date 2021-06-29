@@ -56,6 +56,7 @@ public class SecurityConfiguration {
         permitAll.add("/favicon.ico");
         permitAll.add("/doc.html");
         permitAll.add("/webjars/**");
+        permitAll.add("/xxl-job-admin/api/registry");
         http.authorizeExchange()
                 //白名单配置
                 .pathMatchers(ArrayUtil.toArray(permitAll,String.class)).permitAll()

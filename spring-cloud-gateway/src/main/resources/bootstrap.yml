@@ -14,18 +14,18 @@ spring:
       routes:
         - id: auth
           # 目标服务地址（uri：地址，请求转发后的地址）
-          uri: http://localhost:7001/auth
+          uri: lb://cloud-oauth
           # 路由条件（predicates：断言，匹配 HTTP 请求内容）
           predicates:
             ## 转发地址格式为 uri/archive
             - Path=/auth/**
-        - id: route1
+        - id: fund
           # 目标服务地址（uri：地址，请求转发后的地址）
-          uri: http://localhost:7001/b
+          uri: lb://cloud-fund
           # 路由条件（predicates：断言，匹配 HTTP 请求内容）
           predicates:
             ## 转发地址格式为 uri/archive
-            - Path=/b/**
+            - Path=/fund/**
   redis:
     # redis数据库索引(默认为0)，我们使用索引为3的数据库，避免和其他数据库冲突
     database: 0
@@ -34,7 +34,7 @@ spring:
     # redis端口（默认为6379）
     port: 6379
     # redis访问密码（默认为空）
-    password: haozai
+    password:
     # redis连接超时时间（单位毫秒）
     timeout: 0
     # redis连接池配置

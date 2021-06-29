@@ -33,7 +33,7 @@ public class AuthenticationConverter implements ServerAuthenticationConverter {
             return Mono.empty();
         }
         String token =authorization.replace(OAuth2AccessToken.BEARER_TYPE + " ", "");
-        log.info("当前Token的值:{}",token);
+        log.info("当前Token的值: {}",token);
         OAuth2Authentication oAuth2Authentication = this.tokenStore.readAuthentication(token);
         if(ObjectUtil.isEmpty(oAuth2Authentication)){
             return Mono.empty();

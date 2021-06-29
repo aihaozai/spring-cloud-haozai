@@ -15,6 +15,11 @@ spring:
     username: cloud_fund
     password: cloud_fund666!
 
+security:
+  oauth2:
+    client:
+      resource-ids: auth_resource
+
 #swagger扫描配置
 swagger:
   doc:
@@ -37,4 +42,4 @@ xxl:
 
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG

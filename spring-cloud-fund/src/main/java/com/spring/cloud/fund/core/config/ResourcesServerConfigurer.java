@@ -1,15 +1,21 @@
-package com.spring.cloud.auth.core.configurer;
+package com.spring.cloud.fund.core.config;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
  * @author haozai
@@ -20,22 +26,33 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableResourceServer
 @AllArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
 
-    private final DefaultTokenServices tokenServices;
+    /**
+     * redis
+     */
+    private final RedisConnectionFactory redisConnectionFactory;
 
-    @Qualifier("redisTokenStore")
-    private final TokenStore redisTokenStore;
 
     /**
-     * @description 资源id可再次手动设置任意字符串，如果不设置，则需要在数据oauth_client_details中的resource_ids填写固定值"oauth2-resource"
+     * token存储
+     */
+    @Bean(name = "redisTokenStore")
+    @Primary
+    public TokenStore tokenStore() {
+        return new RedisTokenStore(redisConnectionFactory);
+    }
+
+    /**
+     * @description
      * @param resources
      * @throws Exception
      */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenServices(tokenServices);
-        resources.tokenStore(redisTokenStore);
+        resources.resourceId("auth_resource");
+        resources.tokenStore(tokenStore());
     }
 
     /**
@@ -46,7 +63,6 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http .authorizeRequests()
-                .antMatchers("/oauth/**","/login","/health","/keyPair/**","/res/**","/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable();
     }

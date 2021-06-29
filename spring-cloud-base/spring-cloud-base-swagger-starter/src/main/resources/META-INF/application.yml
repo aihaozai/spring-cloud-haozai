@@ -1,0 +1,5 @@
+spring:
+  autoconfigure:
+    #跳过security自动配置
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration

@@ -20,7 +20,7 @@ public class AuthenticationEntryPointHandler implements ServerAuthenticationEntr
     @Override
     public Mono<Void> commence(ServerWebExchange serverWebExchange, AuthenticationException e) {
         log.info("认证入口---请求链接:{},原因:{}", serverWebExchange.getRequest().getPath(), e.getMessage());
-        String url = "http://localhost";
+        String url = "http://localhost:8080";
         serverWebExchange.getResponse().setStatusCode(HttpStatus.SEE_OTHER);
         serverWebExchange.getResponse().getHeaders().set(HttpHeaders.LOCATION, url);
         return serverWebExchange.getResponse().setComplete();

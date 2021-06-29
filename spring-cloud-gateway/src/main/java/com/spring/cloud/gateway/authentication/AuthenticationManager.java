@@ -25,7 +25,7 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
             OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) authentication;
             String clientId = oAuth2Authentication.getOAuth2Request().getClientId();
             oAuth2Authentication.setAuthenticated(false);
-            log.info("clientId is {}",clientId);
+            log.info("client_id is {}",clientId);
             return Mono.just(oAuth2Authentication);
         }
         Object principal = authentication.getPrincipal();

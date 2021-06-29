@@ -60,7 +60,8 @@ public class TokenConfigurer {
     /**
      * @return DefaultTokenServices
      */
-    @Bean(name = "tokenServices")
+    @Bean
+    @Primary
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
