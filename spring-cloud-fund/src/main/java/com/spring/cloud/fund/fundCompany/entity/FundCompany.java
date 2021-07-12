@@ -2,6 +2,7 @@ package com.spring.cloud.fund.fundCompany.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import spring.cloud.base.datasource.entity.BaseEntity;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Data
 @TableName("fund_company")
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
 public class FundCompany extends BaseEntity implements Serializable  {
     private static final long serialVersionUID = 1L;
 
