@@ -1,4 +1,4 @@
-package com.spring.cloud.gateway.configurer;
+package com.spring.cloud.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.spring.cloud.gateway.authentication.AuthenticationConverter;

@@ -1,4 +1,4 @@
-package com.spring.cloud.gateway.configurer;
+package com.spring.cloud.gateway.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

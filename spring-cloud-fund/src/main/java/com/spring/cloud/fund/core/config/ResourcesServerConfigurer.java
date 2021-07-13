@@ -1,8 +1,6 @@
 package com.spring.cloud.fund.core.config;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -12,9 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
@@ -45,8 +41,8 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     }
 
     /**
-     * @description
-     * @param resources
+     * @description 资源服务配置
+     * @param resources 资源
      * @throws Exception
      */
     @Override
@@ -57,13 +53,13 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
 
     /**
      * @description 配置需要拦截的资源
-     * @param http
+     * @param http http
      * @throws Exception
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http .authorizeRequests()
-                .anyRequest().authenticated()
-                .and().csrf().disable();
+        http.authorizeRequests()
+                .anyRequest().authenticated();
     }
+
 }

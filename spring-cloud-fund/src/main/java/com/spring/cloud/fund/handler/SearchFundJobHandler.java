@@ -42,7 +42,7 @@ public class SearchFundJobHandler {
         searchResult = searchResult.stream().filter(ObjectUtils::isNotEmpty).collect(Collectors.toList());
         iFundRealService.insertBatch(searchResult);
         long end=System.currentTimeMillis();
-        log.info("基金数据更新完毕，耗时：{}",end-begin);
+        log.info("基金实时数据更新完毕，耗时：{}",end-begin);
     }
 
     @XxlJob("searchFundDetailData")

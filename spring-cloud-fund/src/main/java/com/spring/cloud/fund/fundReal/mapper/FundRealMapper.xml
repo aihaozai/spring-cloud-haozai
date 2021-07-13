@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.cloud.fund.fundReal.mapper.FundRealMapper">
 
-    <insert id="insertBatch" parameterType="com.spring.cloud.fund.fundReal.entity.FundReal" useGeneratedKeys="true">
+    <insert id="insertBatch" parameterType="com.spring.cloud.fund.fundReal.entity.FundReal" >
 
-        REPLACE INTO fund_real ( id, fundcode, name, jzrq, dwjz, gsz, gszzl, gztime, searchtime ) VALUES
+        REPLACE INTO fund_real ( fundcode, name, jzrq, dwjz, gsz, gszzl, gztime, searchtime ) VALUES
 
         <foreach collection ="list" item="fundReal" separator =",">
-            (#{fundReal.id}, #{fundReal.fundcode}, #{fundReal.name},
+            (#{fundReal.fundcode}, #{fundReal.name},
             #{fundReal.jzrq}, #{fundReal.dwjz}, #{fundReal.gsz},
             #{fundReal.gszzl}, #{fundReal.gztime},#{fundReal.searchtime})
         </foreach >
