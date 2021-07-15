@@ -35,4 +35,7 @@ public class Fund extends BaseEntity implements Serializable  {
 
     @TableField(exist = false)
     private List<FundReal> fundRealList;
+
+    @TableField(exist = false)
+    private List<String> yAxis;
 }

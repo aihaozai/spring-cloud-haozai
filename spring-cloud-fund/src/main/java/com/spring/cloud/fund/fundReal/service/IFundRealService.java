@@ -1,6 +1,7 @@
 package com.spring.cloud.fund.fundReal.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fundReal.entity.FundReal;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public interface IFundRealService  extends IService<FundReal> {
      * @return
      */
     String queryLastDate();
+
+    /**
+     * 获取实时基金数据
+     * @return
+     */
+    List<Fund> getFundRealData();
 }
