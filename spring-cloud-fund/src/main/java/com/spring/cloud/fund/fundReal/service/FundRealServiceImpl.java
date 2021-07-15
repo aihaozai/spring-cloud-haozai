@@ -89,9 +89,4 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
         return fundList;
     }
-
-    public static void main(String[] args) {
-        double m = 0.01;
-        double n = -0.12;
-    }
 }

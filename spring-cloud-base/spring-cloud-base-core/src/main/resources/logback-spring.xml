@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
-    <property name="log.path" value="D:/log/${springAppName}"/>
+    <property name="log.path" value="F:/log/${springAppName}"/>
     <property name="log.maxHistory" value="15"/>
     <property name="log.colorPattern"
               value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level) %boldCyan(${springAppName:-}) %yellow(%thread) %green(%logger) %msg%n"/>
@@ -45,8 +45,8 @@
     </appender>
 
     <!--logstash配置-->
-    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:6000</destination>
+    <appender name="log_stash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:6999</destination>
         <!-- 日志输出编码 -->
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
@@ -70,15 +70,15 @@
         </encoder>
     </appender>
 
-
     <root level="debug">
         <appender-ref ref="console"/>
     </root>
+
     <springProfile name="dev">
         <root level="info">
             <appender-ref ref="file_info"/>
             <appender-ref ref="file_error"/>
-            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="log_stash"/>
         </root>
     </springProfile>
 </configuration>

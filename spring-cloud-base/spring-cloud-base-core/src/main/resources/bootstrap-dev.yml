@@ -15,4 +15,4 @@ spring:
 ##xxl-job
 xxl:
   job:
-    adminAddresses: http://1.117.205.58:8989/xxl-job-admin
+    adminAddresses: http://127.0.0.1:8989/xxl-job-admin
