@@ -1,0 +1,7 @@
+#镜像来源
+FROM openjdk:8-jdk-alpine
+
+#项目jar包
+ADD spring-cloud-fund-1.0-SNAPSHOT.jar app.jar
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

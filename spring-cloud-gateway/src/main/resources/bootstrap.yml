@@ -28,13 +28,13 @@ spring:
             - Path=/fund/**
   redis:
     # redis数据库索引(默认为0)，我们使用索引为3的数据库，避免和其他数据库冲突
-    database: 0
+    database: 5
     # redis服务器地址（默认为localhost）
-    host: 127.0.0.1
+    host: 47.107.123.179
     # redis端口（默认为6379）
     port: 6379
     # redis访问密码（默认为空）
-    password:
+    password: tb729337294
     # redis连接超时时间（单位毫秒）
     timeout: 0
     # redis连接池配置
