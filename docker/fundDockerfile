@@ -2,6 +2,6 @@
 FROM openjdk:8-jdk-alpine
 
 #ÏîÄ¿jar°ü
-ADD spring-cloud-fund-1.0-SNAPSHOT.jar app.jar
+ADD /data/spring-cloud-fund-1.0-SNAPSHOT.jar app.jar
 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
