@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: dev,dataSource
+    active: dev,dataSource.redis
   application:
     name: cloud-fund
   datasource:
