@@ -1,0 +1,4 @@
+*.spring?
+*.md
+*.sql
+.idea

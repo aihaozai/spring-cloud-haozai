@@ -13,7 +13,7 @@ spring:
 xxl:
   job:
     appName: cloud-elasticsearch-job
-    ip: 127.0.0.1
+    ip: 1.117.205.58
     port: 9888
     logPath:
     logRetentionDays: 0

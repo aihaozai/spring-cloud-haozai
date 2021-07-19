@@ -1,0 +1,17 @@
+version: '1'
+services:
+  auth:
+    build:
+      context: ""
+      dockerfile: .Dockerfile
+    container_name: auth
+    networks:
+      - net
+    ports:
+      - 7001:7001
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+
+networks:
+  net:
+    driver: bridge

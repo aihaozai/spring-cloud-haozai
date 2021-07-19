@@ -1,0 +1,17 @@
+version: '1'
+services:
+  gateway:
+    build:
+      context: ""
+      dockerfile: .Dockerfile
+    container_name: gateway
+    networks:
+      - net
+    ports:
+      - 7000:7000
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+
+networks:
+  net:
+    driver: bridge

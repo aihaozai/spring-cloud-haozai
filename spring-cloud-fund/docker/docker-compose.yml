@@ -1,0 +1,17 @@
+version: '1'
+services:
+  fund:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: fund
+    networks:
+      - net
+    ports:
+      - 7003:7003
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+
+networks:
+  net:
+    driver: bridge

@@ -1,9 +1,9 @@
-version: '3'
+version: '1'
 services:
   gateway:
     build:
       context: ..
-      dockerfile: /data/spring-cloud-haozai/docker/gatewayDockerfile
+      dockerfile: /spring-cloud-gateway/docker/Dockerfile
     container_name: gateway
     networks:
       - net
@@ -14,23 +14,24 @@ services:
   auth:
     build:
       context: ..
-      dockerfile: /data/spring-cloud-haozai/docker/authDockerfile
-    container_name: gateway
+      dockerfile: /spring-cloud-auth/docker/Dockerfile
+    container_name: auth
     networks:
       - net
     ports:
-      - 7000:7001
+      - 7001:7001
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
   fund:
     build:
       context: ..
-      dockerfile: /data/spring-cloud-haozai/docker/fundDockerfile
-    container_name: gateway
+      dockerfile: /spring-cloud-fund/docker/Dockerfile
+    container_name: fund
     networks:
       - net
     ports:
-      - 7000:7003
+      - 7003:7003
+      - 9889:9889
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
 
