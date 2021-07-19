@@ -49,8 +49,8 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        permitAll.add("/auth/oauth/**");
-        permitAll.add("/auth/v2/api-docs");
+        permitAll.add("/api/auth/oauth/**");
+        permitAll.add("/api/auth/v2/api-docs");
         permitAll.add("/swagger-ui/**");
         permitAll.add("/swagger-resources/**");
         permitAll.add("/favicon.ico");

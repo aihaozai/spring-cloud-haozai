@@ -18,15 +18,18 @@ spring:
           # 路由条件（predicates：断言，匹配 HTTP 请求内容）
           predicates:
             ## 转发地址格式为 uri/archive
-            - Path=/auth/**
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=1
         - id: fund
           # 目标服务地址（uri：地址，请求转发后的地址）
           uri: lb://cloud-fund
           # 路由条件（predicates：断言，匹配 HTTP 请求内容）
           predicates:
             ## 转发地址格式为 uri/archive
-            - Path=/fund/**
-
+            - Path=/api/fund/**
+          filters:
+            - StripPrefix=1
 logging:
   level:
     org.springframework.security: DEBUG
