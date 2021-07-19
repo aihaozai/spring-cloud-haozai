@@ -34,7 +34,6 @@ services:
       - 9889:9889
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
-    command: docker rmi $(docker images | grep none | awk '{print $3}')
 
 networks:
   net:
