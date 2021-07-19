@@ -1,4 +1,7 @@
 *.spring?
-*.md
+*.src
+*.docker
 *.sql
+*.iml
+*.md
 .idea

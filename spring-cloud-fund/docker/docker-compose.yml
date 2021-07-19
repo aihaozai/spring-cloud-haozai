@@ -2,7 +2,7 @@ version: '1'
 services:
   fund:
     build:
-      context: ..
+      context: ../
       dockerfile: docker/Dockerfile
     container_name: fund
     networks:

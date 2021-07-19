@@ -1,9 +1,9 @@
-version: '1'
+version: '3'
 services:
   gateway:
     build:
-      context: ..
-      dockerfile: /spring-cloud-gateway/docker/Dockerfile
+      context: ../spring-cloud-gateway/
+      dockerfile: docker/Dockerfile
     container_name: gateway
     networks:
       - net
@@ -13,8 +13,8 @@ services:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
   auth:
     build:
-      context: ..
-      dockerfile: /spring-cloud-auth/docker/Dockerfile
+      context: ../spring-cloud-auth/
+      dockerfile: docker/Dockerfile
     container_name: auth
     networks:
       - net
@@ -24,8 +24,8 @@ services:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
   fund:
     build:
-      context: ..
-      dockerfile: /spring-cloud-fund/docker/Dockerfile
+      context: ../spring-cloud-fund/
+      dockerfile: docker/Dockerfile
     container_name: fund
     networks:
       - net
