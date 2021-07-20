@@ -34,7 +34,7 @@ swagger:
 xxl:
   job:
     appName: cloud-fund-job
-    ip: 1.117.205.58
+    ip: 127.0.0.1
     port: 9889
     logPath:
     logRetentionDays: 0
