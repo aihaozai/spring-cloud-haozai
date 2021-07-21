@@ -11,6 +11,7 @@ services:
       - 7003:7003
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+      - NACOS_PUBLIC_IP=175.27.243.44
 
 networks:
   net:
