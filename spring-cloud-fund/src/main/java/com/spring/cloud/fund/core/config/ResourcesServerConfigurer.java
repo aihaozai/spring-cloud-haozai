@@ -58,8 +58,8 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        http.antMatcher("fundReal/getFundRealDataAnon").anonymous();
         http.authorizeRequests()
-                .antMatchers("fundReal/getFundRealDataAnon").permitAll()
                 .anyRequest().authenticated();
     }
 

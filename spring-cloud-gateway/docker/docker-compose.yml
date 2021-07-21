@@ -11,7 +11,7 @@ services:
       - 7000:7000
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
-
+      - NACOS_PUBLIC_IP=localhost
 networks:
   net:
     driver: bridge
