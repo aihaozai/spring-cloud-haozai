@@ -1,0 +1,16 @@
+version: '3'
+services:
+  auth:
+    image: dataanalysis-docker.pkg.coding.net/spring-cloud-haozai/image/spring-cloud-auth:latest
+    container_name: auth
+    networks:
+      - net
+    ports:
+      - 7001:7001
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+      - NACOS_PUBLIC_IP=175.27.243.44
+
+networks:
+  net:
+    driver: bridge
