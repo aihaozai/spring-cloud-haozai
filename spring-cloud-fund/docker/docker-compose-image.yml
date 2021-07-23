@@ -1,9 +1,7 @@
 version: '3'
 services:
-  fund:
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile
+  auth:
+    image: dataanalysis-docker.pkg.coding.net/spring-cloud-haozai/image/spring-cloud-fund:latest
     container_name: fund
     networks:
       - net
@@ -12,7 +10,7 @@ services:
       - 9889:9889
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
-      - NACOS_PUBLIC_IP=175.27.243.44
+      - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
 
 networks:
   net:
