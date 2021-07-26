@@ -7,12 +7,15 @@ import com.spring.cloud.fund.fundDetail.service.IFundDetailService;
 import com.spring.cloud.fund.fundReal.entity.FundReal;
 import com.spring.cloud.fund.fundReal.service.IFundRealService;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import com.xxl.job.core.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
 import spring.cloud.base.fund.service.IBaseSearchFundService;
+
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,10 @@ public class SearchFundJobHandler {
 
     private final IFundDetailService iFundDetailService;
 
+    /**
+     * 爬取实时数据
+     * @throws IOException
+     */
     @XxlJob("searchFundRealData")
     public void searchFundRealData() throws IOException {
         List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
@@ -45,6 +52,9 @@ public class SearchFundJobHandler {
         log.info("基金实时数据更新完毕，耗时：{}",end-begin);
     }
 
+    /**
+     * 爬取基金详细信息
+     */
     @XxlJob("searchFundDetailData")
     public void searchFundDetailData() {
         List<Fund> fundList = iFundService.list();
@@ -53,5 +63,14 @@ public class SearchFundJobHandler {
         iFundDetailService.insertBatch(fundDetailList);
         long end=System.currentTimeMillis();
         log.info("基金详细数据更新完毕，耗时：{}",end-begin);
+    }
+
+    /**
+     * 删除某日期之前基金实时信息
+     */
+    @XxlJob("deleteFundDetailData")
+    public void deleteFundDetailData() {
+        String delDate = DateUtil.format(DateUtil.addDays(new Date(),-3),"yyyy-MM-dd");
+        iFundRealService.deleteByDate(delDate);
     }
 }

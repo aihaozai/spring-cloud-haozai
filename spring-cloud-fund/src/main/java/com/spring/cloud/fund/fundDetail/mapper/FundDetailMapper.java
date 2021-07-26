@@ -15,5 +15,4 @@ public interface FundDetailMapper extends BaseMapper<FundDetail> {
      * @param fundDetailList
      */
     void insertBatch(List<FundDetail> fundDetailList);
-
 }

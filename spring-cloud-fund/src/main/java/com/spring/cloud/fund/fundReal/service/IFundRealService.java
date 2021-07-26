@@ -28,4 +28,10 @@ public interface IFundRealService  extends IService<FundReal> {
      * @return
      */
     List<Fund> getFundRealData();
+
+    /**
+     * 删除某日期之前基金实时信息
+     * @param delDate 日期
+     */
+    void deleteByDate(String delDate);
 }

@@ -21,4 +21,10 @@ public interface FundRealMapper extends BaseMapper<FundReal> {
      * @return
      */
     String queryLastDate();
+
+    /**
+     * 删除某日期之前基金实时信息
+     * @param delDate 日期
+     */
+    void deleteByDate(String delDate);
 }

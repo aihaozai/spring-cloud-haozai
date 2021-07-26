@@ -19,4 +19,9 @@
         SELECT searchtime FROM fund_real GROUP BY searchtime ORDER BY searchtime DESC LIMIT 0,1
 
     </select>
+
+
+    <delete id="deleteByDate" parameterType="string">
+        <![CDATA[ delete FROM fund_real where searchtime<=#{delDate} ]]>
+    </delete>
 </mapper>

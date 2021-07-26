@@ -89,4 +89,9 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
         return fundList;
     }
+
+    @Override
+    public void deleteByDate(String delDate) {
+        this.fundRealMapper.deleteByDate(delDate);
+    }
 }
