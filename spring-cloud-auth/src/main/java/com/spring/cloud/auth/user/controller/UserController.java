@@ -27,9 +27,9 @@ public class UserController{
     private final IUserService iUserService;
 
     @GetMapping("/page")
-    public Result<Page<User>> selectPage(@RequestBody QueryPage queryPage){
+    public Page<User> selectPage(@RequestBody QueryPage queryPage){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         Page<User> page = iUserService.page(new Page<>(queryPage.getCurrent(), queryPage.getCurrent()),queryWrapper);
-        return Result.ok(page);
+        return page;
     }
 }

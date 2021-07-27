@@ -11,12 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import spring.cloud.base.core.result.Result;
 import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 import spring.cloud.base.fund.dto.FundDetailDataDTO;
 import spring.cloud.base.fund.util.FundDataUtil;
-
 import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,27 +39,26 @@ public class FundController{
     private final FundDataUtil fundDataUtil;
 
     @GetMapping("/getDetailDataChart")
-    public Result<FundDetailDataDTO> getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
-        return Result.ok(fundDataUtil.getFundDetailDataDTO(fundCode));
+    public FundDetailDataDTO getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
+        return fundDataUtil.getFundDetailDataDTO(fundCode);
     }
 
     @PostMapping("/selectFund")
-    public Result<List<Fund>> selectFund(@RequestBody JSONObject jsonObject) {
-        List<Fund> fundList = iFundService.list(QueryUtil.setQuery(jsonObject, new QueryWrapper()));
-        return Result.ok(fundList);
+    public List<Fund> selectFund(@RequestBody JSONObject jsonObject) {
+        return iFundService.list(QueryUtil.setQuery(jsonObject, new QueryWrapper()));
     }
 
     @PostMapping("/page")
-    public Result<Page<Fund>> page(@RequestBody QueryPage queryPage) {
+    public Page<Fund> page(@RequestBody QueryPage queryPage) {
         Page<Fund> page = iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getCurrent()),queryPage.getQueryWrapper());
-        return Result.ok(page);
+        return page;
     }
 
     @GetMapping("/getSubscribeFund")
-    public Result getFundRealData(){
+    public List<Fund> getFundRealData(){
         QueryWrapper<Fund> fundQueryWrapper = new QueryWrapper<>();
         fundQueryWrapper.in("fund_code",fundCodeList);
         List<Fund> fundList = iFundService.list(fundQueryWrapper);
-        return Result.ok(fundList);
+        return fundList;
     }
 }

@@ -17,5 +17,5 @@ public interface IBaseSearchFundService {
      * @return
      * @throws IOException
      */
-    <T> List<T> searchFundRealData(List<String> fundList,Class<T> clazz) throws IOException;
+    <T> List<T> searchFundRealData(List<String> fundList,Class<T> clazz);
 }

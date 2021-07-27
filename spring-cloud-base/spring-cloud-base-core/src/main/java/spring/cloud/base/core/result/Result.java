@@ -47,4 +47,13 @@ public class Result<T> implements Serializable {
         .setData(data);
         return result;
     }
+
+    public static <T> Result<T> fail(T data) {
+        Result<T> result = new Result<>();
+        result.setSuccess(ResultCodeEnum.FAIL.getSuccess())
+                .setCode(ResultCodeEnum.FAIL.getCode())
+                .setMessage(ResultCodeEnum.FAIL.getMessage())
+                .setData(data);
+        return result;
+    }
 }

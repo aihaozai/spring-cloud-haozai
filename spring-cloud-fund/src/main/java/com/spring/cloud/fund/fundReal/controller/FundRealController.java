@@ -1,5 +1,6 @@
 package com.spring.cloud.fund.fundReal.controller;
 
+import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fundReal.service.IFundRealService;
 import com.spring.cloud.fund.handler.SearchFundJobHandler;
 import io.swagger.annotations.Api;
@@ -8,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring.cloud.base.core.result.Result;
+import spring.cloud.base.core.annotation.UnUseResult;
+
+import java.util.List;
 
 
 /**
@@ -27,18 +30,18 @@ public class FundRealController{
     private final IFundRealService iFundRealService;
 
     @GetMapping("/addFundRealData")
-    public Result addFundRealData() throws Exception {
+    public void addFundRealData() {
         searchFundJobHandler.searchFundRealData();
-        return Result.ok();
     }
 
     @GetMapping("/getFundRealData")
-    public Result getFundRealData(){
-        return Result.ok(iFundRealService.getFundRealData());
+    public List<Fund> getFundRealData() {
+        return iFundRealService.getFundRealData();
     }
 
+    @UnUseResult
     @GetMapping("/getFundRealDataAnon")
-    public Result getFundRealDataAnon(){
-        return Result.ok(iFundRealService.getFundRealData());
+    public List<Fund> getFundRealDataAnon() {
+        return iFundRealService.getFundRealData();
     }
 }

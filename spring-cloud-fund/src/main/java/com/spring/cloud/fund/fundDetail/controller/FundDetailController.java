@@ -2,7 +2,6 @@ package com.spring.cloud.fund.fundDetail.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundDetail.entity.FundDetail;
 import com.spring.cloud.fund.fundDetail.service.IFundDetailService;
 import com.spring.cloud.fund.handler.SearchFundJobHandler;
@@ -30,15 +29,13 @@ public class FundDetailController {
     private final SearchFundJobHandler searchFundJobHandler;
 
     @PostMapping("/page")
-    public Result<Page<FundDetail>> page(@RequestBody QueryPage queryPage) {
+    public Page<FundDetail> page(@RequestBody QueryPage queryPage) {
         Page<FundDetail> page = iFundDetailService.page(new Page<>(queryPage.getCurrent(), queryPage.getCurrent()),queryPage.getQueryWrapper());
-        return Result.ok(page);
+        return page;
     }
 
-
     @GetMapping("/addFundDetailData")
-    public Result addFundDetailData() throws Exception {
+    public void addFundDetailData() {
         searchFundJobHandler.searchFundDetailData();
-        return Result.ok();
     }
 }

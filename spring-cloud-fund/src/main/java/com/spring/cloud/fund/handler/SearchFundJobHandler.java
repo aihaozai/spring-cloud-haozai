@@ -9,6 +9,7 @@ import com.spring.cloud.fund.fundReal.service.IFundRealService;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.util.DateUtil;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
@@ -42,7 +43,7 @@ public class SearchFundJobHandler {
      * @throws IOException
      */
     @XxlJob("searchFundRealData")
-    public void searchFundRealData() throws IOException {
+    public void searchFundRealData(){
         List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
         List<FundReal> searchResult = baseSearchFundService.searchFundRealData(fundList, FundReal.class);
         long begin=System.currentTimeMillis();

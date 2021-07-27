@@ -25,7 +25,7 @@ public class BaseSearchFundServiceImpl implements IBaseSearchFundService{
     private final FundDataUtil fundDataUtil;
 
     @Override
-    public <T> List<T>  searchFundRealData(List<String> fundList, Class<T> clazz) throws IOException {
+    public <T> List<T>  searchFundRealData(List<String> fundList, Class<T> clazz){
         long time = System.currentTimeMillis();
         ExecutorService threadPool = new ThreadPoolExecutor(100,200,200L,
                 TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
