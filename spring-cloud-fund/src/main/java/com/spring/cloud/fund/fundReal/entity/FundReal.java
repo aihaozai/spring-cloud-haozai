@@ -69,9 +69,4 @@ public class FundReal extends BaseEntity {
      * 爬取日期
      */
     private String searchtime;
-
-    public void setGztime(Date gztime) {
-        this.gztime = gztime;
-        this.searchtime = DateUtil.format(gztime,NORM_DATE_PATTERN);
-    }
 }

@@ -2,7 +2,6 @@ package com.spring.cloud.fund.fundReal.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.spring.cloud.fund.fundReal.entity.FundReal;
-
 import java.util.List;
 
 /**
@@ -27,4 +26,14 @@ public interface FundRealMapper extends BaseMapper<FundReal> {
      * @param delDate 日期
      */
     void deleteByDate(String delDate);
+
+    /**
+     * 添加索引
+     */
+    void addIndex();
+
+    /**
+     * 删除索引
+     */
+    void delIndex();
 }

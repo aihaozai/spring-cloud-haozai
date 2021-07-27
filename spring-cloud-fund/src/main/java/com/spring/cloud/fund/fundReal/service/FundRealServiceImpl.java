@@ -9,7 +9,6 @@ import com.spring.cloud.fund.fundReal.mapper.FundRealMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -45,7 +44,7 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
     @Override
     public List<Fund> getFundRealData() {
-        DecimalFormat    df   = new DecimalFormat("######0.00");
+        DecimalFormat df = new DecimalFormat("######0.00");
         String date = this.queryLastDate();
         QueryWrapper<Fund> fundQueryWrapper = new QueryWrapper<>();
         QueryWrapper<FundReal> fundRealQueryWrapper = new QueryWrapper<>();
@@ -92,6 +91,8 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
     @Override
     public void deleteByDate(String delDate) {
+        this.fundRealMapper.delIndex();
         this.fundRealMapper.deleteByDate(delDate);
+        this.fundRealMapper.addIndex();
     }
 }

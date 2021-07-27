@@ -39,7 +39,6 @@ public class FundRealController{
         return iFundRealService.getFundRealData();
     }
 
-    @UnUseResult
     @GetMapping("/getFundRealDataAnon")
     public List<Fund> getFundRealDataAnon() {
         return iFundRealService.getFundRealData();
