@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author haozai
- * @description 基金爬取定时器
+ * @description 基金定时器
  * @date 2021/5/21  17:11
  */
 @Slf4j

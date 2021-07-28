@@ -7,6 +7,7 @@ import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.mapper.FundRealMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
@@ -20,7 +21,7 @@ import java.util.stream.IntStream;
  * @author haozai
  *@date 2021/5/28  15:13
  */
-
+@Slf4j
 @Service
 @AllArgsConstructor
 public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> implements IFundRealService {
@@ -91,8 +92,11 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
     @Override
     public void deleteByDate(String delDate) {
+        log.info("删除索引");
         this.fundRealMapper.delIndex();
+        log.info("删除某日期之前基金实时信息");
         this.fundRealMapper.deleteByDate(delDate);
+        log.info("添加索引");
         this.fundRealMapper.addIndex();
     }
 }

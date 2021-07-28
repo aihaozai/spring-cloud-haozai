@@ -1,8 +1,11 @@
 package com.spring.cloud.fund.funddetail.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.fund.funddetail.entity.FundDetail;
+import com.spring.cloud.fund.funddetail.query.FundDetailQueryCriteria;
 import com.spring.cloud.fund.funddetail.service.IFundDetailService;
 import com.spring.cloud.fund.handler.SearchFundJobHandler;
 import io.swagger.annotations.Api;
@@ -10,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.datasource.request.QueryPage;
+import spring.cloud.base.datasource.util.QueryUtil;
 
 
 /**
@@ -27,13 +31,13 @@ public class FundDetailController {
 
     private final SearchFundJobHandler searchFundJobHandler;
 
-    @PostMapping("/page")
-    public Page<FundDetail> page(@RequestBody QueryPage queryPage) {
-        Page<FundDetail> page = iFundDetailService.page(new Page<>(queryPage.getCurrent(), queryPage.getCurrent()),queryPage.getQueryWrapper());
+    @GetMapping("/page")
+    public Page<FundDetail> page(QueryPage queryPage, FundDetailQueryCriteria queryCriteria) {
+        Page<FundDetail> page = iFundDetailService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<FundDetail>(),queryCriteria));
         return page;
     }
 
-    @GetMapping("/addFundDetailData")
+    @PutMapping("/addFundDetailData")
     public void addFundDetailData() {
         searchFundJobHandler.searchFundDetailData();
     }

@@ -7,6 +7,7 @@ import com.spring.cloud.fund.fundcompany.service.IFundCompanyService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class FundCompanyController{
 
     private final IFundService iFundService;
 
-    @GetMapping("/addAllFund")
+    @PutMapping("/addAllFund")
     public void addAllFund() {
         List<FundCompany> fundCompanyList = iFundCompanyService.list();
         for (FundCompany fundCompany: fundCompanyList){
