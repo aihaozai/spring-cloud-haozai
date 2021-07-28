@@ -128,7 +128,7 @@ public class QueryUtil {
         if (!para.contains(UNDER_LINE)) {
             for (int i = 0; i < para.length(); i++) {
                 if (Character.isUpperCase(para.charAt(i))) {
-                    sb.insert(i + temp, "_");
+                    sb.insert(i + temp, UNDER_LINE);
                     temp += 1;
                 }
             }
