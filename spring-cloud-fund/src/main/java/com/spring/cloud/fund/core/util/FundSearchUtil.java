@@ -1,7 +1,7 @@
 package com.spring.cloud.fund.core.util;
 
 import com.spring.cloud.fund.fund.entity.Fund;
-import com.spring.cloud.fund.fundCompany.entity.FundCompany;
+import com.spring.cloud.fund.fundcompany.entity.FundCompany;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

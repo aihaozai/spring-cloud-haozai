@@ -2,10 +2,10 @@ package com.spring.cloud.fund.handler;
 
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
-import com.spring.cloud.fund.fundDetail.entity.FundDetail;
-import com.spring.cloud.fund.fundDetail.service.IFundDetailService;
-import com.spring.cloud.fund.fundReal.entity.FundReal;
-import com.spring.cloud.fund.fundReal.service.IFundRealService;
+import com.spring.cloud.fund.funddetail.entity.FundDetail;
+import com.spring.cloud.fund.funddetail.service.IFundDetailService;
+import com.spring.cloud.fund.fundreal.entity.FundReal;
+import com.spring.cloud.fund.fundreal.service.IFundRealService;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.util.DateUtil;
 import lombok.AllArgsConstructor;

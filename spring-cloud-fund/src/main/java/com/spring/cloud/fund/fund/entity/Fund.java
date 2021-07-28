@@ -2,7 +2,7 @@ package com.spring.cloud.fund.fund.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.spring.cloud.fund.fundReal.entity.FundReal;
+import com.spring.cloud.fund.fundreal.entity.FundReal;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
