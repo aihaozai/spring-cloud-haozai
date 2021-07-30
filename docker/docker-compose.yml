@@ -33,7 +33,7 @@ services:
       - 7003:7003
       - 9889:9889
     environment:
-      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+      - JAVA_OPTS=-Xmx500M -Duser.timezone=GMT+08
 
 networks:
   net:
