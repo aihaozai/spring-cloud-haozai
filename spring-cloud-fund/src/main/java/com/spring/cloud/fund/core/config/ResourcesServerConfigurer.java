@@ -43,7 +43,7 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     /**
      * @description 资源服务配置
      * @param resources 资源
-     * @throws Exception
+     * @throws Exception e
      */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -54,12 +54,12 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     /**
      * @description 配置需要拦截的资源
      * @param http http
-     * @throws Exception
+     * @throws Exception e
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("fundReal/getFundRealDataAnon").anonymous();
         http.authorizeRequests()
+                .antMatchers("fundReal/getFundRealDataAnon").permitAll()
                 .anyRequest().authenticated();
     }
 

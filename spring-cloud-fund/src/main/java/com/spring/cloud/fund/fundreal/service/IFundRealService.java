@@ -12,19 +12,19 @@ import java.util.List;
 public interface IFundRealService  extends IService<FundReal> {
     /**
      * 批量插入
-     * @param fundRealList
+     * @param fundRealList 实时数据
      */
     void insertBatch(List<FundReal> fundRealList);
 
     /**
      * 查询最新的基金日期
-     * @return
+     * @return string
      */
     String queryLastDate();
 
     /**
      * 获取实时基金数据
-     * @return
+     * @return List<Fund>
      */
     List<Fund> getFundRealData();
 

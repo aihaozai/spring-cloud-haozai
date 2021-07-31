@@ -61,27 +61,22 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
                     .sorted(Comparator.comparing(FundReal::getGztime)).collect(Collectors.toList());
                     f.setFundRealList(filterList);
 
-                    double max = filterList.stream().mapToDouble(t->t.getGszzl().doubleValue()).max().getAsDouble();
-                    double min = filterList.stream().mapToDouble(t->t.getGszzl().doubleValue()).min().getAsDouble();
+                    double max = filterList.stream().mapToDouble(t->t.getGszzl().doubleValue()).max().orElse(0);
+                    double min = filterList.stream().mapToDouble(t->t.getGszzl().doubleValue()).min().orElse(0);
                     //计算Y轴数值
                     List<String> yAxis  = new ArrayList<>();
-                    if(max!=min){
+                    if(Double.doubleToLongBits(max)!=Double.doubleToLongBits(min)){
                         double num =  Double.valueOf(df.format((max-min)/3));
                         yAxis.add(df.format(min-num));
                         yAxis.add(df.format(min));
-                        IntStream.range(1,3).forEach(i->{
-                            yAxis.add(df.format(min+i*num));
-                        });
+                        IntStream.range(1,3).forEach(i-> yAxis.add(df.format(min+i*num)));
                         yAxis.add(df.format(max));
                         yAxis.add(df.format(max+num));
                     }else{
                         double num =  Double.valueOf(df.format(max/4));
                         yAxis.add(df.format(max+num));
                         yAxis.add(df.format(max));
-                        IntStream.range(1,4).forEach(i->{
-                            yAxis.add(df.format(max-i*num));
-                        });
-
+                        IntStream.range(1,4).forEach(i-> yAxis.add(df.format(max-i*num)));
                     }
                     f.setYAxis(yAxis);
                 }

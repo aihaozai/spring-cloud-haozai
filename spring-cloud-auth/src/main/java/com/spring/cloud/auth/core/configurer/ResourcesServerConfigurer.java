@@ -1,14 +1,12 @@
 package com.spring.cloud.auth.core.configurer;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
@@ -22,26 +20,24 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @AllArgsConstructor
 public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
 
-    private final DefaultTokenServices tokenServices;
-
     @Qualifier("redisTokenStore")
     private final TokenStore redisTokenStore;
 
     /**
      * @description 资源id可再次手动设置任意字符串，如果不设置，则需要在数据oauth_client_details中的resource_ids填写固定值"oauth2-resource"
-     * @param resources
-     * @throws Exception
+     * @param resources 资源
+     * @throws Exception e
      */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenServices(tokenServices);
+        resources.resourceId("auth_resource");
         resources.tokenStore(redisTokenStore);
     }
 
     /**
      * @description 配置需要拦截的资源
-     * @param http
-     * @throws Exception
+     * @param http http
+     * @throws Exception e
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
