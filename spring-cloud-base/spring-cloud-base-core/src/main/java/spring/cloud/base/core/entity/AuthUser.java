@@ -17,6 +17,7 @@ import java.util.Collection;
 @EqualsAndHashCode(callSuper = false)
 public class AuthUser extends User {
 
+    private String id;
 
     public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);

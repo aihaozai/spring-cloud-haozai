@@ -1,6 +1,7 @@
 package com.spring.cloud.fund.fundsubscribe.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -12,6 +13,7 @@ import spring.cloud.base.datasource.entity.BaseEntity;
  * @date 2021/7/31  15:13
  */
 @Data
+@Builder
 @TableName("fund_subscribe")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)

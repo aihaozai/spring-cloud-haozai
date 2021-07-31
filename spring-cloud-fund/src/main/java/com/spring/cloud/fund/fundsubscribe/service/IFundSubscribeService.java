@@ -9,4 +9,9 @@ import com.spring.cloud.fund.fundsubscribe.entity.FundSubscribe;
  */
 public interface IFundSubscribeService  extends IService<FundSubscribe> {
 
+    /**
+     * 订阅基金
+     * @param fundCode 基金代码
+     */
+    void subscribe(String fundCode);
 }

@@ -6,6 +6,7 @@ import com.spring.cloud.fund.fundsubscribe.mapper.FundSubscribeMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import spring.cloud.base.core.util.AuthUtil;
 
 /**
  * @author haozai
@@ -16,4 +17,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class FundSubscribeServiceImpl extends ServiceImpl<FundSubscribeMapper, FundSubscribe> implements IFundSubscribeService {
 
+    @Override
+    public void subscribe(String fundCode) {
+        super.save(FundSubscribe.builder().userId(AuthUtil.getUserId()).fundCode(fundCode).build());
+    }
 }

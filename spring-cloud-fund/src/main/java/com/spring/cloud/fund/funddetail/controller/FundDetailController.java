@@ -35,8 +35,7 @@ public class FundDetailController {
 
     @GetMapping("/page")
     public Page<FundDetail> page(QueryPage queryPage, FundDetailQueryCriteria queryCriteria) {
-        Page<FundDetail> page = iFundDetailService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<FundDetail>(),queryCriteria));
-        return page;
+        return iFundDetailService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<FundDetail>(),queryCriteria));
     }
 
     @PutMapping("/addFundDetailData")

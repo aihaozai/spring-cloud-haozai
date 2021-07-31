@@ -1,7 +1,5 @@
 package com.spring.cloud.fund.fund.controller;
 
-
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.fund.fund.entity.Fund;
@@ -19,7 +17,6 @@ import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 import spring.cloud.base.fund.dto.FundDetailDataDTO;
 import spring.cloud.base.fund.util.FundDataUtil;
-
 import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +43,14 @@ public class FundController{
 
     @GetMapping("/page")
     public Page<Fund> page(QueryPage queryPage, FundQueryCriteria queryCriteria) {
-        Page<Fund> page = iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new LambdaQueryWrapper<Fund>(),queryCriteria));
-        return page;
+        return iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Fund>(),queryCriteria));
     }
 
     @GetMapping("/getSubscribeFund")
     public List<Fund> getFundRealData(){
         QueryWrapper<Fund> fundQueryWrapper = new QueryWrapper<>();
         fundQueryWrapper.in("fund_code",fundCodeList);
-        List<Fund> fundList = iFundService.list(fundQueryWrapper);
-        return fundList;
+        return iFundService.list(fundQueryWrapper);
     }
 
     @GetMapping("/getDetailDataChart")

@@ -75,7 +75,7 @@ public class SecurityConfiguration {
 
     /**
      * 身份认证过滤器
-     * @return
+     * @return AuthenticationWebFilter
      */
 
     private AuthenticationWebFilter authenticationWebFilter(){
@@ -86,7 +86,7 @@ public class SecurityConfiguration {
 
     /**
      * 跨域过滤器
-     * @return
+     * @return WebFilter
      */
     private WebFilter corsFilter() {
         return (ServerWebExchange ctx, WebFilterChain chain) -> {
