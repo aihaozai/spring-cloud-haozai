@@ -17,6 +17,7 @@ import spring.cloud.base.core.annotation.UnUseResult;
 import spring.cloud.base.core.result.Result;
 
 import java.lang.reflect.AnnotatedElement;
+import java.net.URI;
 
 /**
  * @author haozai
@@ -27,7 +28,7 @@ import java.lang.reflect.AnnotatedElement;
 @RestControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -39,7 +40,11 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @SneakyThrows
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if(o instanceof String){
+        URI uri = serverHttpRequest.getURI();
+       // System.out.println(uri.getPath().replace()));
+        if(serverHttpRequest.getURI().getPath().contains("v2/api-docs")){
+            return o;
+        }else if(o instanceof String){
             return objectMapper.writeValueAsString(Result.ok(o));
         }else if(o instanceof Result){
             return o;

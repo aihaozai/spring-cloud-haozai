@@ -5,7 +5,9 @@ server:
 
 spring:
   profiles:
-    active: dev,dataSource,redis
+    active: test,dataSource,redis
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: cloud-fund
   datasource:
@@ -15,16 +17,11 @@ spring:
     username: cloud_fund
     password: cloud_fund666!
 
-security:
-  oauth2:
-    client:
-      resource-ids: auth_resource
-
 #swagger扫描配置
 swagger:
   doc:
-    enable: false
-    basePackage:
+    enable: true
+    basePackage: com.spring.cloud.fund
     title:
     description:
     termsOfServiceUrl:

@@ -2,9 +2,11 @@ package com.spring.cloud.gateway.authentication;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.google.common.net.HttpHeaders;
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -25,7 +27,7 @@ import reactor.core.publisher.Mono;
 public class AuthenticationConverter implements ServerAuthenticationConverter {
 
     private final TokenStore tokenStore ;
-
+    private static final Gson GSON =new Gson();
     @Override
     public Mono<Authentication> convert(ServerWebExchange exchange) {
         String authorization = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
@@ -38,6 +40,9 @@ public class AuthenticationConverter implements ServerAuthenticationConverter {
         if(ObjectUtil.isEmpty(oAuth2Authentication)){
             return Mono.empty();
         }
+
+        ServerHttpRequest mutatedRequest = exchange.getRequest().mutate().header("oAuth2Authentication", GSON.toJson(oAuth2Authentication)).build();
+        exchange.mutate().request(mutatedRequest).build();
         return Mono.just(oAuth2Authentication);
     }
 }

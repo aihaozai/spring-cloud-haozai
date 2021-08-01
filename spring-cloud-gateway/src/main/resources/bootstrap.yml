@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: dev,redis
+    active: test,redis
   application:
     name: cloud-gateway
   cloud:
