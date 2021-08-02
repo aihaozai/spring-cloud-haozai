@@ -1,6 +1,6 @@
 package com.spring.cloud.fund.fundcompany.controller;
 
-import com.spring.cloud.fund.core.util.FundSearchUtil;
+import com.spring.cloud.fund.util.FundSearchUtil;
 import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundcompany.entity.FundCompany;
 import com.spring.cloud.fund.fundcompany.service.IFundCompanyService;

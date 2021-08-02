@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "gateway.resource.resourceId",
+      "type": "java.lang.String",
+      "defaultValue": "",
+      "description": "Description for gateway.resource.resourceId."
+    },
+    {
+      "name": "gateway.resource.permitAll",
+      "type": "java.util.List",
+      "description": "Description for gateway.resource.permitAll."
+    }
+] }

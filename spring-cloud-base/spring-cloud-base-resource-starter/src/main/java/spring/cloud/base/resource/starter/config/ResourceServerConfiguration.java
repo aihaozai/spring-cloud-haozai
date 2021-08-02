@@ -1,4 +1,4 @@
-package com.spring.cloud.fund.core.config;
+package spring.cloud.base.resource.starter.config;
 
 import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
-
 import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpointHandlerMapping;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -27,7 +26,6 @@ import java.util.Map;
 
 /**
  * @author haozai
- * @description spring-cloud-haozai
  * @date 2021/8/1  20:45
  */
 @Configuration

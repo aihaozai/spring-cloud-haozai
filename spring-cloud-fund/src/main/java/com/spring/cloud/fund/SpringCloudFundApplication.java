@@ -5,10 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import spring.cloud.base.core.annotation.EnableXxlJob;
+import spring.cloud.base.resource.starter.config.EnableGatewayResourceServer;
+
 
 @EnableXxlJob
 @MapperScan("com.spring.cloud.fund.**.mapper")
 @EnableDiscoveryClient
+@EnableGatewayResourceServer
 @SpringBootApplication
 public class SpringCloudFundApplication {
 

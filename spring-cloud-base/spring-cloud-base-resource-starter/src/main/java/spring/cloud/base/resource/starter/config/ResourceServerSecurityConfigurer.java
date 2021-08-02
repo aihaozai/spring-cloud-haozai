@@ -1,13 +1,5 @@
-package com.spring.cloud.fund.core.config;
+package spring.cloud.base.resource.starter.config;
 
-/**
- * @author haozai
- * @description spring-cloud-haozai
- * @date 2021/8/1  20:41
- */
-
-import java.util.Collections;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
@@ -18,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationManager;
-
 import org.springframework.security.oauth2.provider.authentication.TokenExtractor;
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint;
@@ -36,6 +27,13 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.util.Assert;
 import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+
+/**
+ * @author haozai
+ * @date 2021/8/1  20:41
+ */
 
 public final class ResourceServerSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     private AuthenticationEntryPoint authenticationEntryPoint = new OAuth2AuthenticationEntryPoint();
@@ -120,6 +118,7 @@ public final class ResourceServerSecurityConfigurer extends SecurityConfigurerAd
         return this;
     }
 
+    @Override
     public void init(HttpSecurity http) throws Exception {
         this.registerDefaultAuthenticationEntryPoint(http);
     }

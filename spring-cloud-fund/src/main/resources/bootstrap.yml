@@ -37,6 +37,14 @@ xxl:
     logRetentionDays: 0
     accessToken:
 
+#网关资源服务器
+gateway:
+  resource:
+    resourceId: fund_resource
+    permitAll:
+      - fundReal/getFundRealDataAnon
+      - /v2/api-docs
+
 logging:
   level:
     org.springframework.security: DEBUG

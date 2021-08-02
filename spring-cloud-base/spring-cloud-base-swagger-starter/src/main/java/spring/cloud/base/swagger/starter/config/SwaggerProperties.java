@@ -1,4 +1,4 @@
-package spring.cloud.base.swagger.starter.configurer;
+package spring.cloud.base.swagger.starter.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

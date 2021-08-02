@@ -1,4 +1,4 @@
-package com.spring.cloud.fund.core.util;
+package spring.cloud.base.resource.starter.util;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

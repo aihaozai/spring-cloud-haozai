@@ -1,4 +1,4 @@
-package com.spring.cloud.fund.core.util;
+package com.spring.cloud.fund.util;
 
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fundcompany.entity.FundCompany;
@@ -31,9 +31,8 @@ public class FundSearchUtil {
 
     /**
      * 爬取某基金公司下的基金
-     * @param companyCode
-     * @return
-     * @throws IOException
+     * @param companyCode 公司编码
+     * @return List<Fund>
      */
     public static List<Fund>  getFundList(String companyCode){
         log.info("获取基金开始----公司编号："+companyCode);
@@ -60,8 +59,7 @@ public class FundSearchUtil {
 
     /**
      * 爬取基金公司
-     * @return
-     * @throws IOException
+     * @return List<FundCompany>
      */
     public static List<FundCompany>  getFundCompanyList(){
         log.info("获取基金公司开始");

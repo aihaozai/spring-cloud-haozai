@@ -1,31 +1,26 @@
-package com.spring.cloud.fund.core.config;
+package spring.cloud.base.resource.starter.config;
 
-import com.spring.cloud.fund.core.util.GsonUtil;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.authentication.BearerTokenExtractor;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetailsSource;
 import org.springframework.security.oauth2.provider.authentication.TokenExtractor;
 import org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
+import spring.cloud.base.resource.starter.util.GsonUtil;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails.ACCESS_TOKEN_TYPE;
 import static org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails.ACCESS_TOKEN_VALUE;
 
 /**
@@ -149,7 +144,4 @@ public class OAuth2AuthenticationProcessingFilter implements Filter, Initializin
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(ACCESS_TOKEN_VALUE);
-    }
 }
