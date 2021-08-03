@@ -5,8 +5,10 @@ import com.spring.cloud.fund.fundsubscribe.entity.FundSubscribe;
 import com.spring.cloud.fund.fundsubscribe.mapper.FundSubscribeMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import spring.cloud.base.core.util.AuthUtil;
+import spring.cloud.base.resource.starter.util.OAuth2ResourceUtil;
 
 /**
  * @author haozai
@@ -19,6 +21,7 @@ public class FundSubscribeServiceImpl extends ServiceImpl<FundSubscribeMapper, F
 
     @Override
     public void subscribe(String fundCode) {
-        super.save(FundSubscribe.builder().userId(AuthUtil.getUserId()).fundCode(fundCode).build());
+        Authentication authentication = OAuth2ResourceUtil.getAuthentication().getUserAuthentication();
+        super.save(FundSubscribe.builder().userId(OAuth2ResourceUtil.getUserId()).fundCode(fundCode).build());
     }
 }

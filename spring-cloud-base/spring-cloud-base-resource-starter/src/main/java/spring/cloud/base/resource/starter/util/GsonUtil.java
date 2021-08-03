@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
  */
 public class GsonUtil {
 
+    private static final Gson GSON = new Gson();
     private static final Gson AUTHENTICATION_GSON = new GsonBuilder().registerTypeAdapter(Authentication.class, new InterfaceAdapter<UsernamePasswordAuthenticationToken>())
             .registerTypeAdapter(GrantedAuthority.class, new InterfaceAdapter<SimpleGrantedAuthority>())
             .create();
@@ -24,6 +25,14 @@ public class GsonUtil {
     }
 
     public static Authentication deserializeAuthentication(String json){
-        return (Authentication)AUTHENTICATION_GSON.fromJson(json,OAuth2Authentication.class);
+        return AUTHENTICATION_GSON.fromJson(json,OAuth2Authentication.class);
+    }
+
+    public static <T> T authenticationFromJson(Object o,Class<T> clazz){
+        return AUTHENTICATION_GSON.fromJson(AUTHENTICATION_GSON.toJson(o),clazz);
+    }
+
+    public static <T> T fromJson(Object o,Class<T> clazz){
+        return GSON.fromJson(GSON.toJson(o),clazz);
     }
 }

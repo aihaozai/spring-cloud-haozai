@@ -1,0 +1,40 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+
+mybatis-plus:
+  # Mapper.xml 文件位置 Maven 多模块项目的扫描路径需以 classpath*: 开头
+  mapperLocations: classpath*:com/spring/cloud/**/mapper/*Mapper.xml
+  #  通过父类（或实现接口）的方式来限定扫描实体  typeAliasesPackage  typeAliasesSuperType 配合一起使用
+  typeAliasesPackage: com.spring.cloud.**.entity
+  typeAliasesSuperType: spring.cloud.base.datasource.entity.BaseEntity
+
+  configuration: # MyBatis 原生支持的配置
+    # 是否开启自动驼峰命名规则（camel case）映射
+    mapUnderscoreToCamelCase: true
+    # 配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: null
+  global-config: # 全局策略配置
+    # 是否控制台 print mybatis-plus 的 LOGO
+    banner: false
+    db-config:
+      # id类型
+      id-type: auto
+      # 表名是否使用下划线命名，默认数据库表使用下划线命名
+      table-underline: true
+      #是否开启大写命名，默认不开启
+      capital-mode: false
+      #逻辑已删除值,(逻辑删除下有效) 需要注入逻辑策略LogicSqlInjector 以@Bean方式注入
+      logic-not-delete-value: 0
+      #逻辑未删除值,(逻辑删除下有效)
+      logic-delete-value: 1

@@ -14,7 +14,7 @@ public class AuthUtil {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    private static AuthUser getAuthUser() {
+    public static AuthUser getAuthUser() {
         return (AuthUser) getAuthentication().getPrincipal();
     }
 

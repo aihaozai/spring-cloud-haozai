@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: test,dataSource,redis
+    active: test
   main:
     allow-bean-definition-overriding: true
   application:
