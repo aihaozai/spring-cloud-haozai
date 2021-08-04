@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import spring.cloud.base.datasource.entity.BaseEntity;
-
 import java.io.Serializable;
 import java.util.List;
 

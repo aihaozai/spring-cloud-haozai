@@ -1,6 +1,8 @@
 package com.spring.cloud.fund.funddetail.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.spring.cloud.fund.funddetail.entity.FundDetail;
 import java.util.List;
 

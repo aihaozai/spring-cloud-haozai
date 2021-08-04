@@ -39,7 +39,6 @@ public class FundController{
 
     private final FundDataUtil fundDataUtil;
 
-
     @GetMapping("/page")
     public Page<Fund> page(QueryPage queryPage, FundQueryCriteria queryCriteria) {
         return iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Fund>(),queryCriteria));

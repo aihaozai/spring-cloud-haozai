@@ -3,7 +3,6 @@ package com.spring.cloud.fund.funddetail.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.funddetail.entity.FundDetail;
-
 import java.util.List;
 
 /**

@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: test
+    active: dev,dev-redis,swagger
   application:
     name: cloud-oauth
   datasource:
