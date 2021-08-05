@@ -32,23 +32,14 @@ public class SearchFundJobHandler {
 
     private final IFundRealService iFundRealService;
 
-    private final IBaseSearchFundService baseSearchFundService;
-
     private final IFundDetailService iFundDetailService;
 
     /**
-     * 爬取实时数据
-     * @throws IOException
+     * 周一之周五  9:00 - 15:00 每分钟一次 爬取实时数据
      */
     @XxlJob("searchFundRealData")
     public void searchFundRealData(){
-        List<String> fundList = iFundService.list().stream().map(Fund::getFundCode).collect(Collectors.toList());
-        List<FundReal> searchResult = baseSearchFundService.searchFundRealData(fundList, FundReal.class);
-        long begin=System.currentTimeMillis();
-        searchResult = searchResult.stream().filter(ObjectUtils::isNotEmpty).collect(Collectors.toList());
-        iFundRealService.insertBatch(searchResult);
-        long end=System.currentTimeMillis();
-        log.info("基金实时数据更新完毕，耗时：{}",end-begin);
+        this.iFundService.searchFundRealData();
     }
 
     /**

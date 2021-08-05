@@ -33,4 +33,5 @@ public interface IFundRealService  extends IService<FundReal> {
      * @param delDate 日期
      */
     void deleteByDate(String delDate);
+
 }

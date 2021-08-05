@@ -1,6 +1,7 @@
 package com.spring.cloud.fund.fundreal.controller;
 
 import com.spring.cloud.fund.fund.entity.Fund;
+import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundreal.service.IFundRealService;
 import com.spring.cloud.fund.handler.SearchFundJobHandler;
 import io.swagger.annotations.Api;
@@ -23,13 +24,13 @@ import java.util.List;
 @AllArgsConstructor
 public class FundRealController{
 
-    private final SearchFundJobHandler searchFundJobHandler;
+    private final IFundService iFundService;
 
     private final IFundRealService iFundRealService;
 
     @GetMapping("/addFundRealData")
     public void addFundRealData() {
-        searchFundJobHandler.searchFundRealData();
+        iFundService.searchFundRealData();
     }
 
     @GetMapping("/getFundRealData")

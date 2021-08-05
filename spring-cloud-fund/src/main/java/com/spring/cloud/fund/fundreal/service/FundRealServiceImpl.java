@@ -7,7 +7,9 @@ import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.mapper.FundRealMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
@@ -23,14 +25,12 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> implements IFundRealService {
 
     @Value("${search.fundCode}")
     private ArrayList<String> fundCodeList;
-
     private final FundRealMapper fundRealMapper;
-
     private final IFundService iFundService;
 
     @Override
