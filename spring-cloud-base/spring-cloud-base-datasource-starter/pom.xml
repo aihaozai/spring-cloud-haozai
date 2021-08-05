@@ -36,16 +36,16 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.atool</groupId>
-            <artifactId>fluent-mybatis</artifactId>
-            <version>${fluent-mybatis.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.atool</groupId>
-            <artifactId>fluent-mybatis-processor</artifactId>
-            <version>${fluent-mybatis.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.atool</groupId>-->
+<!--            <artifactId>fluent-mybatis</artifactId>-->
+<!--            <version>${fluent-mybatis.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.github.atool</groupId>-->
+<!--            <artifactId>fluent-mybatis-processor</artifactId>-->
+<!--            <version>${fluent-mybatis.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>

@@ -1,5 +1,6 @@
 package com.spring.cloud.fund.funddetail.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,4 +49,10 @@ public class FundDetail extends BaseEntity implements Serializable  {
      *近一月收益率
      */
     private String oneY;
+
+    /**
+     *订阅id
+     */
+    @TableField(exist = false)
+    private String subscribeId;
 }

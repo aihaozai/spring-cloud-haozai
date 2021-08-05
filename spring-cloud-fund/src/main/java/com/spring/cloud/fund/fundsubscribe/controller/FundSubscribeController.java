@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author haozai
@@ -29,6 +26,13 @@ public class FundSubscribeController{
     @PutMapping("/subscribe")
     public void subscribe(@RequestParam String fundCode) {
         fundSubscribeService.subscribe(fundCode);
+    }
+
+    @ApiOperation("取消订阅基金")
+    @ApiParam(required = true, name = "订阅id")
+    @DeleteMapping("/unSubscribe")
+    public void unSubscribe(@RequestParam String subscribeId) {
+        fundSubscribeService.removeById(subscribeId);
     }
 
 }

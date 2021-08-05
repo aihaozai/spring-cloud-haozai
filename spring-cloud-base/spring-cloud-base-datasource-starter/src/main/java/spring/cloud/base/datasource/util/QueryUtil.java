@@ -2,7 +2,6 @@ package spring.cloud.base.datasource.util;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -24,31 +23,6 @@ import java.util.List;
 public class QueryUtil {
 
     private static final String UNDER_LINE = "_";
-
-    /**
-     * 设置查询参数
-     * @param queryObject
-     * @param queryWrapper
-     */
-    @SuppressWarnings("unchecked")
-    public static QueryWrapper setQuery(JSONObject queryObject, QueryWrapper queryWrapper){
-        if(ObjectUtils.isNotEmpty(queryObject)){
-            queryObject.forEach((key,val) -> {
-                if(ObjectUtils.isNotEmpty(key)){
-                    if(key.contains(QueryEnum.LIKE.getKeyword())){
-                        queryWrapper.like(key.replace(QueryEnum.LIKE.getKeyword(),""),val);
-                    }
-                    else if(key.contains(QueryEnum.IN.getKeyword())){
-                        queryWrapper.in(key.replace(QueryEnum.IN.getKeyword(),""),((List)val).toArray());
-                    }
-                    else{
-                        queryWrapper.eq(key,val);
-                    }
-                }
-            });
-        }
-        return queryWrapper;
-    }
 
     @SneakyThrows
     public static <R, Q> QueryWrapper getPredicate(QueryWrapper<R> queryWrapper, Q query) {
@@ -80,38 +54,6 @@ public class QueryUtil {
         }
 
         return queryWrapper;
-    }
-
-    @SneakyThrows
-    public static <T, Q> LambdaQueryWrapper getPredicate(LambdaQueryWrapper<T> lambdaQueryWrapper, Q query) {
-        if (query == null) {
-            return lambdaQueryWrapper;
-        }
-        List<Field> fields = getAllFields(query.getClass(), new ArrayList<>());
-        for (Field field : fields) {
-            boolean accessible = field.isAccessible();
-            field.setAccessible(true);
-            Query q = field.getAnnotation(Query.class);
-            if (q != null) {
-                Object o = field.get(query);
-                if (ObjectUtil.isNull(o) || StringUtils.EMPTY.equals(o)) {
-                    continue;
-                }
-                String name = StringUtils.isNotBlank(q.nickname()) ? q.nickname() : field.getName();
-
-
-                switch (q.type()) {
-                    case EQUAL:
-                        lambdaQueryWrapper.eq(l -> name, o);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            field.setAccessible(accessible);
-        }
-
-        return lambdaQueryWrapper;
     }
 
     private static List<Field> getAllFields(Class clazz, List<Field> fields) {

@@ -42,4 +42,9 @@ public class FundDetailController {
     public void addFundDetailData() {
         searchFundJobHandler.searchFundDetailData();
     }
+
+    @GetMapping("/subscribePage")
+    public Page<FundDetail> subscribePage(QueryPage queryPage, FundDetailQueryCriteria queryCriteria) {
+        return iFundDetailService.subscribePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<FundDetail>(),queryCriteria));
+    }
 }

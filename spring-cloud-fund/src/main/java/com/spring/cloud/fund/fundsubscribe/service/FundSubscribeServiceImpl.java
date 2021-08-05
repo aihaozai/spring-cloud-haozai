@@ -21,7 +21,6 @@ public class FundSubscribeServiceImpl extends ServiceImpl<FundSubscribeMapper, F
 
     @Override
     public void subscribe(String fundCode) {
-        Authentication authentication = OAuth2ResourceUtil.getAuthentication().getUserAuthentication();
         super.save(FundSubscribe.builder().userId(OAuth2ResourceUtil.getUserId()).fundCode(fundCode).build());
     }
 }

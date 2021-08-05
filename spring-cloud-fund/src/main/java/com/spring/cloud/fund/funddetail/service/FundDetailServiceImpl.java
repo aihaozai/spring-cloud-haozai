@@ -2,18 +2,26 @@ package com.spring.cloud.fund.funddetail.service;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.thread.ThreadFactoryBuilder;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.funddetail.entity.FundDetail;
 import com.spring.cloud.fund.funddetail.mapper.FundDetailMapper;
+import com.sun.javafx.collections.MappingChange;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import spring.cloud.base.fund.dto.FundDetailDataDTO;
 import spring.cloud.base.fund.util.FundDataUtil;
+import spring.cloud.base.resource.starter.util.OAuth2ResourceUtil;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -52,6 +60,11 @@ public class FundDetailServiceImpl extends ServiceImpl<FundDetailMapper, FundDet
     @Override
     public void insertBatch(List<FundDetail> fundDetailList) {
         this.fundDetailMapper.insertBatch(fundDetailList);
+    }
+
+    @Override
+    public Page<FundDetail> subscribePage(Page page, QueryWrapper predicate) {
+        return this.fundDetailMapper.subscribePage(page, OAuth2ResourceUtil.getUserId(),predicate);
     }
 
 
