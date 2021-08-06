@@ -23,6 +23,6 @@ public class P6spySqlFormatConfigure implements MessageFormattingStrategy {
     @Override
     public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
         return StringUtils.isNotBlank(sql) ? simpleDateFormat.format(new Date())
-                + " | 耗时 " + elapsed + " ms | SQL 语句：" + new MySQLFormatter().format(sql)+ ";" : StringUtils.EMPTY;
+                + " | 耗时 " + elapsed + " ms | SQL 语句：" + StringUtils.LF + new MySQLFormatter().format(sql) : StringUtils.EMPTY;
     }
 }
