@@ -1,0 +1,16 @@
+version: '3'
+services:
+  fund:
+    image: ${IMAGE_NAME}
+    container_name: ${CONTAINER_NAME}
+    networks:
+      - net
+    ports:
+      - 7000:7000
+    environment:
+      - JAVA_OPTS=-Xmx150M -Duser.timezone=GMT+08
+      - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
+
+networks:
+  net:
+    driver: bridge
