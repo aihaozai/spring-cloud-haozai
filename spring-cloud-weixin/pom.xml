@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>haozai</groupId>
         <artifactId>spring-cloud-haozai</artifactId>
@@ -10,17 +11,17 @@
     </parent>
 
     <groupId>com</groupId>
-    <artifactId>spring-cloud-fund</artifactId>
+    <artifactId>spring-cloud-weixin</artifactId>
     <version>${spring-cloud-haozai.version}</version>
-    <name>spring-cloud-fund</name>
-    <description>基金服务</description>
+    <name>spring-cloud-weixin</name>
+    <description>微信服务</description>
+
+    <properties>
+        <weixin.version>4.1.4.B</weixin.version>
+    </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.haozai</groupId>
-            <artifactId>spring-cloud-base-fund-starter</artifactId>
-            <version>${spring-cloud-haozai.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>com.haozai</groupId>
             <artifactId>spring-cloud-base-datasource-starter</artifactId>
@@ -41,6 +42,16 @@
             <artifactId>spring-cloud-base-resource-starter</artifactId>
             <version>${spring-cloud-haozai.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>${weixin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -50,17 +61,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 
 </project>

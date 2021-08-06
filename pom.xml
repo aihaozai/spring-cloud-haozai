@@ -22,6 +22,7 @@
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-elasticsearch</module>
         <module>spring-cloud-fund</module>
+        <module>spring-cloud-weixin</module>
     </modules>
 
     <properties>

@@ -11,7 +11,7 @@
 
     <groupId>com</groupId>
     <artifactId>spring-cloud-gateway</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${spring-cloud-haozai.version}</version>
     <name>spring-cloud-gateway</name>
     <description>gateway</description>
 
@@ -23,17 +23,17 @@
         <dependency>
             <groupId>com.haozai</groupId>
             <artifactId>spring-cloud-base-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${spring-cloud-haozai.version}</version>
         </dependency>
         <dependency>
             <groupId>com.haozai</groupId>
             <artifactId>spring-cloud-base-redis-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${spring-cloud-haozai.version}</version>
         </dependency>
         <dependency>
             <groupId>com.haozai</groupId>
             <artifactId>spring-cloud-base-swagger-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${spring-cloud-haozai.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
