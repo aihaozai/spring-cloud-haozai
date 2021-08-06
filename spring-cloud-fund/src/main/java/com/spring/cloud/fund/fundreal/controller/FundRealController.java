@@ -27,6 +27,7 @@ public class FundRealController{
     private final IFundService iFundService;
 
     private final IFundRealService iFundRealService;
+<<<<<<< Updated upstream
 
     @GetMapping("/addFundRealData")
     public void addFundRealData() {
@@ -42,4 +43,6 @@ public class FundRealController{
     public List<FundRealVO> getFundRealDataAnon() {
         return iFundRealService.getFundRealData();
     }
+=======
+>>>>>>> Stashed changes
 }
