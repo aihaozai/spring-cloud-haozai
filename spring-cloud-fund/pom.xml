@@ -11,7 +11,7 @@
 
     <groupId>com</groupId>
     <artifactId>spring-cloud-fund</artifactId>
-    <version>${spring-cloud-haozai.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <name>spring-cloud-fund</name>
     <description>基金服务</description>
 

@@ -11,7 +11,7 @@
 
     <groupId>com</groupId>
     <artifactId>spring-cloud-elasticsearch</artifactId>
-    <version>${spring-cloud-haozai.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <name>spring-cloud-elasticsearch</name>
     <description>Demo project for Spring Boot</description>
 

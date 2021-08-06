@@ -1,8 +1,7 @@
 package spring.cloud.base.fund.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 
+import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 

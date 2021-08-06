@@ -1,15 +1,12 @@
 package spring.cloud.base.datasource.util;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.alibaba.fastjson.JSONObject;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import spring.cloud.base.datasource.annotation.Query;
-import spring.cloud.base.datasource.request.QueryEnum;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +33,7 @@ public class QueryUtil {
             Query q = field.getAnnotation(Query.class);
             if (q != null) {
                 Object o = field.get(query);
-                if (ObjectUtil.isNull(o) || StringUtils.EMPTY.equals(o)) {
+                if (ObjectUtils.isEmpty(o) || StringUtils.EMPTY.equals(o)) {
                     continue;
                 }
                 String name = StringUtils.isNotBlank(q.nickname()) ? q.nickname() : field.getName();

@@ -11,7 +11,7 @@
 
     <groupId>com</groupId>
     <artifactId>spring-cloud-auth</artifactId>
-    <version>${spring-cloud-haozai.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <name>spring-cloud-auth</name>
     <description>鉴权服务</description>
 
