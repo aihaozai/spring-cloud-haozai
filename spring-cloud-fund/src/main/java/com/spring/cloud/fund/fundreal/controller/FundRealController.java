@@ -9,9 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
 
 /**
  * @author haozai
@@ -27,7 +25,6 @@ public class FundRealController{
     private final IFundService iFundService;
 
     private final IFundRealService iFundRealService;
-<<<<<<< Updated upstream
 
     @GetMapping("/addFundRealData")
     public void addFundRealData() {
@@ -43,6 +40,5 @@ public class FundRealController{
     public List<FundRealVO> getFundRealDataAnon() {
         return iFundRealService.getFundRealData();
     }
-=======
->>>>>>> Stashed changes
+
 }

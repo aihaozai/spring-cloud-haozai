@@ -2,20 +2,13 @@ package com.spring.cloud.fund.fundreal.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.spring.cloud.fund.fund.entity.Fund;
-import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.mapper.FundRealMapper;
-<<<<<<< Updated upstream
 import com.spring.cloud.fund.fundreal.model.FundRealVO;
-import lombok.AllArgsConstructor;
-=======
->>>>>>> Stashed changes
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
