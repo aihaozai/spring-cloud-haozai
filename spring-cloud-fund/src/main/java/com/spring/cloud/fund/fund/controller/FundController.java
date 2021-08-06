@@ -27,7 +27,7 @@ import java.util.List;
  * @date 2021/5/06  15:13
  */
 @Slf4j
-@Api(tags = "基金公司控制器",value = "/fund")
+@Api(tags = "基金控制器",value = "/fund")
 @RequestMapping("/fund")
 @RestController
 @AllArgsConstructor

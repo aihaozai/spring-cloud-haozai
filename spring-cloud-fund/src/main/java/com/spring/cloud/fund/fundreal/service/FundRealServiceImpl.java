@@ -6,6 +6,7 @@ import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.mapper.FundRealMapper;
+import com.spring.cloud.fund.fundreal.model.FundRealVO;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,6 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
     @Value("${search.fundCode}")
     private ArrayList<String> fundCodeList;
     private final FundRealMapper fundRealMapper;
-    private final IFundService iFundService;
 
     @Override
     public void insertBatch(List<FundReal> fundRealList) {
@@ -44,18 +44,18 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
     }
 
     @Override
-    public List<Fund> getFundRealData() {
+    public List<FundRealVO> getFundRealData() {
         DecimalFormat df = new DecimalFormat("######0.00");
         String date = this.queryLastDate();
-        QueryWrapper<Fund> fundQueryWrapper = new QueryWrapper<>();
+
         QueryWrapper<FundReal> fundRealQueryWrapper = new QueryWrapper<>();
-        fundQueryWrapper.in("fund_code",fundCodeList);
+
         fundRealQueryWrapper.in("fundcode",fundCodeList);
         fundRealQueryWrapper.eq("searchtime",date);
 
-        List<Fund> fundList = iFundService.list(fundQueryWrapper);
+        List<FundRealVO> voList = fundRealMapper.fundList(new QueryWrapper<>().in("fund_code",fundCodeList));
         List<FundReal> fundRealList = super.list(fundRealQueryWrapper);
-        fundList.forEach(f-> {
+        voList.forEach(f-> {
             List<FundReal> filterList = fundRealList.stream()
                     .filter(c -> f.getFundCode().equals(c.getFundcode()))
                     .sorted(Comparator.comparing(FundReal::getGztime)).collect(Collectors.toList());
@@ -82,7 +82,7 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
                 }
         );
 
-        return fundList;
+        return voList;
     }
 
     @Override

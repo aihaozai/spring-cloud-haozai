@@ -33,17 +33,13 @@ public class FundDetailController {
 
     private final SearchFundJobHandler searchFundJobHandler;
 
-    @GetMapping("/page")
-    public Page<FundDetail> page(QueryPage queryPage, FundDetailQueryCriteria queryCriteria) {
-        return iFundDetailService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<FundDetail>(),queryCriteria));
-    }
 
     @PutMapping("/addFundDetailData")
     public void addFundDetailData() {
         searchFundJobHandler.searchFundDetailData();
     }
 
-    @GetMapping("/subscribePage")
+    @GetMapping("/page")
     public Page<FundDetail> subscribePage(QueryPage queryPage, FundDetailQueryCriteria queryCriteria) {
         return iFundDetailService.subscribePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<FundDetail>(),queryCriteria));
     }

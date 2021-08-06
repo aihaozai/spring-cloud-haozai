@@ -1,7 +1,12 @@
 package com.spring.cloud.fund.fundreal.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
+import com.spring.cloud.fund.fundreal.model.FundRealVO;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,4 +44,12 @@ public interface FundRealMapper extends BaseMapper<FundReal> {
      * 删除索引
      */
     void delIndex();
+
+    /**
+     * 基金基本信息
+     * @param fundQueryWrapper
+     * @return
+     */
+    @Select(" select f.fund_code, f.fund_name from fund  ${ew.customSqlSegment} ")
+    List<FundRealVO> fundList(@Param(Constants.WRAPPER) QueryWrapper fundQueryWrapper);
 }

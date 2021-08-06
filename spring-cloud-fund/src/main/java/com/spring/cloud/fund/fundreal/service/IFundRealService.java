@@ -3,6 +3,8 @@ package com.spring.cloud.fund.fundreal.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
+import com.spring.cloud.fund.fundreal.model.FundRealVO;
+
 import java.util.List;
 
 /**
@@ -24,9 +26,9 @@ public interface IFundRealService  extends IService<FundReal> {
 
     /**
      * 获取实时基金数据
-     * @return List<Fund>
+     * @return List<FundRealVO>
      */
-    List<Fund> getFundRealData();
+    List<FundRealVO> getFundRealData();
 
     /**
      * 删除某日期之前基金实时信息
