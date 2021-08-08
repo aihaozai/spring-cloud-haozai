@@ -58,6 +58,7 @@ public class SecurityConfiguration {
         permitAll.add("/doc.html");
         permitAll.add("/webjars/**");
         permitAll.add("/xxl-job-admin/api/registry");
+        permitAll.add("/api/weixin/wx/user/**/login");
         http.authorizeExchange()
                 //白名单配置
                 .pathMatchers(ArrayUtil.toArray(permitAll,String.class)).permitAll()

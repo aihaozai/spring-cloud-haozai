@@ -3,11 +3,14 @@ package com.spring.cloud.auth.core.configurer;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 /**
  * @author haozai
@@ -42,8 +45,9 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http .authorizeRequests()
-                .antMatchers("/oauth/**","/login","/health","/keyPair/**","/res/**","/v2/api-docs").permitAll()
+                .antMatchers("/login","/health","/oauth/weixin/token","/keyPair/**","/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable();
+        http.requestMatcher(new OrRequestMatcher(new AntPathRequestMatcher("/oauth/weixin/token", HttpMethod.GET.name())));
     }
 }

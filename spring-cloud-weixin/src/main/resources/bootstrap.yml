@@ -9,7 +9,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: cloud-fund
+    name: cloud-weixin
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name:  com.p6spy.engine.spy.P6SpyDriver
@@ -32,6 +32,7 @@ gateway:
   resource:
     resourceId: weixin_resource
     permitAll:
+      - /wx/user/**/login
       - /v2/api-docs
 
 logging:
@@ -41,8 +42,8 @@ logging:
 wx:
   miniapp:
     configs:
-      - appid: #微信小程序的appid
-        secret: #微信小程序的Secret
+      - appid: wxad35604cd4dfafb7
+        secret: dbad3a89dceb8b2bdfd9f3639d002ec0
         token: #微信小程序消息服务器配置的token
         aesKey: #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON

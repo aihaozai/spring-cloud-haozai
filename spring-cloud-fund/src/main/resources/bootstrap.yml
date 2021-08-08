@@ -42,7 +42,7 @@ gateway:
   resource:
     resourceId: fund_resource
     permitAll:
-      - fundReal/getFundRealDataAnon
+      - /fundReal/getFundRealDataAnon
       - /v2/api-docs
 
 logging:

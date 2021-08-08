@@ -47,9 +47,9 @@ public interface FundRealMapper extends BaseMapper<FundReal> {
 
     /**
      * 基金基本信息
-     * @param fundQueryWrapper
-     * @return
+     * @param fundQueryWrapper 构造器
+     * @return List<FundRealVO>
      */
-    @Select(" select f.fund_code, f.fund_name from fund  ${ew.customSqlSegment} ")
+    @Select(" select fund_code, fund_name from fund  ${ew.customSqlSegment} ")
     List<FundRealVO> fundList(@Param(Constants.WRAPPER) QueryWrapper fundQueryWrapper);
 }
