@@ -45,9 +45,7 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http .authorizeRequests()
-                .antMatchers("/login","/health","/oauth/weixin/token","/keyPair/**","/v2/api-docs").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/user/**").authenticated()
                 .and().csrf().disable();
-        http.requestMatcher(new OrRequestMatcher(new AntPathRequestMatcher("/oauth/weixin/token", HttpMethod.GET.name())));
     }
 }

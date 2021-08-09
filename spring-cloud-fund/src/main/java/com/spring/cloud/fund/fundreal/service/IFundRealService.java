@@ -36,4 +36,10 @@ public interface IFundRealService  extends IService<FundReal> {
      */
     void deleteByDate(String delDate);
 
+    /**
+     * 订阅实时基金数据
+     * @param codes
+     * @return
+     */
+    List<FundRealVO> subscribeFundReal(String codes);
 }

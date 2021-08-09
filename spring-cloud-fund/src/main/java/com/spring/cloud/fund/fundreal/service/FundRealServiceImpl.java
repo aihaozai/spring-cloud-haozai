@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.mapper.FundRealMapper;
 import com.spring.cloud.fund.fundreal.model.FundRealVO;
+import io.micrometer.core.instrument.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,20 +42,40 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
     @Override
     public List<FundRealVO> getFundRealData() {
+        return this.getFundReal(null);
+    }
+
+    @Override
+    public void deleteByDate(String delDate) {
+        log.info("删除索引");
+        this.fundRealMapper.delIndex();
+        log.info("删除某日期之前基金实时信息");
+        this.fundRealMapper.deleteByDate(delDate);
+        log.info("添加索引");
+        this.fundRealMapper.addIndex();
+    }
+
+    @Override
+    public List<FundRealVO> subscribeFundReal(String codes) {
+        return this.getFundReal(codes);
+    }
+
+    private List<FundRealVO> getFundReal(String codes){
         DecimalFormat df = new DecimalFormat("######0.00");
         String date = this.queryLastDate();
 
         QueryWrapper<FundReal> fundRealQueryWrapper = new QueryWrapper<>();
-
-        fundRealQueryWrapper.in("fundcode",fundCodeList);
         fundRealQueryWrapper.eq("searchtime",date);
+        if(StringUtils.isNotBlank(codes)){
+            fundRealQueryWrapper.in("fundcode",codes.split(","));
+        }
 
-        List<FundRealVO> voList = fundRealMapper.fundList(new QueryWrapper<>().in("fund_code",fundCodeList));
+        List<FundRealVO> voList = fundRealMapper.fundList(new QueryWrapper<>().in("fund_code",codes.split(",")));
         List<FundReal> fundRealList = super.list(fundRealQueryWrapper);
         voList.forEach(f-> {
-            List<FundReal> filterList = fundRealList.stream()
-                    .filter(c -> f.getFundCode().equals(c.getFundcode()))
-                    .sorted(Comparator.comparing(FundReal::getGztime)).collect(Collectors.toList());
+                    List<FundReal> filterList = fundRealList.stream()
+                            .filter(c -> f.getFundCode().equals(c.getFundcode()))
+                            .sorted(Comparator.comparing(FundReal::getGztime)).collect(Collectors.toList());
                     f.setFundRealList(filterList);
 
                     double max = filterList.stream().mapToDouble(t->t.getGszzl().doubleValue()).max().orElse(0);
@@ -77,17 +98,6 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
                     f.setYAxis(yAxis);
                 }
         );
-
         return voList;
-    }
-
-    @Override
-    public void deleteByDate(String delDate) {
-        log.info("删除索引");
-        this.fundRealMapper.delIndex();
-        log.info("删除某日期之前基金实时信息");
-        this.fundRealMapper.deleteByDate(delDate);
-        log.info("添加索引");
-        this.fundRealMapper.addIndex();
     }
 }

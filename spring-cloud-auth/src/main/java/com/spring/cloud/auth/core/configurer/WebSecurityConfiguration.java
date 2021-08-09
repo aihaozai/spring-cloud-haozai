@@ -5,7 +5,6 @@ import com.spring.cloud.auth.core.service.UserServiceDetailImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -14,10 +13,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.OrRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -33,8 +28,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserServiceDetailImpl userServiceDetail;
 
-    private RequestMatcher requestMatcher;
-
     /**
      * AuthenticationEntryPoint 认证入口
      * AccessDeniedHandler 拒绝通过处理
@@ -45,7 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/login","/health", "/css/**","/keyPair/**","/v2/api-docs").permitAll()
+                .antMatchers("/","/login","/health", "/oauth/weixin/token","/keyPair/**","/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

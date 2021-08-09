@@ -44,9 +44,7 @@ public class WxMaUserController {
     }
 
     /**
-     * <pre>
      * 获取用户信息接口
-     * </pre>
      */
     @GetMapping("/info")
     public WxMaUserInfo info(@PathVariable String appid, String sessionKey,
