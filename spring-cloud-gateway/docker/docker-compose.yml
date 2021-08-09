@@ -12,6 +12,7 @@ services:
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
       - NACOS_PUBLIC_IP=localhost
+      - spring.profiles.active=prod,prod-redis
 networks:
   net:
     driver: bridge
