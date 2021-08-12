@@ -18,7 +18,7 @@ public class OAuth2ResourceUtil {
         return GsonUtil.authenticationFromJson(getAuthentication().getUserAuthentication().getPrincipal(),AuthUser.class);
     }
 
-    public static String getUserId() {
+    public static Long getUserId() {
         return getAuthUser().getId();
     }
 }

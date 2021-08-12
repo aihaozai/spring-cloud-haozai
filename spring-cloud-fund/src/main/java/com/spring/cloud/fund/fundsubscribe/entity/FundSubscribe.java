@@ -22,7 +22,7 @@ public class FundSubscribe extends BaseEntity {
     /**
      * 用户id
      */
-    private String userId;
+    private Long userId;
 
     /**
      * 基金代码

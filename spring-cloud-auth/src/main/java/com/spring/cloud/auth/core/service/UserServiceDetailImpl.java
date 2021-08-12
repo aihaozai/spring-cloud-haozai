@@ -31,8 +31,9 @@ public class UserServiceDetailImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findUserByUsername(username.trim());
         Objects.requireNonNull(user,this.message.getMessage("AuthenticationProvider.badUser",  null, Locale.getDefault()));
-        AuthUser authUser = new AuthUser(user.getUsername(),user.getPassword(),AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
-        authUser.setId(user.getId());
+        AuthUser authUser = new AuthUser(user.getUsername(),user.getPassword(),user.isEnabled(),user.isAccountNonExpired(),user.isCredentialsNonExpired(),user.isAccountNonLocked(),AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
+
+        authUser.setId(user.getId()).setAccount(user.getAccount());
         return authUser;
     }
 

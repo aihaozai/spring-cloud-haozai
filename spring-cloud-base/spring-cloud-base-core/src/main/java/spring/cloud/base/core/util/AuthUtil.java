@@ -18,7 +18,7 @@ public class AuthUtil {
         return (AuthUser) getAuthentication().getPrincipal();
     }
 
-    public static String getUserId() {
+    public static Long getUserId() {
         return getAuthUser().getId();
     }
 }

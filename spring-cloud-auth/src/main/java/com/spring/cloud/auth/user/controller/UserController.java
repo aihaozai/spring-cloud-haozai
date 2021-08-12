@@ -16,7 +16,7 @@ import spring.cloud.base.datasource.request.QueryPage;
  * @author haozai
  * @date 2021/4/30  11:19
  */
-@Api(value = "用户控制器")
+@Api(value = "用户接口")
 @RequestMapping("/user")
 @RestController
 @AllArgsConstructor

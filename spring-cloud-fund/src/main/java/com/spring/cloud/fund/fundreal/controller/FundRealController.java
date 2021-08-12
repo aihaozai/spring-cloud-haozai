@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2021/5/28  15:13
  */
 @Slf4j
-@Api("基金实时控制器")
+@Api("基金实时接口")
 @RequestMapping("/fundReal")
 @RestController
 @AllArgsConstructor
