@@ -43,6 +43,9 @@ public class QueryUtil {
                     case EQUAL:
                         queryWrapper.eq(name, o);
                         break;
+                    case LIKE:
+                        queryWrapper.like(name, o);
+                        break;
                     default:
                         break;
                 }

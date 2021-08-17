@@ -35,7 +35,11 @@ public @interface Query {
         /**
          * 相等
          */
-        EQUAL
+        EQUAL,
+        /**
+         * 模糊
+         */
+        LIKE
     }
 
 }

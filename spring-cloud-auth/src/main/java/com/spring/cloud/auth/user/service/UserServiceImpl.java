@@ -1,11 +1,12 @@
 package com.spring.cloud.auth.user.service;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spring.cloud.auth.user.entity.User;
 import com.spring.cloud.auth.user.mapper.UserMapper;
+import com.spring.cloud.auth.user.model.UserVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     private final UserMapper userMapper;
 
-    public IPage<User> selectUserPage(Page<User> page) {
-        return this.baseMapper.selectPage(page,null);
+    @Override
+    public Page<UserVO> selectUserPage(Page<UserVO> page, QueryWrapper queryWrapper) {
+        return this.baseMapper.selectUserPage(page,queryWrapper);
     }
 
     @Override

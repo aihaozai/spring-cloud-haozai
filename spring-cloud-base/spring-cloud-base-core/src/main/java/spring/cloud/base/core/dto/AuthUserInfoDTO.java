@@ -18,9 +18,9 @@ public class AuthUserInfoDTO implements Serializable {
 
     private String username;
 
-    private String avatar = "https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png";
+    private String avatar ;
 
     private String address;
 
-    private String position = "Java工程师 | 蚂蚁金服-计算服务事业群-微信平台部";
+    private String position;
 }
