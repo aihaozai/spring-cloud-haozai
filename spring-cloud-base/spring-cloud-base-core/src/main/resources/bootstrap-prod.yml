@@ -19,3 +19,8 @@ spring:
 xxl:
   job:
     adminAddresses: http://1.117.205.58:8989/xxl-job-admin
+
+jasypt:
+  encryptor:
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    password: spring-cloud-haozai #你的秘钥

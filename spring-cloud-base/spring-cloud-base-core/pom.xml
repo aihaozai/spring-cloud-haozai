@@ -21,6 +21,7 @@
         <starter-security.version>2.2.0.RELEASE</starter-security.version>
         <xxl-job.version>2.3.0</xxl-job.version>
         <webmvc.version>5.2.7.RELEASE</webmvc.version>
+        <jasypt.version>3.0.3</jasypt.version>
     </properties>
 
     <dependencies>
@@ -59,8 +60,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.2.7.RELEASE</version>
+            <version>${webmvc.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot</artifactId>
+            <version>${jasypt.version}</version>
         </dependency>
     </dependencies>
 </project>

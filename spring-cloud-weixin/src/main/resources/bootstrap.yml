@@ -15,7 +15,7 @@ spring:
     driver-class-name:  com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:p6spy:mysql://1gfco70pqu10zt81o.mysql.rds.aliyuncs.com:3306/cloud_fund?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: cloud_fund
-    password: cloud_fund666!
+    password: ENC(2iWxMuXWnVpwoFM/2Z1YtLRcPf1OixvbgBQjMpjjzF1HOuB9DsGEvQWJIFBwe5ZX)
 
 #swagger扫描配置
 swagger:
@@ -42,8 +42,8 @@ logging:
 wx:
   miniapp:
     configs:
-      - appid: wxad35604cd4dfafb7
-        secret: dbad3a89dceb8b2bdfd9f3639d002ec0
+      - appid: ENC(9LXerQy4fvgjA3rsjFIxyjqeKThyCXgNZMHV/Be+4aFHW59vAvZ8lUdS5ewqYmrK2DeNlzHEKxjNrHXBCGVuUA==)
+        secret: ENC(OVrwRFYHWh4aNzwwnYEwk2Hd8ZMhCcsItvvrM7WNz+zkavbQaU5xqZhmri1JASolttt8xyBWZhfDQu/fV/te0vKsf0IjuCfxVc/6F/X6RpM=)
         token: #微信小程序消息服务器配置的token
         aesKey: #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON

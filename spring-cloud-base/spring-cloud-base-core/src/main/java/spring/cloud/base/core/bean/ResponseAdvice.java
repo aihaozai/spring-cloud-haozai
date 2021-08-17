@@ -16,9 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import spring.cloud.base.core.annotation.UnUseResult;
 import spring.cloud.base.core.result.Result;
 
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.AnnotatedElement;
 import java.net.URI;
 
