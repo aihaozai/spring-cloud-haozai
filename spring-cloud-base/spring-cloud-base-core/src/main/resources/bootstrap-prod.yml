@@ -22,5 +22,5 @@ xxl:
 
 jasypt:
   encryptor:
-    algorithm: PBEWITHHMACSHA512ANDAES_256
+    algorithm: PBEWITHHMACSHA512ANDAES_128
     password: spring-cloud-haozai #你的秘钥
