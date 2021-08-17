@@ -16,6 +16,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import spring.cloud.base.core.annotation.UnUseResult;
 import spring.cloud.base.core.result.Result;
 
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.AnnotatedElement;
 import java.net.URI;
 
@@ -30,6 +33,8 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private final ObjectMapper objectMapper;
 
+    private static String API = "v2/api-docs";
+
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
         AnnotatedElement annotatedElement = methodParameter.getAnnotatedElement();
@@ -40,9 +45,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @SneakyThrows
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        URI uri = serverHttpRequest.getURI();
-       // System.out.println(uri.getPath().replace()));
-        if(serverHttpRequest.getURI().getPath().contains("v2/api-docs")){
+        if(serverHttpRequest.getURI().getPath().contains(API)){
             return o;
         }else if(o instanceof String){
             return objectMapper.writeValueAsString(Result.ok(o));

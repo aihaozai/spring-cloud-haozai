@@ -3,6 +3,7 @@ package spring.cloud.base.core.result;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.apache.http.HttpStatus;
 
 import java.io.Serializable;
 
@@ -23,10 +24,6 @@ public class Result<T> implements Serializable {
      */
     private Integer code;
     /**
-     * 返回信息
-     */
-    private String message;
-    /**
      * 返回数据
      */
     private T data;
@@ -34,8 +31,7 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> ok() {
         Result<T> result = new Result<>();
         result.setSuccess(ResultCodeEnum.SUCCESS.getSuccess())
-        .setCode(ResultCodeEnum.SUCCESS.getCode())
-        .setMessage(ResultCodeEnum.SUCCESS.getMessage());
+        .setCode(ResultCodeEnum.SUCCESS.getCode());
         return result;
     }
 
@@ -43,8 +39,15 @@ public class Result<T> implements Serializable {
         Result<T> result = new Result<>();
         result.setSuccess(ResultCodeEnum.SUCCESS.getSuccess())
         .setCode(ResultCodeEnum.SUCCESS.getCode())
-        .setMessage(ResultCodeEnum.SUCCESS.getMessage())
         .setData(data);
+        return result;
+    }
+
+    public static <T> Result<T> ok(T data,Integer code) {
+        Result<T> result = new Result<>();
+        result.setSuccess(HttpStatus.SC_OK==code?ResultCodeEnum.SUCCESS.getSuccess():ResultCodeEnum.FAIL.getSuccess())
+                .setCode(code)
+                .setData(data);
         return result;
     }
 
@@ -52,7 +55,6 @@ public class Result<T> implements Serializable {
         Result<T> result = new Result<>();
         result.setSuccess(ResultCodeEnum.FAIL.getSuccess())
                 .setCode(ResultCodeEnum.FAIL.getCode())
-                .setMessage(ResultCodeEnum.FAIL.getMessage())
                 .setData(data);
         return result;
     }
