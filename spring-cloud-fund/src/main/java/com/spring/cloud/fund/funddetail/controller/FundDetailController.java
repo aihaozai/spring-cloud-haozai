@@ -4,7 +4,7 @@ package com.spring.cloud.fund.funddetail.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.fund.funddetail.entity.FundDetail;
-import com.spring.cloud.fund.funddetail.query.FundDetailQueryCriteria;
+import com.spring.cloud.fund.funddetail.model.FundDetailQueryCriteria;
 import com.spring.cloud.fund.funddetail.service.IFundDetailService;
 import com.spring.cloud.fund.handler.SearchFundJobHandler;
 import io.swagger.annotations.Api;

@@ -1,4 +1,4 @@
-package com.spring.cloud.fund.fund.query;
+package com.spring.cloud.fund.funddetail.model;
 
 
 import lombok.Data;
@@ -9,7 +9,7 @@ import spring.cloud.base.datasource.annotation.Query;
  * @date 2021/7/28 14:54
  */
 @Data
-public class FundQueryCriteria {
+public class FundDetailQueryCriteria {
 
     @Query(type = Query.Type.EQUAL)
     private String fundCode;

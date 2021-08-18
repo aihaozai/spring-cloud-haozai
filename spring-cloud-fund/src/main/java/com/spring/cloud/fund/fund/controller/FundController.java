@@ -3,12 +3,11 @@ package com.spring.cloud.fund.fund.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.fund.fund.entity.Fund;
-import com.spring.cloud.fund.fund.query.FundQueryCriteria;
+import com.spring.cloud.fund.fund.model.FundQueryCriteria;
 import com.spring.cloud.fund.fund.service.IFundService;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,6 @@ import spring.cloud.base.fund.util.FundDataUtil;
 import spring.cloud.base.resource.starter.util.OAuth2ResourceUtil;
 
 import javax.script.ScriptException;
-import java.util.ArrayList;
 import java.util.List;
 
 

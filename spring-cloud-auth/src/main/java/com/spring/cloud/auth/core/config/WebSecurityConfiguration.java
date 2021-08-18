@@ -1,4 +1,4 @@
-package com.spring.cloud.auth.core.configurer;
+package com.spring.cloud.auth.core.config;
 
 
 import com.spring.cloud.auth.core.service.UserServiceDetailImpl;
