@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nacos:
+    image: nacos/nacos-server:latest
+      container_name: nacos
+      networks:
+        - net
+      ports:
+        - 8848:8848
+      environment:
+        - MODE=standalone
+        - SPRING_DATASOURCE_PLATFORM=mysql
+        - MYSQL_MASTER_SERVICE_HOST=1gfco70pqu10zt81o.mysql.rds.aliyuncs.com
+        - MYSQL_MASTER_SERVICE_PORT=3306
+        - MYSQL_MASTER_SERVICE_DB_NAME=nacos
+        - MYSQL_MASTER_SERVICE_USER=nacos
+        - MYSQL_MASTER_SERVICE_PASSWORD=nacos666!
+networks:
+  net:
+    driver: bridge
