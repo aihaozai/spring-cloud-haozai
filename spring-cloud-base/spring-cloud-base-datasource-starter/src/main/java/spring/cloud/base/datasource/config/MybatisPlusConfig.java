@@ -31,4 +31,14 @@ public class MybatisPlusConfig {
     public OptimisticLockerInterceptor optimisticLockerInterceptor(){
         return new OptimisticLockerInterceptor();
     }
+
+    /**
+     * 自动填充处理器
+     * @return MyMetaObjectHandler
+     */
+    @Bean
+    public MyMetaObjectHandler myMetaObjectHandler(){
+        return new MyMetaObjectHandler();
+    }
+
 }
