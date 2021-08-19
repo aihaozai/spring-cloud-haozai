@@ -1,7 +1,7 @@
 package com.spring.cloud.elasticsearch.constant;
 
 /**
- * @author aihaozai
+ * @author haozai
  * @date 2021/5/25 10:43
  */
 public class ElasticSearchConstant {

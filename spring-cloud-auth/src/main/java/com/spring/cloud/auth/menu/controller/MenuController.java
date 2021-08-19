@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author haozai
  * @date 2021/8/18  14:31
@@ -41,5 +44,11 @@ public class MenuController {
         BeanUtils.copyProperties(menuDTO,menu);
         System.out.println(menu.toString());
         iMenuService.save(menu);
+    }
+
+    @ApiOperation("下拉选择")
+    @GetMapping("/select")
+    public List<Map> select() {
+        return iMenuService.select();
     }
 }

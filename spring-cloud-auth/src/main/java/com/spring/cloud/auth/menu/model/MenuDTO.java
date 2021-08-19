@@ -21,7 +21,6 @@ public class MenuDTO {
     private Long id;
 
     @NotNull(message = "上级菜单不能为空！")
-    @Max(value = 9999 ,message = "不能大于9999")
     @ApiModelProperty(value = "上级菜单id",name = "pid")
     private Long pid;
 
