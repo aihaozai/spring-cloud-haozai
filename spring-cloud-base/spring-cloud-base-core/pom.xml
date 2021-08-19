@@ -22,6 +22,7 @@
         <xxl-job.version>2.3.0</xxl-job.version>
         <webmvc.version>5.2.7.RELEASE</webmvc.version>
         <jasypt.version>3.0.3</jasypt.version>
+        <validator.version>7.0.1.Final</validator.version>
     </properties>
 
     <dependencies>
@@ -67,6 +68,11 @@
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot</artifactId>
             <version>${jasypt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${validator.version}</version>
         </dependency>
     </dependencies>
 </project>

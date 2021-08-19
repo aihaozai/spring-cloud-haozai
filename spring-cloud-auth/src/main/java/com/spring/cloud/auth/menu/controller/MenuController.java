@@ -4,13 +4,16 @@ package com.spring.cloud.auth.menu.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.auth.menu.entity.Menu;
+import com.spring.cloud.auth.menu.model.MenuDTO;
 import com.spring.cloud.auth.menu.model.MenuQueryCriteria;
 import com.spring.cloud.auth.menu.service.IMenuService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 
@@ -19,7 +22,7 @@ import spring.cloud.base.datasource.util.QueryUtil;
  * @date 2021/8/18  14:31
  */
 @Api(value = "菜单接口")
-@RequestMapping("/user")
+@RequestMapping("/menu")
 @RestController
 @AllArgsConstructor
 public class MenuController {
@@ -29,5 +32,14 @@ public class MenuController {
     @GetMapping("/page")
     public Page<Menu> page(QueryPage queryPage, MenuQueryCriteria queryCriteria) {
         return iMenuService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
+    }
+
+    @ApiOperation("新增菜单")
+    @PostMapping("/add")
+    public void add(@RequestBody @Validated MenuDTO menuDTO) {
+        Menu menu = new Menu();
+        BeanUtils.copyProperties(menuDTO,menu);
+        System.out.println(menu.toString());
+        iMenuService.save(menu);
     }
 }

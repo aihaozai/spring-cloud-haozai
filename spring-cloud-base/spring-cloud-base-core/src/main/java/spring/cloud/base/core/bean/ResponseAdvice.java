@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import spring.cloud.base.core.annotation.UnUseResult;
 import spring.cloud.base.core.result.Result;
-
 import java.lang.reflect.AnnotatedElement;
-import java.net.URI;
 
 /**
  * @author haozai
