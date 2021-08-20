@@ -17,6 +17,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * 下拉选择
      * @return java.util.List<java.util.Map>
      */
-    @Select("SELECT id AS code,menu_name AS label FROM menu")
+    @Select("SELECT id AS code, name AS label FROM menu")
     List<Map> select();
 }

@@ -1,9 +1,14 @@
 package com.spring.cloud.auth.menu.service;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spring.cloud.auth.menu.entity.Menu;
 import com.spring.cloud.auth.menu.mapper.MenuMapper;
+import com.spring.cloud.auth.menu.model.MenuTree;
+import com.spring.cloud.auth.util.MenuTreeUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +28,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public List<Map> select() {
         return menuMapper.select();
+    }
+
+    @Override
+    public Page treePage(Page<Menu> page, QueryWrapper predicate) {
+        predicate.eq("pid",MenuTreeUtil.PID);
+        Page menuPage = super.page(page,predicate);
+        List<Menu> menuList = menuPage.getRecords();
+        menuList.addAll(super.list(new LambdaQueryWrapper<Menu>().ne(Menu::getPid,MenuTreeUtil.PID)));
+        List<MenuTree> treeList = MenuTreeUtil.buildMenuTree(MenuTreeUtil.PID,menuList);
+        menuPage.setRecords(treeList);
+        return menuPage;
     }
 }

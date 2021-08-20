@@ -1,8 +1,9 @@
 package com.spring.cloud.auth.menu.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spring.cloud.auth.menu.entity.Menu;
-
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,12 @@ public interface IMenuService extends IService<Menu> {
      * @return java.util.List<java.util.Map>
      */
     List<Map> select();
+
+    /**
+     * 树形分页
+     * @param page  分页
+     * @param predicate 查询构造器
+     * @return com.baomidou.mybatisplus.extension.plugins.pagination.Page<com.spring.cloud.auth.menu.entity.Menu>
+     */
+    Page treePage(Page<Menu> page, QueryWrapper predicate);
 }

@@ -11,5 +11,6 @@ import spring.cloud.base.datasource.annotation.Query;
 @Data
 public class MenuQueryCriteria {
 
-
+    @Query(type = Query.Type.EQUAL)
+    private Long pid;
 }

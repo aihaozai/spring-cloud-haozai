@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import spring.cloud.base.datasource.entity.BaseEntity;
@@ -25,14 +26,17 @@ public class Menu extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "上级菜单id",name = "pid")
     private Long pid;
 
-    @ApiModelProperty(value = "菜单名称",name = "menuName")
-    private String menuName;
+    @ApiModelProperty(value = "菜单名称",name = "name")
+    private String name;
 
-    @ApiModelProperty(value = "访问菜单路径",name = "menuUrl")
-    private String menuUrl;
+    @ApiModelProperty(value = "访问菜单路径",name = "path")
+    private String path;
 
-    @ApiModelProperty(value = "菜单图标",name = "menuIcon")
-    private String menuIcon;
+    @ApiModelProperty(value = "菜单部件",name = "component")
+    private String component;
+
+    @ApiModelProperty(value = "菜单图标",name = "icon")
+    private String icon;
 
     @ApiModelProperty(value = "排序",name = "sort")
     private Integer sort;

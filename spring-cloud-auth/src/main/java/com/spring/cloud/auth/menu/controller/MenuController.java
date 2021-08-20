@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.auth.menu.entity.Menu;
 import com.spring.cloud.auth.menu.model.MenuDTO;
 import com.spring.cloud.auth.menu.model.MenuQueryCriteria;
+import com.spring.cloud.auth.menu.model.MenuTree;
 import com.spring.cloud.auth.menu.service.IMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,9 +33,10 @@ public class MenuController {
 
     private final IMenuService iMenuService;
 
-    @GetMapping("/page")
-    public Page<Menu> page(QueryPage queryPage, MenuQueryCriteria queryCriteria) {
-        return iMenuService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
+    @GetMapping("/treePage")
+    public Page treePage(QueryPage queryPage, MenuQueryCriteria queryCriteria) {
+        queryCriteria.setPid(0L);
+        return iMenuService.treePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
     }
 
     @ApiOperation("新增菜单")
