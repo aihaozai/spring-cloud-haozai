@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import java.math.BigInteger;
@@ -31,7 +32,7 @@ public class BeanConfig {
      * @return org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
      */
     @Bean
-    @ConditionalOnMissingBean
+    @Primary
     public MappingJackson2HttpMessageConverter getMappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         ObjectMapper objectMapper = new ObjectMapper();
