@@ -11,6 +11,7 @@ import com.spring.cloud.auth.menu.model.MenuTree;
 import com.spring.cloud.auth.util.MenuTreeUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import spring.cloud.base.core.dto.SelectDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -26,13 +27,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     private final MenuMapper menuMapper;
 
     @Override
-    public List<Map> select() {
+    public List<SelectDTO> select() {
         return menuMapper.select();
-    }
+}
 
     @Override
     public Page treePage(Page<Menu> page, QueryWrapper predicate) {
-        predicate.eq("pid",MenuTreeUtil.PID);
         Page menuPage = super.page(page,predicate);
         List<Menu> menuList = menuPage.getRecords();
         menuList.addAll(super.list(new LambdaQueryWrapper<Menu>().ne(Menu::getPid,MenuTreeUtil.PID)));

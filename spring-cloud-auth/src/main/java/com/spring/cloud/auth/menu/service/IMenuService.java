@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spring.cloud.auth.menu.entity.Menu;
+import spring.cloud.base.core.dto.SelectDTO;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +16,11 @@ import java.util.Map;
 public interface IMenuService extends IService<Menu> {
 
     /**
+     *
      * 下拉选择
-     * @return java.util.List<java.util.Map>
+     * @return java.util.List<spring.cloud.base.core.dto.SelectDTO>
      */
-    List<Map> select();
+    List<SelectDTO> select();
 
     /**
      * 树形分页

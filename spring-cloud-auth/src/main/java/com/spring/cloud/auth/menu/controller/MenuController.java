@@ -8,6 +8,7 @@ import com.spring.cloud.auth.menu.model.MenuDTO;
 import com.spring.cloud.auth.menu.model.MenuQueryCriteria;
 import com.spring.cloud.auth.menu.model.MenuTree;
 import com.spring.cloud.auth.menu.service.IMenuService;
+import com.spring.cloud.auth.util.MenuTreeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import spring.cloud.base.core.dto.SelectDTO;
 import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 
@@ -35,7 +37,7 @@ public class MenuController {
 
     @GetMapping("/treePage")
     public Page treePage(QueryPage queryPage, MenuQueryCriteria queryCriteria) {
-        queryCriteria.setPid(0L);
+        queryCriteria.setPid(MenuTreeUtil.PID);
         return iMenuService.treePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
     }
 
@@ -50,7 +52,7 @@ public class MenuController {
 
     @ApiOperation("下拉选择")
     @GetMapping("/select")
-    public List<Map> select() {
+    public List<SelectDTO> select() {
         return iMenuService.select();
     }
 }
