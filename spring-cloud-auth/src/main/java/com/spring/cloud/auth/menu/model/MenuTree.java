@@ -14,5 +14,6 @@ import java.util.List;
 @Setter
 @Getter
 public class MenuTree extends Menu {
+
     private List<MenuTree> children = new ArrayList<>();
 }

@@ -46,8 +46,21 @@ public class MenuController {
     public void add(@RequestBody @Validated MenuDTO menuDTO) {
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuDTO,menu);
-        System.out.println(menu.toString());
         iMenuService.save(menu);
+    }
+
+    @ApiOperation("编辑菜单")
+    @PutMapping("/edit")
+    public void edit(@RequestBody @Validated MenuDTO menuDTO) {
+        Menu menu = new Menu();
+        BeanUtils.copyProperties(menuDTO,menu);
+        iMenuService.updateById(menu);
+    }
+
+    @ApiOperation("删除菜单")
+    @DeleteMapping("/delete/{id}")
+    public void edit(@PathVariable String id) {
+        iMenuService.removeById(id);
     }
 
     @ApiOperation("下拉选择")

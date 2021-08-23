@@ -22,7 +22,7 @@ public class QueryUtil {
     private static final String UNDER_LINE = "_";
 
     @SneakyThrows
-    public static <R, Q> QueryWrapper getPredicate(QueryWrapper<R> queryWrapper, Q query) {
+    public static <R, Q> QueryWrapper<R> getPredicate(QueryWrapper<R> queryWrapper, Q query) {
         if (query == null) {
             return queryWrapper;
         }

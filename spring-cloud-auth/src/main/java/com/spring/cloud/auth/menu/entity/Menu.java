@@ -50,4 +50,8 @@ public class Menu extends BaseEntity implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+
+    @ApiModelProperty(value = "树形表格专用",name = "key")
+    @TableField(exist = false)
+    private Long key;
 }

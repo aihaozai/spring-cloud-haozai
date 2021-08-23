@@ -5,13 +5,11 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.ulisesbocchio.jasyptspringboot.annotation.EncryptablePropertySource;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-
 import java.math.BigInteger;
 
 /**
@@ -32,8 +30,8 @@ public class BeanConfig {
      * @return org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
      */
     @Bean
-    @Primary
-    public MappingJackson2HttpMessageConverter getMappingJackson2HttpMessageConverter() {
+    @ConditionalOnBean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule simpleModule = new SimpleModule();

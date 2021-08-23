@@ -1,5 +1,6 @@
 package com.spring.cloud.auth.menu.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
  * @date 2021/8/19 16:25
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MenuDTO {
 
     private Long id;

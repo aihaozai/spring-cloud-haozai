@@ -28,5 +28,5 @@ public interface IMenuService extends IService<Menu> {
      * @param predicate 查询构造器
      * @return com.baomidou.mybatisplus.extension.plugins.pagination.Page<com.spring.cloud.auth.menu.entity.Menu>
      */
-    Page treePage(Page<Menu> page, QueryWrapper predicate);
+    Page treePage(Page<Menu> page, QueryWrapper<Menu> predicate);
 }
