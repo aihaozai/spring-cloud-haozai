@@ -27,7 +27,7 @@ import java.util.List;
  * @date 2021/5/06  15:13
  */
 @Slf4j
-@Api(tags = "基金控制器",value = "/fund")
+@Api(tags = "基金接口(fund)")
 @RequestMapping("/fund")
 @RestController
 @AllArgsConstructor
@@ -39,7 +39,7 @@ public class FundController{
 
     @GetMapping("/page")
     public Page<Fund> page(QueryPage queryPage, FundQueryCriteria queryCriteria) {
-        return iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Fund>(),queryCriteria));
+        return iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<>(),queryCriteria));
     }
 
     @GetMapping("/getSubscribeFund")
