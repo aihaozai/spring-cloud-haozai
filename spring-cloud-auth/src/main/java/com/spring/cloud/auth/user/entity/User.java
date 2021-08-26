@@ -3,7 +3,7 @@ package com.spring.cloud.auth.user.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.spring.cloud.auth.core.entity.Role;
+import com.spring.cloud.auth.role.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

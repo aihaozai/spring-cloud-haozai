@@ -1,17 +1,12 @@
 package com.spring.cloud.auth.user.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.spring.cloud.auth.core.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import spring.cloud.base.datasource.entity.BaseEntity;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author haozai
@@ -25,7 +20,6 @@ public class UserVO extends BaseEntity implements Serializable{
 
     @ApiModelProperty(value = "账号",name = "account")
     private String account;
-
 
     @ApiModelProperty(value = "用户名称",name = "username")
     private String username;

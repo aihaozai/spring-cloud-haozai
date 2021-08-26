@@ -33,12 +33,12 @@ import java.util.Map;
 @AllArgsConstructor
 public class MenuController {
 
-    private final IMenuService iMenuService;
+    private final IMenuService menuService;
 
     @GetMapping("/treePage")
     public Page treePage(QueryPage queryPage, MenuQueryCriteria queryCriteria) {
         queryCriteria.setPid(MenuTreeUtil.PID);
-        return iMenuService.treePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
+        return menuService.treePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
     }
 
     @ApiOperation("新增菜单")
@@ -46,7 +46,7 @@ public class MenuController {
     public void add(@RequestBody @Validated MenuDTO menuDTO) {
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuDTO,menu);
-        iMenuService.save(menu);
+        menuService.save(menu);
     }
 
     @ApiOperation("编辑菜单")
@@ -54,18 +54,18 @@ public class MenuController {
     public void edit(@RequestBody @Validated MenuDTO menuDTO) {
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuDTO,menu);
-        iMenuService.updateById(menu);
+        menuService.updateById(menu);
     }
 
     @ApiOperation("删除菜单")
     @DeleteMapping("/delete/{id}")
     public void edit(@PathVariable String id) {
-        iMenuService.removeById(id);
+        menuService.removeById(id);
     }
 
     @ApiOperation("下拉选择")
     @GetMapping("/select")
     public List<SelectDTO> select() {
-        return iMenuService.select();
+        return menuService.select();
     }
 }

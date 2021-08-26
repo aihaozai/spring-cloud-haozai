@@ -24,10 +24,10 @@ import spring.cloud.base.datasource.util.QueryUtil;
 @AllArgsConstructor
 public class UserController{
 
-    private final IUserService iUserService;
+    private final IUserService userService;
 
     @GetMapping("/page")
     public Page<UserVO> page(QueryPage queryPage, UserQueryCriteria queryCriteria) {
-        return iUserService.selectUserPage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<UserVO>(),queryCriteria));
+        return userService.selectUserPage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<UserVO>(),queryCriteria));
     }
 }
