@@ -2,9 +2,8 @@ package com.spring.cloud.auth.role.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spring.cloud.auth.menu.entity.Menu;
-import com.spring.cloud.auth.menu.model.MenuDTO;
 import com.spring.cloud.auth.role.entity.Role;
+import com.spring.cloud.auth.role.model.RoleDTO;
 import com.spring.cloud.auth.role.model.RoleQueryCriteria;
 import com.spring.cloud.auth.role.service.IRoleService;
 import io.swagger.annotations.Api;
@@ -33,11 +32,19 @@ public class RoleController {
         return roleService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Role>(),queryCriteria));
     }
 
-//    @ApiOperation("新增角色")
-//    @PostMapping("/add")
-//    public void add(@RequestBody @Validated MenuDTO menuDTO) {
-//        Menu menu = new Menu();
-//        BeanUtils.copyProperties(menuDTO,menu);
-//        menuService.save(menu);
-//    }
+    @ApiOperation("新增角色")
+    @PostMapping("/add")
+    public void add(@RequestBody @Validated RoleDTO roleDTO) {
+        Role role = new Role();
+        BeanUtils.copyProperties(roleDTO,role);
+        roleService.save(role);
+    }
+
+    @ApiOperation("编辑角色")
+    @PutMapping("/edit")
+    public void edit(@RequestBody @Validated RoleDTO roleDTO) {
+        Role role = new Role();
+        BeanUtils.copyProperties(roleDTO,role);
+        roleService.updateById(role);
+    }
 }

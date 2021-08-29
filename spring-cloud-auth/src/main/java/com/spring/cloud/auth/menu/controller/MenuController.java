@@ -59,7 +59,7 @@ public class MenuController {
 
     @ApiOperation("删除菜单")
     @DeleteMapping("/delete/{id}")
-    public void edit(@PathVariable String id) {
+    public void edit(@PathVariable Long id) {
         menuService.removeById(id);
     }
 
