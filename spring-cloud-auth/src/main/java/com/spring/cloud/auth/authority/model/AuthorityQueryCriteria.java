@@ -13,4 +13,7 @@ public class AuthorityQueryCriteria {
 
     @Query(type = Query.Type.EQUAL)
     private String name;
+
+    @Query(type = Query.Type.EQUAL)
+    private String menuId;
 }

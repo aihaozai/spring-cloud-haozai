@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.spring.cloud.auth.menu.entity.Menu;
+import com.spring.cloud.auth.menu.model.MenuTree;
 import spring.cloud.base.core.dto.SelectDTO;
 
 import java.util.List;
@@ -29,4 +30,11 @@ public interface IMenuService extends IService<Menu> {
      * @return com.baomidou.mybatisplus.extension.plugins.pagination.Page<com.spring.cloud.auth.menu.entity.Menu>
      */
     Page treePage(Page<Menu> page, QueryWrapper<Menu> predicate);
+
+    /**
+     *
+     * 菜单授权树
+     * @return java.util.List
+     */
+    List authorityTree();
 }

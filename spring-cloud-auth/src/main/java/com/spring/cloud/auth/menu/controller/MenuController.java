@@ -11,7 +11,6 @@ import com.spring.cloud.auth.menu.service.IMenuService;
 import com.spring.cloud.auth.util.MenuTreeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +20,6 @@ import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author haozai
@@ -67,5 +65,10 @@ public class MenuController {
     @GetMapping("/select")
     public List<SelectDTO> select() {
         return menuService.select();
+    }
+
+    @GetMapping("/authorityTree")
+    public List authorityTree() {
+        return menuService.authorityTree();
     }
 }
