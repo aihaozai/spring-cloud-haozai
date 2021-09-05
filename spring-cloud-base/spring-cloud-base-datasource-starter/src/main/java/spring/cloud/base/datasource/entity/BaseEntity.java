@@ -3,6 +3,7 @@ package spring.cloud.base.datasource.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+import java.io.Serializable;
 
 /**
  * @author haozai
@@ -10,7 +11,9 @@ import lombok.Data;
  * @date 2021/3/25  22:48
  */
 @Data
-public class BaseEntity {
+public class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 }

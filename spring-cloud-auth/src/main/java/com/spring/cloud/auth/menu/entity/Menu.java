@@ -20,8 +20,7 @@ import java.util.Date;
 @Data
 @TableName("menu")
 @EqualsAndHashCode(callSuper = true)
-public class Menu extends BaseEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Menu extends BaseEntity {
 
     @ApiModelProperty(value = "上级菜单id",name = "pid")
     private Long pid;

@@ -1,10 +1,7 @@
 package com.spring.cloud.auth.menu.model;
 
-import com.spring.cloud.auth.authority.entity.Authority;
-import com.spring.cloud.auth.menu.entity.Menu;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 

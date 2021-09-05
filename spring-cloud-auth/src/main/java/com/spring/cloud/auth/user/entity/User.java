@@ -20,8 +20,7 @@ import java.util.List;
 @Data
 @TableName("user")
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class User extends BaseEntity {
 
     @ApiModelProperty(value = "账号",name = "account")
     private String account;

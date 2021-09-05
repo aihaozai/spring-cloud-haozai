@@ -20,8 +20,6 @@ import spring.cloud.base.datasource.entity.BaseEntity;
 @EqualsAndHashCode(callSuper = true)
 public class Authority extends BaseEntity implements GrantedAuthority {
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(value = "菜单id",name = "menuId")
     private Long menuId;
 

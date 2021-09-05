@@ -1,7 +1,6 @@
 package com.spring.cloud.auth.authority.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.auth.authority.entity.Authority;
 import com.spring.cloud.auth.authority.model.AuthorityDTO;
 import com.spring.cloud.auth.authority.model.AuthorityQueryCriteria;
@@ -12,16 +11,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
-
 import java.util.List;
 
 /**
  * @author haozai
  * @date 2021/8/25 12:40
  */
-@Api(value = "角色接口(authority)")
+@Api(value = "权限接口(authority)")
 @RequestMapping("/authority")
 @RestController
 @AllArgsConstructor

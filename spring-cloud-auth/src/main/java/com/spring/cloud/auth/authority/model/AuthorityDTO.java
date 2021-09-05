@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @author haozai
- * @description 菜单
+ * @description 操作权限
  * @date 2021/8/25 12:40
  */
 @Data
-@ApiModel(description = "操作权限表")
+@ApiModel(description = "操作权限")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorityDTO {
 

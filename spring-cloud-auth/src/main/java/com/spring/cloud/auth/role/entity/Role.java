@@ -19,8 +19,6 @@ import spring.cloud.base.datasource.entity.BaseEntity;
 @EqualsAndHashCode(callSuper = true)
 public class Role extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(value = "角色名称",name = "name")
     private String name;
 

@@ -5,7 +5,6 @@ import com.spring.cloud.auth.authority.entity.Authority;
 import com.spring.cloud.auth.menu.entity.Menu;
 import com.spring.cloud.auth.menu.model.MenuAuthorityTree;
 import com.spring.cloud.auth.menu.model.MenuTree;
-import org.springframework.util.CollectionUtils;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ public class MenuTreeUtil {
     }
     public static List<MenuAuthorityTree> buildAuthority(@Nonnull Long pid, @Nonnull List<Menu> menuList, @Nonnull List<Authority> authorities){
         List<MenuAuthorityTree> menuTreeList = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(menuList)&&!CollectionUtils.isEmpty(authorities)){
+        if(CollectionUtil.isNotEmpty(menuList)){
             for (Menu menu : menuList){
                 if(menu.getPid().equals(pid)) {
                     List<Authority> temp = authorities.stream().filter(a->a.getMenuId().equals(menu.getId())).collect(Collectors.toList());
@@ -79,7 +78,7 @@ public class MenuTreeUtil {
         MenuAuthorityTree menuTree = new MenuAuthorityTree();
         menuTree.setLabel(menu.getName());
         menuTree.setValue(menu.getId());
-        if(!CollectionUtils.isEmpty(temp)){
+        if(CollectionUtil.isNotEmpty(temp)){
             List<MenuAuthorityTree.Authority> authorityList = new ArrayList<>();
             for (Authority authority : temp){
                 MenuAuthorityTree.Authority auth = new MenuAuthorityTree.Authority();

@@ -19,8 +19,7 @@ import java.util.List;
 @TableName("fund")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public class Fund extends BaseEntity implements Serializable  {
-    private static final long serialVersionUID = 1L;
+public class Fund extends BaseEntity {
 
     private String fundCode;
 

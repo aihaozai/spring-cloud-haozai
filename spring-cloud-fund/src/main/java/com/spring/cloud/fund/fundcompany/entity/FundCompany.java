@@ -17,8 +17,7 @@ import java.io.Serializable;
 @TableName("fund_company")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-public class FundCompany extends BaseEntity implements Serializable  {
-    private static final long serialVersionUID = 1L;
+public class FundCompany extends BaseEntity {
 
     private String companyCode;
 

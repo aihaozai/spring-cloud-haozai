@@ -15,8 +15,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class UserVO extends BaseEntity implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class UserVO extends BaseEntity {
 
     @ApiModelProperty(value = "账号",name = "account")
     private String account;
