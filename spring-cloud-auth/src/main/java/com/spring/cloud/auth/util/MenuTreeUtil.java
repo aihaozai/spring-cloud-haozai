@@ -1,10 +1,10 @@
 package com.spring.cloud.auth.util;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.spring.cloud.auth.authority.entity.Authority;
-import com.spring.cloud.auth.menu.entity.Menu;
-import com.spring.cloud.auth.menu.model.MenuAuthorityTree;
-import com.spring.cloud.auth.menu.model.MenuTree;
+import com.spring.cloud.auth.system.authority.entity.Authority;
+import com.spring.cloud.auth.system.menu.entity.Menu;
+import com.spring.cloud.auth.system.menu.model.MenuAuthorityTree;
+import com.spring.cloud.auth.system.menu.model.MenuTree;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;

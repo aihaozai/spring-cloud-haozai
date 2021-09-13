@@ -27,7 +27,7 @@ public class SystemJwtTokenEnhancer implements TokenEnhancer {
         User user = (User) authentication.getUserAuthentication().getPrincipal();
         final Map<String, Object> additionalInformation = new HashMap<>(1);
         AuthUserInfoDTO infoDTO = new AuthUserInfoDTO();
-        BeanUtils.copyProperties(user,new AuthUserInfoDTO());
+        BeanUtils.copyProperties(user,infoDTO);
         additionalInformation.put("user", infoDTO);
         additionalInformation.put("expireAt", accessToken.getExpiration());
         DefaultOAuth2AccessToken auth2AccessToken = (DefaultOAuth2AccessToken) accessToken;
