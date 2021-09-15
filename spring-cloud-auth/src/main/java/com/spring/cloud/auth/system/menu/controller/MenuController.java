@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.core.dto.SelectDTO;
@@ -40,6 +41,7 @@ public class MenuController {
         return menuService.treePage(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<Menu>(),queryCriteria));
     }
 
+    @PreAuthorize("hasAuthority('menu:add')")
     @ApiOperation("新增菜单")
     @PostMapping("/add")
     public void add(@RequestBody @Validated MenuDTO menuDTO) {
@@ -48,6 +50,7 @@ public class MenuController {
         menuService.save(menu);
     }
 
+    @PreAuthorize("hasAuthority('menu:edit')")
     @ApiOperation("编辑菜单")
     @PutMapping("/edit")
     public void edit(@RequestBody @Validated MenuDTO menuDTO) {
@@ -56,6 +59,7 @@ public class MenuController {
         menuService.updateById(menu);
     }
 
+    @PreAuthorize("hasAuthority('menu:delete')")
     @ApiOperation("删除菜单")
     @DeleteMapping("/delete/{id}")
     public void edit(@PathVariable Long id) {
