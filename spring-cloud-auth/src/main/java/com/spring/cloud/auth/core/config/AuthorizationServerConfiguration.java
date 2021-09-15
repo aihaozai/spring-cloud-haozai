@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * redisTokenStore
      */
     @Qualifier("redisTokenStore")
-    private final TokenStore redisTokenStore ;
+    private final RedisTokenStore redisTokenStore ;
 
     /**
      * token增强器

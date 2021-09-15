@@ -1,13 +1,14 @@
 package spring.cloud.base.security.starter.configurer;
 
+import com.google.common.collect.Maps;
 import org.springframework.beans.BeanUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import spring.cloud.base.core.dto.AuthUserInfoDTO;
-import java.util.HashMap;
+import spring.cloud.base.core.model.AuthUser;
+
 import java.util.Map;
 
 /**
@@ -24,8 +25,8 @@ public class SystemJwtTokenEnhancer implements TokenEnhancer {
      */
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        User user = (User) authentication.getUserAuthentication().getPrincipal();
-        final Map<String, Object> additionalInformation = new HashMap<>(1);
+        AuthUser user = (AuthUser) authentication.getUserAuthentication().getPrincipal();
+        final Map<String, Object> additionalInformation = Maps.newHashMapWithExpectedSize(1);
         AuthUserInfoDTO infoDTO = new AuthUserInfoDTO();
         BeanUtils.copyProperties(user,infoDTO);
         additionalInformation.put("user", infoDTO);

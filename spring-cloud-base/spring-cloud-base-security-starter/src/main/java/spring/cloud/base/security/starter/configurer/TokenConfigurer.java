@@ -53,7 +53,7 @@ public class TokenConfigurer {
      */
     @Bean(name = "redisTokenStore")
     @Primary
-    public TokenStore tokenStore() {
+    public RedisTokenStore redisTokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 
@@ -64,7 +64,7 @@ public class TokenConfigurer {
     @Primary
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setTokenStore(redisTokenStore());
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
     }

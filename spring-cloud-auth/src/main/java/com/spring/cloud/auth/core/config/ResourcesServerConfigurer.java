@@ -1,13 +1,16 @@
 package com.spring.cloud.auth.core.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.cloud.auth.core.hander.SystemLogoutSuccessHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
  * @author haozai
@@ -21,7 +24,15 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
 
     @Qualifier("redisTokenStore")
-    private final TokenStore redisTokenStore;
+    private final RedisTokenStore redisTokenStore;
+
+
+    private final ObjectMapper objectMapper;
+
+    @Bean
+    public SystemLogoutSuccessHandler logoutSuccessHandler(){
+        return new SystemLogoutSuccessHandler(redisTokenStore,objectMapper);
+    }
 
     /**
      * @description 资源id可再次手动设置任意字符串，如果不设置，则需要在数据oauth_client_details中的resource_ids填写固定值"oauth2-resource"
@@ -41,8 +52,9 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http .authorizeRequests()
-                .antMatchers("/user/**").authenticated()
+        http.authorizeRequests()
+                .antMatchers("/**").authenticated()
+                .and().logout().logoutSuccessHandler(logoutSuccessHandler()).clearAuthentication(true)
                 .and().csrf().disable();
     }
 }

@@ -1,4 +1,4 @@
-package spring.cloud.base.core.entity;
+package spring.cloud.base.core.model;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

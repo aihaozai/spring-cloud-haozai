@@ -2,11 +2,9 @@ package com.spring.cloud.auth.system.role.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.spring.cloud.auth.constant.AuthorizeConstant;
-import com.spring.cloud.auth.system.authority.entity.Authority;
-import com.spring.cloud.auth.system.menu.entity.Menu;
 import com.spring.cloud.auth.system.role.entity.RolePermission;
 import org.apache.ibatis.annotations.Select;
-import spring.cloud.base.core.entity.AuthAuthority;
+import spring.cloud.base.core.model.AuthAuthority;
 
 import java.util.List;
 

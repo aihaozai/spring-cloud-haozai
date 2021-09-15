@@ -54,6 +54,4 @@ public class User extends BaseEntity {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    @TableField(exist = false)
-    private List<Role> authorities;
 }

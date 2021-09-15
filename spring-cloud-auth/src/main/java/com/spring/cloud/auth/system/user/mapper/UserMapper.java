@@ -21,7 +21,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param queryWrapper 构造器
      * @return
      */
-    Page<UserVO> selectUserPage(Page<UserVO> page,@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+    Page<UserVO> selectUserPage(Page<UserVO> page, @Param(Constants.WRAPPER) QueryWrapper queryWrapper);
 
     /**
      * 根据用户名称查询用户

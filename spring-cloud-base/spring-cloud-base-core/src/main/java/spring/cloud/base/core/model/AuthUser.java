@@ -1,4 +1,4 @@
-package spring.cloud.base.core.entity;
+package spring.cloud.base.core.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,6 +22,9 @@ public class AuthUser extends User {
     private Long id;
 
     private String account;
+
+    private String avatar;
+
 
     public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);

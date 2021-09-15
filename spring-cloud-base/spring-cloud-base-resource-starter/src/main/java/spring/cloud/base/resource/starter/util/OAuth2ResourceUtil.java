@@ -2,7 +2,7 @@ package spring.cloud.base.resource.starter.util;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import spring.cloud.base.core.entity.AuthUser;
+import spring.cloud.base.core.model.AuthUser;
 
 /**
  * @author haozai

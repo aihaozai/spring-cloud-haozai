@@ -1,9 +1,8 @@
 package com.spring.cloud.auth.system.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.spring.cloud.auth.system.authority.entity.Authority;
 import com.spring.cloud.auth.system.role.entity.RolePermission;
-import spring.cloud.base.core.entity.AuthAuthority;
+import spring.cloud.base.core.model.AuthAuthority;
 
 import java.util.List;
 

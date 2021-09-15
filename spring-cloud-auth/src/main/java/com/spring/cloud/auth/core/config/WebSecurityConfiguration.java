@@ -38,7 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/login","/health", "/oauth/weixin/token","/keyPair/**","/v2/api-docs").permitAll()
+                .antMatchers("/","/health", "/oauth/weixin/token","/keyPair/**","/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

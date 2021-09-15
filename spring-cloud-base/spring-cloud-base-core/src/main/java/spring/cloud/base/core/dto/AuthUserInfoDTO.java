@@ -3,11 +3,9 @@ package spring.cloud.base.core.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * @author haozai
@@ -22,7 +20,7 @@ public class AuthUserInfoDTO implements Serializable {
 
     private String username;
 
-    private String avatar ;
+    private String avatar;
 
     private String address;
 
