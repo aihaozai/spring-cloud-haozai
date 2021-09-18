@@ -6,15 +6,21 @@ import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.JdkSerializationStrategy;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStoreSerializationStrategy;
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import spring.cloud.base.redis.starter.utils.RedisUtil;
 
 /**
  * @author haozai
@@ -27,17 +33,21 @@ import reactor.core.publisher.Mono;
 public class AuthenticationConverter implements ServerAuthenticationConverter {
 
     private final TokenStore tokenStore ;
+
     private static final Gson GSON =new Gson();
+
     @Override
     public Mono<Authentication> convert(ServerWebExchange exchange) {
         String authorization = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if(StringUtils.isEmpty(authorization)){
             return Mono.empty();
         }
+
         String token =authorization.replace(OAuth2AccessToken.BEARER_TYPE + " ", "");
         log.info("当前Token的值: {}",token);
         OAuth2Authentication oAuth2Authentication = this.tokenStore.readAuthentication(token);
         if(ObjectUtil.isEmpty(oAuth2Authentication)){
+
             return Mono.empty();
         }
 

@@ -11,6 +11,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import spring.cloud.base.redis.starter.utils.RedisUtil;
 
 /**
  * @author haozai
@@ -44,5 +45,10 @@ public class RedisConfigure {
         template.afterPropertiesSet();
 
         return template;
+    }
+
+    @Bean
+    public RedisUtil redisUtil(){
+        return new RedisUtil(redisTemplate());
     }
 }

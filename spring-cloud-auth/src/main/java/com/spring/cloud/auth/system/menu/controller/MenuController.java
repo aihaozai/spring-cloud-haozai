@@ -50,7 +50,7 @@ public class MenuController {
         menuService.save(menu);
     }
 
-    @PreAuthorize("hasAuthority('menu:edit')")
+    @PreAuthorize("hasAuthority('menu:edit') or hasAnyRole()")
     @ApiOperation("编辑菜单")
     @PutMapping("/edit")
     public void edit(@RequestBody @Validated MenuDTO menuDTO) {
