@@ -23,6 +23,7 @@
         <module>spring-cloud-elasticsearch</module>
         <module>spring-cloud-fund</module>
         <module>spring-cloud-weixin</module>
+        <module>spring-cloud-tx-manage</module>
     </modules>
 
     <properties>

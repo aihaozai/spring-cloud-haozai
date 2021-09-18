@@ -19,6 +19,7 @@
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <fluent-mybatis.version>1.6.8</fluent-mybatis.version>
         <p6spy.version>3.8.1</p6spy.version>
+        <txlcn.version>5.0.2.RELEASE</txlcn.version>
     </properties>
 
     <dependencies>
@@ -36,16 +37,17 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.atool</groupId>-->
-<!--            <artifactId>fluent-mybatis</artifactId>-->
-<!--            <version>${fluent-mybatis.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.atool</groupId>-->
-<!--            <artifactId>fluent-mybatis-processor</artifactId>-->
-<!--            <version>${fluent-mybatis.version}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-tc</artifactId>
+            <version>${txlcn.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-txmsg-netty</artifactId>
+            <version>${txlcn.version}</version>
+        </dependency>
         <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
