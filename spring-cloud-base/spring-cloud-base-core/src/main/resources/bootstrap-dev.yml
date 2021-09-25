@@ -6,10 +6,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: http://169.254.212.54:8848 #nacos注册地址
+        server-addr: http://192.168.190.1:8848 #nacos注册地址
         group: DEFAULT_GROUP  #注册组 （服务组管理，不强制）
       config:
-        server-addr: http://169.254.212.54:8848 #nacos注册地址
+        server-addr: http://192.168.190.1:8848 #nacos注册地址
         file-extension: yml #配置文件后缀支持 txt json yaml xml html Properties 格式 大家更加喜欢来
         group: DEFAULT_GROUP # 分组 （配置组管理，不强制）
         shared-configs: base-fund.yml
@@ -23,3 +23,7 @@ jasypt:
   encryptor:
     algorithm: PBEWITHHMACSHA512ANDAES_128
     password: spring-cloud-haozai #你的秘钥
+
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070

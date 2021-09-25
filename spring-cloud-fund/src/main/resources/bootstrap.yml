@@ -44,7 +44,8 @@ gateway:
     permitAll:
       - /fundReal/getFundRealDataAnon
       - /v2/api-docs
-
+      - /test/test1
+      - /test/test2
 logging:
   level:
     org.springframework.security: DEBUG

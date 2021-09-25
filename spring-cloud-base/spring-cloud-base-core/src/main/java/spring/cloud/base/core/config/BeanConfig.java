@@ -9,8 +9,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author haozai
@@ -39,7 +43,11 @@ public class BeanConfig {
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
         objectMapper.registerModule(simpleModule);
+        List<MediaType> mediaTypes = new ArrayList<>();
+        mediaTypes.add(MediaType.TEXT_HTML);
+        mediaTypes.add(MediaType.TEXT_PLAIN);
         jackson2HttpMessageConverter.setObjectMapper(objectMapper);
+        jackson2HttpMessageConverter.setSupportedMediaTypes(mediaTypes);
         return jackson2HttpMessageConverter;
     }
 }

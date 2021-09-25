@@ -1,5 +1,6 @@
 package com.spring.cloud.fund;
 
+import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +10,7 @@ import spring.cloud.base.core.annotation.EnableXxlJob;
 import spring.cloud.base.resource.starter.config.EnableGatewayResourceServer;
 
 @EnableXxlJob
+@EnableDistributedTransaction
 @MapperScan("com.spring.cloud.fund.**.mapper")
 @EnableDiscoveryClient
 @EnableGatewayResourceServer

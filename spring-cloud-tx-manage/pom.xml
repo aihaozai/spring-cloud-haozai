@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <jasypt.version>3.0.3</jasypt.version>
     </properties>
 
     <dependencies>
