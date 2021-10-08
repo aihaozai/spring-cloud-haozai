@@ -23,6 +23,7 @@
         <module>spring-cloud-base-swagger-starter</module>
         <module>spring-cloud-base-fund-starter</module>
         <module>spring-cloud-base-resource-starter</module>
+        <module>spring-cloud-base-mq-starter</module>
     </modules>
 
     <properties>
