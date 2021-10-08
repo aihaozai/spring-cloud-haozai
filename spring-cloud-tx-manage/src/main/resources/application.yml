@@ -1,0 +1,42 @@
+server:
+  path: 7005
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: tx-manager
+  datasource:
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    url: jdbc:p6spy:mysql://1gfco70pqu10zt81o.mysql.rds.aliyuncs.com:3306/tx_manager?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: cloud_tx
+    password: cloud_tx666
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: haozai
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+
+tx-lcn:
+  manager:
+    host: 127.0.0.1 # TxManager Host Ip
+    port: 8070 # TxClient连接请求端口
+    heart-time: 15000 # 心跳检测时间(ms)
+    dtx-time: 30000  #分布式事务执行总时间
+    concurrent-level: 128
+    admin-key: 123456
+
+  message:
+    netty:
+      attr-delay-time: 10000 #参数延迟删除时间单位ms
+  logger:
+    enabled: true
+
+
+
