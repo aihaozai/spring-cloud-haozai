@@ -38,7 +38,7 @@ public class TestController {
 
     @GetMapping("/encryptor")
     public String encryptor(String str){
-        return encryptor.encrypt("cloud_tx666!");
+        return encryptor.encrypt(str);
     }
 
     public static void main(String[] args) {

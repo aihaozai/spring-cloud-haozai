@@ -16,6 +16,25 @@ spring:
     url: jdbc:p6spy:mysql://1gfco70pqu10zt81o.mysql.rds.aliyuncs.com:3306/cloud_fund?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: cloud_fund
     password: ENC(2iWxMuXWnVpwoFM/2Z1YtLRcPf1OixvbgBQjMpjjzF1HOuB9DsGEvQWJIFBwe5ZX)
+  rabbitmq:
+    host: 192.168.174.128
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: manual
+  cloud:
+    stream:
+      bindings:
+        myInput:
+          #指定输入通道对应的主题名
+          destination: cloudstream
+          #指定该应用实例属于 stream 消费组
+          group: stream
+        myOutput:
+          destination: cloudstream
+
 
 #swagger扫描配置
 swagger:
@@ -46,6 +65,7 @@ gateway:
       - /v2/api-docs
       - /test/test1
       - /test/test2
+      -
 logging:
   level:
     org.springframework.security: DEBUG
