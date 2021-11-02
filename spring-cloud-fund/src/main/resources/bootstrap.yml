@@ -17,13 +17,15 @@ spring:
     username: cloud_fund
     password: ENC(2iWxMuXWnVpwoFM/2Z1YtLRcPf1OixvbgBQjMpjjzF1HOuB9DsGEvQWJIFBwe5ZX)
   rabbitmq:
-    host: 192.168.174.128
+    host: 175.27.243.44
     port: 5672
     username: guest
     password: guest
-    listener:
-      simple:
-        acknowledge-mode: manual
+    #开启 return 确认机制
+    publisher-returns: true
+    #开启confirm确认机制
+    publisher-confirm-type: correlated
+
   cloud:
     stream:
       bindings:
@@ -34,7 +36,15 @@ spring:
           group: stream
         myOutput:
           destination: cloudstream
-
+      rabbit:
+        bindings:
+          myInput:
+            consumer:
+              requeue-reject: false
+              acknowledge-mode: manual
+              recovery-interval: 3000
+              durable-subscription: true
+              max-concurrency: 5
 
 #swagger扫描配置
 swagger:
@@ -65,7 +75,6 @@ gateway:
       - /v2/api-docs
       - /test/test1
       - /test/test2
-      -
 logging:
   level:
     org.springframework.security: DEBUG

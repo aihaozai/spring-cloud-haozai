@@ -1,6 +1,8 @@
 package com.spring.cloud.fund.test;
 
+import com.spring.cloud.fund.mq.client.StreamClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final TestService testService;
+    private final StreamClient streamClient;
 
     @GetMapping("/test1")
     public String test1(){
@@ -26,8 +29,10 @@ public class TestController {
 
     @GetMapping("/test2")
     public String test2(){
-        System.out.println(2222);
-        testService.test2();
+//        System.out.println(2222);
+//        testService.test2();
+        streamClient.output().send(MessageBuilder.withPayload("Hello World...").build());
+
         return "dfdsfsda";
     }
 }

@@ -26,8 +26,6 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> implements IFundRealService {
 
-    @Value("${search.fundCode}")
-    private ArrayList<String> fundCodeList;
     private final FundRealMapper fundRealMapper;
 
     @Override
