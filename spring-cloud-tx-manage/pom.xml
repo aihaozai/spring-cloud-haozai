@@ -11,7 +11,7 @@
 
     <groupId>com</groupId>
     <artifactId>spring-cloud-tx-manage</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>spring-cloud-tx-manage</name>
     <description>Demo project for Spring Boot</description>
 

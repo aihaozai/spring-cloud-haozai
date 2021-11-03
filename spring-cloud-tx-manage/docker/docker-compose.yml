@@ -1,0 +1,18 @@
+version: '3'
+services:
+  auth:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: tx-manage
+    networks:
+      - net
+    ports:
+      - 7005:7005
+      - 8070:8070
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+
+networks:
+  net:
+    driver: bridge
