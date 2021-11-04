@@ -30,7 +30,7 @@ public class StreamReceiver {
         Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
         log.info("接收到消息：{}" , message);
         if(deliveryTag!=null&&channel!=null){
-            channel.basicReject(deliveryTag,true);
+            channel.basicAck(deliveryTag,true);
         }
     }
 }
