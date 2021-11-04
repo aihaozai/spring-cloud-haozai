@@ -18,7 +18,7 @@ spring:
 ##xxl-job
 xxl:
   job:
-    adminAddresses: http://${NACOS_PUBLIC_IP}:8989/xxl-job-admin
+    adminAddresses: http://${XXL_PUBLIC_IP}:8989/xxl-job-admin
 
 jasypt:
   encryptor:
@@ -28,4 +28,4 @@ jasypt:
 
 tx-lcn:
   client:
-    manager-address: 175.27.243.44:8070
+    manager-address: ${TX_PUBLIC_IP}:8070

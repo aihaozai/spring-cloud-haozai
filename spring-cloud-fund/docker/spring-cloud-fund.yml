@@ -11,6 +11,8 @@ services:
     environment:
       - JAVA_OPTS=-Xmx500M -Duser.timezone=GMT+08
       - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
+      - XXL_PUBLIC_IP=${XXL_PUBLIC_IP}
+      - TX_PUBLIC_IP=${TX_PUBLIC_IP}
       - spring.profiles.active=prod,prod-redis,swagger
 
 networks:
