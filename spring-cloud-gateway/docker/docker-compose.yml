@@ -11,7 +11,10 @@ services:
       - 7000:7000
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+      - SERVICE_IP=localhost
       - NACOS_PUBLIC_IP=localhost
+      - XXL_PUBLIC_IP=localhost
+      - TX_PUBLIC_IP=localhost
       - spring.profiles.active=prod,prod-redis
 networks:
   net:

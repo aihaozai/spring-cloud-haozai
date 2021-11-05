@@ -9,6 +9,7 @@ services:
       - 7000:7000
     environment:
       - JAVA_OPTS=-Xmx150M -Duser.timezone=GMT+08
+      - SERVICE_IP=${SERVICE_IP}
       - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
       - XXL_PUBLIC_IP=${XXL_PUBLIC_IP}
       - TX_PUBLIC_IP=${TX_PUBLIC_IP}

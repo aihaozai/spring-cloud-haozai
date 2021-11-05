@@ -11,7 +11,10 @@ services:
       - 7001:7001
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
-      - NACOS_PUBLIC_IP=175.27.243.44
+      - SERVICE_IP=localhost
+      - NACOS_PUBLIC_IP=localhost
+      - XXL_PUBLIC_IP=localhost
+      - TX_PUBLIC_IP=localhost
       - spring.profiles.active=prod,prod-redis,swagger
 
 networks:
