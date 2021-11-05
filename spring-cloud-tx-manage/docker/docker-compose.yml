@@ -1,6 +1,6 @@
 version: '3'
 services:
-  auth:
+  tx-manage:
     build:
       context: ../
       dockerfile: docker/Dockerfile
