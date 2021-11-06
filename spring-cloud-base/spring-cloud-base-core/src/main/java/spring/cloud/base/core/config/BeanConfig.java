@@ -11,7 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +29,19 @@ import java.util.List;
 @EnableEncryptableProperties
 @EncryptablePropertySource( name  =  "EncryptedProperties" , value  =  "classpath:/bootstrap.yml" )
 @ComponentScan(basePackages = {"spring.cloud.base.core.bean"})
-public class BeanConfig {
+public class BeanConfig implements WebMvcConfigurer {
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.removeIf(converter -> converter instanceof MappingJackson2HttpMessageConverter);
+        converters.add(mappingJackson2HttpMessageConverter());
+    }
 
     /**
      *
      * 解决前端js处理大数字丢失精度问题，将Long和BigInteger转换成string
      * @return org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
      */
-    @Bean
-    @ConditionalOnBean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -46,6 +53,7 @@ public class BeanConfig {
         List<MediaType> mediaTypes = new ArrayList<>();
         mediaTypes.add(MediaType.TEXT_HTML);
         mediaTypes.add(MediaType.TEXT_PLAIN);
+        mediaTypes.add(MediaType.APPLICATION_JSON);
         jackson2HttpMessageConverter.setObjectMapper(objectMapper);
         jackson2HttpMessageConverter.setSupportedMediaTypes(mediaTypes);
         return jackson2HttpMessageConverter;
