@@ -14,6 +14,7 @@ services:
       - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
       - XXL_PUBLIC_IP=${XXL_PUBLIC_IP}
       - TX_PUBLIC_IP=${TX_PUBLIC_IP}
+      - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_IP_PORT}
       - spring.profiles.active=prod,prod-redis,swagger
 
 networks:
