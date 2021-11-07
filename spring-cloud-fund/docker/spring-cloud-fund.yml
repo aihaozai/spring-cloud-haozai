@@ -15,6 +15,7 @@ services:
       - XXL_PUBLIC_IP=${XXL_PUBLIC_IP}
       - TX_PUBLIC_IP=${TX_PUBLIC_IP}
       - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_IP_PORT}
+      - SW_GRPC_LOG_SERVER_HOST = ${SKYWALKING_IP_PORT}
       - spring.profiles.active=prod,prod-redis,swagger
 
 networks:
