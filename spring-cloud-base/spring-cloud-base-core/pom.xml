@@ -22,6 +22,7 @@
         <xxl-job.version>2.3.0</xxl-job.version>
         <webmvc.version>5.2.7.RELEASE</webmvc.version>
         <validator.version>7.0.1.Final</validator.version>
+        <skywalking.version>8.5.0</skywalking.version>
     </properties>
 
     <dependencies>
@@ -52,8 +53,13 @@
         </dependency>
         <dependency>
             <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <version>${skywalking.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-logback-1.x</artifactId>
-            <version>8.5.0</version>
+            <version>${skywalking.version}</version>
         </dependency>
         <dependency>
             <groupId>com.xuxueli</groupId>
