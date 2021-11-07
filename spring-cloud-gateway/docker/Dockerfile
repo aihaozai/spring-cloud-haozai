@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM apache/skywalking-base:8.7.0-es7
 
 ADD target/spring-cloud-gateway-1.0-SNAPSHOT.jar app.jar
 

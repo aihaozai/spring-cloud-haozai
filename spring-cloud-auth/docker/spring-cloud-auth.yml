@@ -15,7 +15,8 @@ services:
       - TX_PUBLIC_IP=${TX_PUBLIC_IP}
       - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_IP_PORT}
       - spring.profiles.active=prod,prod-redis,swagger
-
+    volumes:
+      - /data/agent.config:/skywalking/agent/config
 networks:
   net:
     driver: bridge
