@@ -1,0 +1,138 @@
+pipeline {
+  agent any
+  stages {
+    stage('检出') {
+      steps {
+        checkout([$class: 'GitSCM',
+        branches: [[name: GIT_BUILD_REF]],
+        userRemoteConfigs: [[
+          url: GIT_REPO_URL,
+          credentialsId: CREDENTIALS_ID
+        ]]])
+      }
+    }
+    stage('编译') {
+      steps {
+        sh 'mvn clean package -Dmaven.test.skip=true'
+      }
+    }
+    stage('构建镜像并推送到 CODING Docker 制品库') {
+      steps {
+        script {
+          docker.withRegistry(
+            "${CCI_CURRENT_WEB_PROTOCOL}://${CODING_DOCKER_REG_HOST}",
+            "${CODING_ARTIFACTS_CREDENTIALS_ID}"
+          ) {
+            def dockerImage = docker.build("${CODING_DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}", "-f ${DOCKERFILE_PATH} ${DOCKER_BUILD_CONTEXT}")
+            dockerImage.push()
+          }
+        }
+
+      }
+    }
+    stage('部署到远程服务器') {
+      steps {
+        script {
+          def remoteConfig = [:]
+          remoteConfig.name = "my-remote-server"
+          remoteConfig.host = "${REMOTE_HOST}"
+          remoteConfig.port = "${REMOTE_SSH_PORT}".toInteger()
+          remoteConfig.allowAnyHosts = true
+
+          withCredentials([
+            sshUserPrivateKey(
+              credentialsId: "${REMOTE_CRED}",
+              keyFileVariable: "privateKeyFilePath"
+            ),
+            usernamePassword(
+              credentialsId: "${CODING_ARTIFACTS_CREDENTIALS_ID}",
+              usernameVariable: 'CODING_DOCKER_REG_USERNAME',
+              passwordVariable: 'CODING_DOCKER_REG_PASSWORD'
+            )
+          ]) {
+
+            // SSH 登陆用户名
+            remoteConfig.user = "${REMOTE_USER_NAME}"
+            // SSH 私钥文件地址
+            remoteConfig.identityFile = privateKeyFilePath
+
+            // 查看打包后的文件列表
+            sh 'ls'
+
+            //上传docker.yml
+            sshPut(
+              remote: remoteConfig,
+              // 本地文件或文件夹
+              from: "${DOCKE_COMPOSE_PATH}",
+              // 远端文件或文件夹
+              into: "${PROJECT_PATH}"
+            )
+            //上传agent.config
+            sshPut(
+              remote: remoteConfig,
+              // 本地文件或文件夹
+              from: "docker/agent.config",
+              // 远端文件或文件夹
+              into: "${PROJECT_PATH}"
+            )
+
+            // DOCKER_IMAGE_VERSION 中涉及到 GIT_LOCAL_BRANCH / GIT_TAG / GIT_COMMIT 的环境变量的使用
+            // 需要在本地完成拼接后，再传入到远端服务器中使用
+            DOCKER_IMAGE_URL = sh(
+              script: "echo ${CODING_DOCKER_REG_HOST}/${CODING_DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}",
+              returnStdout: true
+            )
+
+            // 请确保远端环境中有 Docker 环境
+
+            sshCommand(
+              remote: remoteConfig,
+              command: " docker rm -f ${DOCKER_IMAGE_NAME} ",
+            )
+
+            sshCommand(
+              remote: remoteConfig,
+              command: " docker rmi -f ${DOCKER_IMAGE_URL} ",
+            )
+
+            sshCommand(
+              remote: remoteConfig,
+              command: "docker login -u ${CODING_DOCKER_REG_USERNAME} -p ${CODING_DOCKER_REG_PASSWORD} ${CODING_DOCKER_REG_HOST} && docker pull ${DOCKER_IMAGE_URL}",
+              sudo: true,
+            )
+
+            DOCKER_COMPOSE_CONFIG = sh(
+              script: "echo docker-compose -f ${PROJECT_PATH}/${DOCKER_IMAGE_NAME}.yml config",
+              returnStdout: true
+            )
+
+            DOCKER_COMPOSE_EXPORT = sh(
+              script: "echo export SERVICE_IP=${SERVICE_IP} NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP} XXL_PUBLIC_IP=${XXL_PUBLIC_IP} TX_PUBLIC_IP=${TX_PUBLIC_IP} SKYWALKING_IP_PORT=${SKYWALKING_IP_PORT} IMAGE_NAME=${CODING_DOCKER_REG_HOST}/${CODING_DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} CONTAINER_NAME=${DOCKER_IMAGE_NAME}",
+              returnStdout: true
+            )
+
+            DOCKER_COMPOSE_NAME_PATH = sh(
+              script: "echo docker-compose -f ${PROJECT_PATH}/${DOCKER_IMAGE_NAME}.yml -p ${DOCKER_IMAGE_NAME} up -d",
+              returnStdout: true
+            )
+
+            sshCommand(
+              remote: remoteConfig,
+              command: " ${DOCKER_COMPOSE_EXPORT} ${DOCKER_COMPOSE_CONFIG} ${DOCKER_COMPOSE_NAME_PATH} ",
+            )
+            echo "部署成功"
+          }
+        }
+
+        useCustomStepPlugin(key: 'codingcorp:message_wework_bot', version: 'latest', params: [type:'text',key:'01a54a19-3b8e-45bd-bf62-161d5d36bc57',content:"""${DOCKER_IMAGE_NAME}服务已更新"""])
+      }
+    }
+  }
+  environment {
+    CODING_DOCKER_REG_HOST = "${CCI_CURRENT_TEAM}-docker.pkg.${CCI_CURRENT_DOMAIN}"
+    CODING_DOCKER_IMAGE_NAME = "${PROJECT_NAME.toLowerCase()}/${DOCKER_REPO_NAME}/${DOCKER_IMAGE_NAME}"
+    DOCKERFILE_PATH = "./${DOCKER_IMAGE_NAME}/docker/Dockerfile"
+    DOCKER_BUILD_CONTEXT = "./${DOCKER_IMAGE_NAME}/"
+    DOCKE_COMPOSE_PATH = "${DOCKER_IMAGE_NAME}/docker/${DOCKER_IMAGE_NAME}.yml"
+  }
+}
