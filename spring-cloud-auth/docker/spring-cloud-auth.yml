@@ -13,7 +13,7 @@ services:
       - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
       - XXL_PUBLIC_IP=${XXL_PUBLIC_IP}
       - TX_PUBLIC_IP=${TX_PUBLIC_IP}
-      - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${TX_PUBLIC_IP}:11800
+      #- SW_AGENT_COLLECTOR_BACKEND_SERVICES=${TX_PUBLIC_IP}:11800
       - spring.profiles.active=prod,prod-redis,swagger
 
 networks:
