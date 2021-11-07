@@ -6,9 +6,9 @@ ENV TZ=Asia/Shanghai
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-#alpine没有zoneinfo
+#openjdk:8-jdk-alpine没有zoneinfo
 #RUN apk add -U tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ENV SW_AGENT_NAME="auth"
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-javaagent:/skywalking/agent/skywalking-agent.jar","-jar","/app.jar"]
