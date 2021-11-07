@@ -7,9 +7,8 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #alpine没有zoneinfo
-RUN apk add -U tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#RUN apk add -U tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-ENV SW_AGENT_COLLECTOR_BACKEND_SERVICES="127.0.0.1:11800" \
-    SW_AGENT_NAME="auth"
+ENV SW_AGENT_NAME="auth"
 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
