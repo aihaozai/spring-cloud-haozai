@@ -17,7 +17,7 @@
 
     <properties>
         <knife4j.version>3.0.2</knife4j.version>
-        <gateway.version>3.0.2</gateway.version>
+        <gateway.version>2.1.5.RELEASE</gateway.version>
     </properties>
 
     <dependencies>
