@@ -11,7 +11,7 @@ RUN apk add --no-cache tzdata && cp /usr/share/zoneinfo/$TZ /etc/localtime
 
 #gateway插件
 RUN mv /skywalking/agent/optional-plugins/apm-spring-cloud-gateway-2.1.x-plugin-8.7.0.jar /skywalking/agent/plugins
-RUN mv /skywalking/agent/optional-plugins/apm-spring-webflux-5.x-plugin-8.7.0.jar /skywalking/agent/plugins
+#RUN mv /skywalking/agent/optional-plugins/apm-spring-webflux-5.x-plugin-8.7.0.jar /skywalking/agent/plugins
 
 ENV SW_AGENT_NAME="gateway"
 
