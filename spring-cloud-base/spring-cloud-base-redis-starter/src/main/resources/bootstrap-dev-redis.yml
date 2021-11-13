@@ -10,7 +10,7 @@ spring:
     # redis端口（默认为6379）
     port: 6379
     # redis访问密码（默认为空）
-    password:
+    password: haozai
     # redis连接超时时间（单位毫秒）
     timeout: 7200
     # redis连接池配置
