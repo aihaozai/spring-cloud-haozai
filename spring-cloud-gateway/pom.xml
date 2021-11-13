@@ -17,7 +17,6 @@
 
     <properties>
         <knife4j.version>3.0.2</knife4j.version>
-        <gateway.version>2.1.5.RELEASE</gateway.version>
         <oauth2.version>5.3.3.RELEASE</oauth2.version>
     </properties>
 
@@ -45,7 +44,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
-            <version>${starter-oauth2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -60,7 +58,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
-            <version>${gateway.version}</version>
         </dependency>
     </dependencies>
 
