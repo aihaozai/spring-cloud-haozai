@@ -91,6 +91,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>true</skip>
                     <mainClass>com.spring.cloud.**.*Application</mainClass>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
