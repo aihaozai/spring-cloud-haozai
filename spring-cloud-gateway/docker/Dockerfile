@@ -1,4 +1,4 @@
-FROM dataanalysis-docker.pkg.coding.net/spring-cloud-haozai/image/openjdk-font:8-jdk-alpine
+FROM dataanalysis-docker.pkg.coding.net/spring-cloud-haozai/image/openjdk-font-skywalking:8-jdk-alpine
 
 ADD target/spring-cloud-gateway-1.0-SNAPSHOT.jar app.jar
 
