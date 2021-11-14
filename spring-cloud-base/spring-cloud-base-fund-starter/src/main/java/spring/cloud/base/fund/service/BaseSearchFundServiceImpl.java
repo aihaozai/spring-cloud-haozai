@@ -48,20 +48,20 @@ public class BaseSearchFundServiceImpl implements IBaseSearchFundService{
         List<String> lastList = new ArrayList<>();
         num.getAndSet(fundList.size());
         fundList.forEach(l->
-                threadPool.execute(() -> {
-
-                            try {
-                                T data = fundDataUtil.getFundRealData(l,clazz);
-                                if(ObjectUtils.isNotEmpty(data)){
-                                    result.add(data);
-                                }
-                                log.debug(l + "=>{}", data);
-                            } catch (Exception e) {
-                                lastList.add(l);
-                            }
-                            num.getAndDecrement();
-                        }
-                ));
+            threadPool.execute(() -> {
+                try {
+                    T data = fundDataUtil.getFundRealData(l,clazz);
+                    if(ObjectUtils.isNotEmpty(data)){
+                        result.add(data);
+                    }
+                    log.debug(l + "=>{}", data);
+                    } catch (Exception e) {
+                    lastList.add(l);
+                    }
+                    num.getAndDecrement();
+                }
+            )
+        );
         while(true){
             if(num.get()==0){
                 break;

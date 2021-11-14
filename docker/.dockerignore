@@ -1,7 +1,0 @@
-*.spring?
-*.src
-*.docker
-*.sql
-*.iml
-*.md
-.idea
