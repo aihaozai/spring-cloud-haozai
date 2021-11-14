@@ -85,9 +85,14 @@
                 <configuration>
                     <archive>
                         <manifest>
+                            <addClasspath>true</addClasspath>
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.spring.cloud.**.*Application</mainClass>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
+                        <manifestEntries>
+                             <version>${project.version}</version>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
