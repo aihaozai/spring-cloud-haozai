@@ -16,7 +16,7 @@ services:
       - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_IP_PORT}
       - spring.profiles.active=prod,prod-redis,swagger
     volumes:
-      - /data/agent.config:/skywalking/agent/config/agent.config
+      - /data/agent.config:/agent/config/agent.config
 networks:
   net:
     driver: bridge
