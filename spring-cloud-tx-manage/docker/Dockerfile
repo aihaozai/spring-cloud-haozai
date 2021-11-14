@@ -1,12 +1,5 @@
-FROM openjdk:8-jdk-alpine
+FROM dataanalysis-docker.pkg.coding.net/spring-cloud-haozai/image/openjdk-font:8-jdk-alpine
 
 ADD target/spring-cloud-tx-manage-1.0-SNAPSHOT.jar app.jar
-
-ENV TZ=Asia/Shanghai
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-#alpine没有zoneinfo
-RUN apk add -U tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

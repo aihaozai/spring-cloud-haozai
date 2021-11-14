@@ -1,13 +1,6 @@
-FROM apache/skywalking-base:8.7.0-es7
+FROM dataanalysis-docker.pkg.coding.net/spring-cloud-haozai/image/openjdk-font:8-jdk-alpine
 
 ADD target/spring-cloud-auth-1.0-SNAPSHOT.jar app.jar
-
-ENV TZ=Asia/Shanghai
-
-#openjdk:8-jdk-alpine没有zoneinfo
-#RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN apk add --no-cache tzdata && cp /usr/share/zoneinfo/$TZ /etc/localtime
 
 ENV SW_AGENT_NAME="auth"
 
