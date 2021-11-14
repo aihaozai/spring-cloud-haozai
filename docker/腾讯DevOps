@@ -71,7 +71,7 @@ pipeline {
             sshPut(
               remote: remoteConfig,
               // 本地文件或文件夹
-              from: "docker/agent.config",
+              from: "skywalking/agent.config",
               // 远端文件或文件夹
               into: "${PROJECT_PATH}"
             )
