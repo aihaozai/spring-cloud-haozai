@@ -11,6 +11,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+      - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_IP_PORT}
       - SW_AGENT_NAME=rabbitmq
       - JAVA_OPTS=-javaagent:/agent/skywalking-agent.jar
 networks:
