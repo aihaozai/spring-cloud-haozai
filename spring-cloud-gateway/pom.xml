@@ -18,7 +18,6 @@
     <properties>
         <knife4j.version>3.0.2</knife4j.version>
         <oauth2.version>5.3.3.RELEASE</oauth2.version>
-        <start-class>com.spring.cloud.gateway.SpringCloudGatewayApplication</start-class>
     </properties>
 
     <dependencies>
