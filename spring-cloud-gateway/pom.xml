@@ -69,32 +69,25 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <useUniqueVersions>false</useUniqueVersions>
-                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.spring.cloud.gateway.SpringCloudGatewayApplication</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
-                        <manifestEntries>
-                            <version>${project.version}</version>
-                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${maven-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>repackage</id>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <skip>true</skip>
                     <mainClass>com.spring.cloud.gateway.SpringCloudGatewayApplication</mainClass>
-                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
             <plugin>
