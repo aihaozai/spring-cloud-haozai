@@ -10,6 +10,11 @@ services:
     environment:
       #- SW_STORAGE=elasticsearch7
       #- SW_STORAGE_ES_CLUSTER_NODES=es:9200
+      - SW_CLUSTER=nacos
+      - SW_CLUSTER_NACOS_HOST_PORT=1.117.205.58:8848
+      - SW_CLUSTER_NACOS_USERNAME = nacos
+      - SW_CLUSTER_NACOS_PASSWORD=haozai
+
   skywaling-ui:
     image: apache/skywalking-ui:8.5.0
     container_name: ui
