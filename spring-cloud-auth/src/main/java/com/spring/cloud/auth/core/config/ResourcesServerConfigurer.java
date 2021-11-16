@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.cloud.auth.core.hander.SystemLogoutSuccessHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,9 +30,12 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
 
     private final ObjectMapper objectMapper;
 
+
+    private final MessageSource message;
+
     @Bean
     public SystemLogoutSuccessHandler logoutSuccessHandler(){
-        return new SystemLogoutSuccessHandler(redisTokenStore,objectMapper);
+        return new SystemLogoutSuccessHandler(redisTokenStore,objectMapper,message);
     }
 
     /**
