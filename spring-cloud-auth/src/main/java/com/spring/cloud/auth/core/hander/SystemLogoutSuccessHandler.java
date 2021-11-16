@@ -5,6 +5,7 @@ import com.google.common.net.HttpHeaders;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 
 /**
  * @author haozai
@@ -28,6 +30,8 @@ public class SystemLogoutSuccessHandler implements LogoutSuccessHandler {
     private final RedisTokenStore redisTokenStore;
 
     private final ObjectMapper objectMapper;
+
+    private final MessageSource message;
 
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
@@ -43,8 +47,7 @@ public class SystemLogoutSuccessHandler implements LogoutSuccessHandler {
                 redisTokenStore.removeAccessTokenUsingRefreshToken(oAuth2RefreshToken);
             }
         }
-
         httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(Result.ok("退出成功")));
+        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(Result.ok(this.message.getMessage("AuthenticationProvider.logout",null, Locale.getDefault()))));
     }
 }
