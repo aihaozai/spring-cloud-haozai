@@ -4,4 +4,4 @@ ADD target/spring-cloud-gateway-1.0-SNAPSHOT.jar app.jar
 
 ENV SW_AGENT_NAME="gateway"
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/agent/skywalking-agent.jar", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-Djava.io.tmpdir=/tmp", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/agent/skywalking-agent.jar", "-jar", "/app.jar"]
