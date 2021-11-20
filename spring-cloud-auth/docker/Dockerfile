@@ -7,4 +7,4 @@ ENV LANG="zh_CN.UTF-8"
 
 ENV SW_AGENT_NAME="auth"
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/agent/skywalking-agent.jar", "-jar", "/app.jar"]
+ENTRYPOINT ["tini", "java", "-Djava.io.tmpdir=/tmp", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/agent/skywalking-agent.jar", "-jar", "/app.jar"]

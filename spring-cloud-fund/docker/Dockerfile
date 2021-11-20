@@ -4,4 +4,4 @@ ADD target/spring-cloud-fund-1.0-SNAPSHOT.jar app.jar
 
 ENV SW_AGENT_NAME="fund"
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/agent/skywalking-agent.jar", "-jar", "/app.jar"]
+ENTRYPOINT ["tini", "java", "-Djava.io.tmpdir=/tmp", "-Djava.security.egd=file:/dev/./urandom", "-javaagent:/agent/skywalking-agent.jar", "-jar", "/app.jar"]
