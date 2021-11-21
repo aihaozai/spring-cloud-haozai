@@ -57,6 +57,7 @@ public class ResourcesServerConfigurer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/","/health", "/oauth/weixin/token","/keyPair/**","/v2/api-docs").permitAll()
                 .antMatchers("/**").authenticated()
                 .and().logout().logoutSuccessHandler(logoutSuccessHandler()).clearAuthentication(true)
                 .and().csrf().disable();
