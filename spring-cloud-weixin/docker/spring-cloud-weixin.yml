@@ -6,7 +6,7 @@ services:
     networks:
       - net
     ports:
-      - 7001:7001
+      - 7004:7004
     environment:
       - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
       - SERVICE_IP=${SERVICE_IP}
