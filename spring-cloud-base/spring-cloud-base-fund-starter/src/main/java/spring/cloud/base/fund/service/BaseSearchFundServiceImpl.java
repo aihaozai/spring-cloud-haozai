@@ -28,7 +28,7 @@ public class BaseSearchFundServiceImpl implements IBaseSearchFundService{
     public <T> List<T>  searchFundRealData(List<String> fundList, Class<T> clazz){
         long time = System.currentTimeMillis();
         ExecutorService threadPool = new ThreadPoolExecutor(100,200,200L,
-                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
+                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(5),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
 
         AtomicInteger num = new AtomicInteger();
         List<T> result =new ArrayList<>();
