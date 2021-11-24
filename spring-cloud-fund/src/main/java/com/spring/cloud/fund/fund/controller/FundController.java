@@ -5,13 +5,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.model.FundQueryCriteria;
 import com.spring.cloud.fund.fund.service.IFundService;
+import com.spring.cloud.fund.handler.SearchFundJobHandler;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.cloud.base.datasource.request.QueryPage;
 import spring.cloud.base.datasource.util.QueryUtil;
 import spring.cloud.base.fund.dto.FundDetailDataDTO;
@@ -37,6 +35,8 @@ public class FundController{
 
     private final FundDataUtil fundDataUtil;
 
+    private final SearchFundJobHandler searchFundJobHandler;
+
     @GetMapping("/page")
     public Page<Fund> page(QueryPage queryPage, FundQueryCriteria queryCriteria) {
         return iFundService.page(new Page<>(queryPage.getCurrent(), queryPage.getSize()), QueryUtil.getPredicate(new QueryWrapper<>(),queryCriteria));
@@ -52,5 +52,10 @@ public class FundController{
     @GetMapping("/getDetailDataChart")
     public FundDetailDataDTO getDetailDataChart(@RequestParam String fundCode) throws ScriptException {
         return fundDataUtil.getFundDetailDataDTO(fundCode);
+    }
+
+    @PutMapping("/searchFundRealData")
+    public void searchFundRealData() {
+        searchFundJobHandler.searchFundRealData();
     }
 }

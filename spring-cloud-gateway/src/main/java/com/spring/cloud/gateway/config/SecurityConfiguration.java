@@ -50,7 +50,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         permitAll.add("/api/auth/oauth/**");
-        permitAll.add("/api/**/v2/api-docs");
+        permitAll.add("/api/*/v2/api-docs");
         permitAll.add("/api/fund/fundReal/getFundRealDataAnon");
         permitAll.add("/swagger-ui/**");
         permitAll.add("/swagger-resources/**");
@@ -58,7 +58,7 @@ public class SecurityConfiguration {
         permitAll.add("/doc.html");
         permitAll.add("/webjars/**");
         permitAll.add("/xxl-job-admin/api/registry");
-        permitAll.add("/api/weixin/wx/user/**/login");
+        permitAll.add("/api/weixin/wx/user/*/login");
         http.authorizeExchange()
                 //白名单配置
                 .pathMatchers(ArrayUtil.toArray(permitAll,String.class)).permitAll()

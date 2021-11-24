@@ -15,6 +15,8 @@ import spring.cloud.base.fund.dto.FundDetailDataDTO;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author haozai
@@ -42,12 +44,17 @@ public class FundDataUtil {
 
     private final ScriptEngine engineByName = engineManager.getEngineByName("JavaScript");
 
+    private final static List<String> ERROR = Arrays.asList("1");
+
     public <T> T getFundRealData(String fundCode,Class<T> clazz){
         ResponseEntity<String> response = restTemplate.getForEntity(String.format(FUND_URL,fundCode), String.class );
         if(StringUtils.isEmpty(response.getBody())){
             return null;
         }
         String data = response.getBody().replaceAll(PATTERN,"");
+        if(ERROR.contains(data)){
+            return null;
+        }
         return  JSONObject.parseObject(data, clazz);
     }
 

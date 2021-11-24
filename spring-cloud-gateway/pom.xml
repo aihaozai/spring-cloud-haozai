@@ -25,6 +25,16 @@
             <groupId>com.haozai</groupId>
             <artifactId>spring-cloud-base-core</artifactId>
             <version>${spring-cloud-haozai.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-openfeign</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.xuxueli</groupId>
+                    <artifactId>xxl-job-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.haozai</groupId>

@@ -18,8 +18,9 @@
     <properties>
         <nacos.version>2.2.5.RELEASE</nacos.version>
         <logstash.version>4.10</logstash.version>
-        <starter-security.version>2.2.0.RELEASE</starter-security.version>
+        <starter-security.version>2.2.5.RELEASE</starter-security.version>
         <xxl-job.version>2.3.0</xxl-job.version>
+        <jasypt.version>3.0.3</jasypt.version>
         <webmvc.version>5.2.7.RELEASE</webmvc.version>
         <validator.version>7.0.1.Final</validator.version>
         <skywalking.version>8.5.0</skywalking.version>
@@ -76,6 +77,7 @@
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot</artifactId>
+            <version>${jasypt.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
