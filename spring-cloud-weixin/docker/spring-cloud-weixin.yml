@@ -1,0 +1,22 @@
+version: '3'
+services:
+  auth:
+    image: ${IMAGE_NAME}
+    container_name: ${CONTAINER_NAME}
+    networks:
+      - net
+    ports:
+      - 7001:7001
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+      - SERVICE_IP=${SERVICE_IP}
+      - NACOS_PUBLIC_IP=${NACOS_PUBLIC_IP}
+      - XXL_PUBLIC_IP=${XXL_PUBLIC_IP}
+      - TX_PUBLIC_IP=${TX_PUBLIC_IP}
+      - SW_AGENT_COLLECTOR_BACKEND_SERVICES=${SKYWALKING_IP_PORT}
+      - spring.profiles.active=prod,prod-redis,swagger
+    volumes:
+      - /data/agent.config:/agent/config/agent.config
+networks:
+  net:
+    driver: bridge

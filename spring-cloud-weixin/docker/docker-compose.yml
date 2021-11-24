@@ -1,0 +1,22 @@
+version: '3'
+services:
+  auth:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: auth
+    networks:
+      - net
+    ports:
+      - 7001:7001
+    environment:
+      - JAVA_OPTS=-Xmx100M -Duser.timezone=GMT+08
+      - SERVICE_IP=localhost
+      - NACOS_PUBLIC_IP=localhost
+      - XXL_PUBLIC_IP=localhost
+      - TX_PUBLIC_IP=localhost
+      - spring.profiles.active=prod,prod-redis,swagger
+
+networks:
+  net:
+    driver: bridge
