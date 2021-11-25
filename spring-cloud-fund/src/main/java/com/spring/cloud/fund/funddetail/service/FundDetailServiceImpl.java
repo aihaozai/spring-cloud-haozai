@@ -40,7 +40,7 @@ public class FundDetailServiceImpl extends ServiceImpl<FundDetailMapper, FundDet
     public List<FundDetail> searchFundDetailData(List<Fund> fundList) {
         long time = System.currentTimeMillis();
         ExecutorService threadPool = new ThreadPoolExecutor(70,160,200L,
-                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(160),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
+                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(200),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
 
         AtomicInteger num = new AtomicInteger();
         List<FundDetail> result =new ArrayList<>();
