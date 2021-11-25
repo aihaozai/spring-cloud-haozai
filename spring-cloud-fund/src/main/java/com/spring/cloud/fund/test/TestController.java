@@ -31,7 +31,7 @@ public class TestController {
     public String test2(){
 //        System.out.println(2222);
 //        testService.test2();
-        streamClient.output().send(MessageBuilder.withPayload("Hello World...").build());
+        streamClient.delayOutput().send(MessageBuilder.withPayload("Hello World...").build());
 
         return "dfdsfsda";
     }

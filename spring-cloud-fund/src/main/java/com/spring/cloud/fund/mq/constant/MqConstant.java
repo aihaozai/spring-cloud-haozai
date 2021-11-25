@@ -8,4 +8,10 @@ public class MqConstant {
     public final static String IN_PUT = "myInput";
 
     public final static String OUT_PUT = "myOutput";
+
+    public final static String DELAY_OUT_PUT = "delayOutput";
+
+    public final static String DELAY_IN_PUT = "delayInput";
+
+    public final static String DEAD_LETTER_IN_PUT = "deadLetterInput";
 }

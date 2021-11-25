@@ -33,4 +33,24 @@ public class StreamReceiver {
             channel.basicAck(deliveryTag,true);
         }
     }
+
+//    @StreamListener(MqConstant.DELAY_IN_PUT)
+//    public void receiveDelay(Message message) throws IOException {
+//        Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
+//        Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
+//        log.info("接收到消息：{}" , message);
+//        if(deliveryTag!=null&&channel!=null){
+//            channel.basicAck(deliveryTag,true);
+//        }
+//    }
+
+    @StreamListener(MqConstant.DEAD_LETTER_IN_PUT)
+    public void receiveDeadLetter(Message message) throws IOException {
+        Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
+        Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
+        log.info("死信接收到消息：{}" , message);
+        if(deliveryTag!=null&&channel!=null){
+            channel.basicReject(deliveryTag,true);
+        }
+    }
 }

@@ -28,14 +28,33 @@ spring:
 
   cloud:
     stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+      defaultBinder: defaultRabbit
       bindings:
+        #默认队列
         myInput:
           #指定输入通道对应的主题名
-          destination: cloudstream
+          destination: cloudStream
           #指定该应用实例属于 stream 消费组
           group: stream
         myOutput:
-          destination: cloudstream
+          destination: cloudStream
+          group: stream
+        #延时队列
+        delayOutput:
+          producer:
+            required-groups: delayGroup
+          destination: delayStream
+          group: delayStream
+        delayInput:
+          destination: delayStream
+          group: delayStream
+        #死信队列
+        deadLetterInput:
+          destination: deadLetterStream
+          group: delayStream
       rabbit:
         bindings:
           myInput:
@@ -45,6 +64,26 @@ spring:
               recovery-interval: 3000
               durable-subscription: true
               max-concurrency: 5
+          delayInput:
+            consumer:
+              requeue-reject: false
+              acknowledge-mode: manual
+              recovery-interval: 3000
+              durable-subscription: true
+              max-concurrency: 5
+          deadLetterInput:
+            consumer:
+              requeue-reject: false
+              acknowledge-mode: manual
+              recovery-interval: 3000
+              durable-subscription: true
+              max-concurrency: 5
+          delayOutput:
+            producer:
+              ttl: 6000 #队列里的消息如果3000ms之后还没被消费，就会成为死信，必须配置required-groups
+              autoBindDlq: true #为当前的队列创建一个死信队列，没有指定队列名称时以dlq结尾
+              deadLetterExchange: deadLetterInput #绑定exchange
+              deadLetterQueueName: deadLetterStream.delayStream #指定名称
 
 #swagger扫描配置
 swagger:
@@ -75,7 +114,8 @@ gateway:
       - /v2/api-docs
       - /test/test1
       - /test/test2
-
+      - /fund/searchFundRealData
+      
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework.security: INFO

@@ -28,4 +28,29 @@ public interface StreamClient {
     @Output(MqConstant.OUT_PUT)
     MessageChannel output();
 
+    /**
+     *
+     * 延迟队列输出
+     * @return org.springframework.messaging.SubscribableChannel
+     */
+    @Output(MqConstant.DELAY_OUT_PUT)
+    MessageChannel delayOutput();
+
+//
+//    /**
+//     *
+//     * 延迟队列输入
+//     * @return org.springframework.messaging.SubscribableChannel
+//     */
+//    @Input(MqConstant.DELAY_IN_PUT)
+//    MessageChannel delayInput();
+
+
+    /**
+     *
+     * 死信队列输入
+     * @return org.springframework.messaging.SubscribableChannel
+     */
+    @Input(MqConstant.DEAD_LETTER_IN_PUT)
+    MessageChannel deadLetterInput();
 }
