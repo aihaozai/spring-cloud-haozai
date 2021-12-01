@@ -34,15 +34,25 @@ public class StreamReceiver {
         }
     }
 
-//    @StreamListener(MqConstant.DELAY_IN_PUT)
-//    public void receiveDelay(Message message) throws IOException {
-//        Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
-//        Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
-//        log.info("接收到消息：{}" , message);
-//        if(deliveryTag!=null&&channel!=null){
-//            channel.basicAck(deliveryTag,true);
-//        }
-//    }
+    @StreamListener(MqConstant.DELAY_IN_PUT)
+    public void receiveDelay(Message message) throws IOException {
+        Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
+        Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
+        log.info("延迟接收到消息：{}" , message);
+        if(deliveryTag!=null&&channel!=null){
+            //channel.basicReject(deliveryTag,false);
+        }
+    }
+
+    @StreamListener(MqConstant.DLQ_IN_PUT)
+    public void receiveDlq(Message message) throws IOException {
+        Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
+        Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
+        log.info("DLQ接收到消息：{}" , message);
+        if(deliveryTag!=null&&channel!=null){
+
+        }
+    }
 
     @StreamListener(MqConstant.DEAD_LETTER_IN_PUT)
     public void receiveDeadLetter(Message message) throws IOException {
@@ -50,7 +60,8 @@ public class StreamReceiver {
         Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
         log.info("死信接收到消息：{}" , message);
         if(deliveryTag!=null&&channel!=null){
-            channel.basicReject(deliveryTag,true);
+            channel.basicAck(deliveryTag,true);
         }
     }
+
 }

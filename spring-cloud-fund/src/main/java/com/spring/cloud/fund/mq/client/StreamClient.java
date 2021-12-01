@@ -3,7 +3,6 @@ package com.spring.cloud.fund.mq.client;
 import com.spring.cloud.fund.mq.constant.MqConstant;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
 /**
@@ -26,7 +25,7 @@ public interface StreamClient {
      * @return org.springframework.messaging.SubscribableChannel
      */
     @Output(MqConstant.OUT_PUT)
-    MessageChannel output();
+    SubscribableChannel output();
 
     /**
      *
@@ -34,17 +33,41 @@ public interface StreamClient {
      * @return org.springframework.messaging.SubscribableChannel
      */
     @Output(MqConstant.DELAY_OUT_PUT)
-    MessageChannel delayOutput();
+    SubscribableChannel delayOutput();
 
-//
-//    /**
-//     *
-//     * 延迟队列输入
-//     * @return org.springframework.messaging.SubscribableChannel
-//     */
-//    @Input(MqConstant.DELAY_IN_PUT)
-//    MessageChannel delayInput();
 
+    /**
+     *
+     * 延迟队列输入
+     * @return org.springframework.messaging.SubscribableChannel
+     */
+    @Input(MqConstant.DELAY_IN_PUT)
+    SubscribableChannel delayInput();
+
+
+    /**
+     *
+     * DLQ队列输出
+     * @return org.springframework.messaging.SubscribableChannel
+     */
+    @Output(MqConstant.DLQ_OUT_PUT)
+    SubscribableChannel dlqOutput();
+
+    /**
+     *
+     * DLQ队列输入
+     * @return org.springframework.messaging.SubscribableChannel
+     */
+    @Input(MqConstant.DLQ_IN_PUT)
+    SubscribableChannel dlqInput();
+
+    /**
+     *
+     * 死信队列输出
+     * @return org.springframework.messaging.SubscribableChannel
+     */
+    @Output(MqConstant.DEAD_LETTER_OUT_PUT)
+    SubscribableChannel deadLetterOutput();
 
     /**
      *
@@ -52,5 +75,5 @@ public interface StreamClient {
      * @return org.springframework.messaging.SubscribableChannel
      */
     @Input(MqConstant.DEAD_LETTER_IN_PUT)
-    MessageChannel deadLetterInput();
+    SubscribableChannel deadLetterInput();
 }

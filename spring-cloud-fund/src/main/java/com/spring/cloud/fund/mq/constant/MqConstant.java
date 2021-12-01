@@ -13,5 +13,11 @@ public class MqConstant {
 
     public final static String DELAY_IN_PUT = "delayInput";
 
+    public final static String DLQ_OUT_PUT = "dlqOutput";
+
+    public final static String DLQ_IN_PUT = "dlqInput";
+
+    public final static String DEAD_LETTER_OUT_PUT = "deadLetterOutput";
+
     public final static String DEAD_LETTER_IN_PUT = "deadLetterInput";
 }
