@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.cloud.base.core.result.Result;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,12 +31,6 @@ public class SearchFundController {
     private final ISearchFundService iSearchFundService;
 
     private final SearchFundJobHandler searchFundJobHandler;
-
-    @GetMapping("/searchFundRealData")
-    public Result searchFundRealData() throws IOException {
-        searchFundJobHandler.fundRealDataJobHandler();
-        return Result.ok();
-    }
 
     @GetMapping("/createFundIndex")
     public Result createFundIndex(){

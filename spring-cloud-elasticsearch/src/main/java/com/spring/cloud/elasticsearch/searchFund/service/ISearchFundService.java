@@ -10,12 +10,6 @@ import java.util.List;
 public interface ISearchFundService{
 
 
-    /**
-     * 爬取实时基金
-     * @param fundCodeList
-     * @throws IOException
-     */
-    void searchFundRealData(List<String> fundCodeList) throws IOException;
 
     /**
      * 创建基金索引

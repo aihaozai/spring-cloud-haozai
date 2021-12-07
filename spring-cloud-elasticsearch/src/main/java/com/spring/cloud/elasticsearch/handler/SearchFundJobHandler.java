@@ -5,8 +5,6 @@ import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -21,11 +19,6 @@ public class SearchFundJobHandler {
     private ArrayList<String> fundCodeList;
 
     private  ISearchFundService iSearchFundService;
-
-    @XxlJob("fundRealDataJobHandler")
-    public void fundRealDataJobHandler() throws IOException {
-        iSearchFundService.searchFundRealData(fundCodeList);
-    }
 
     @XxlJob("createFundIndexJobHandler")
     public void createFundIndexJobHandler(){
