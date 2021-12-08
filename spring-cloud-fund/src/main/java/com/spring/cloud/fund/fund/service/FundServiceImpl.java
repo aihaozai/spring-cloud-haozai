@@ -44,8 +44,8 @@ public class FundServiceImpl extends ServiceImpl<FundMapper, Fund> implements IF
         long begin = System.currentTimeMillis();
         List<String> fundList = new ArrayList<>();
 
-        ExecutorService threadPool = new ThreadPoolExecutor(200,200,200L,
-                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(1800),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
+        ExecutorService threadPool = new ThreadPoolExecutor(200,200,10L,
+                TimeUnit.SECONDS,new LinkedBlockingQueue<>(),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
 
         this.fundMapper.fundCodeList(resultContext -> {
             fundList.add(resultContext.getResultObject());
