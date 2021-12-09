@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: dev,dev-redis,swagger
+    active: dev,dev-redis,swagger,dev-mq
   main:
     allow-bean-definition-overriding: true
   application:
@@ -16,86 +16,6 @@ spring:
     url: jdbc:p6spy:mysql://1gfco70pqu10zt81o.mysql.rds.aliyuncs.com:3306/cloud_fund?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: cloud_fund
     password: ENC(2iWxMuXWnVpwoFM/2Z1YtLRcPf1OixvbgBQjMpjjzF1HOuB9DsGEvQWJIFBwe5ZX)
-  rabbitmq:
-    host: 101.35.6.20
-    port: 5672
-    username: guest
-    password: guest
-    #开启 return 确认机制
-    publisher-returns: true
-    #在需要使用消息的return机制时候，此参数必须设置为true
-    template:
-      mandatory: true
-    #开启confirm确认机制
-    publisher-confirm-type: correlated
-
-  cloud:
-    stream:
-      binders:
-        defaultRabbit:
-          type: rabbit
-      bindings:
-        #默认队列
-        myInput:
-          #指定输入通道对应的主题名
-          destination: cloudStream
-          #指定该应用实例属于 stream 消费组
-          group: stream
-        myOutput:
-          destination: cloudStream
-          group: stream
-        #延时队列
-        delayOutput:
-          producer:
-            required-groups: delayGroup
-          destination: delayStream
-          group: delayStream
-        delayInput:
-          consumer:
-            required-groups: delayGroup
-          destination: delayStream
-          group: delayStream
-        #开启死信的队列
-        dlqOutput:
-          destination: dlqStream
-          group: dlqStream
-        dlqInput:
-          destination: dlqStream
-          group: dlqStream
-        #死信队列
-        deadLetterInput:
-          destination: deadLetterStream
-          group: delayStream
-      rabbit:
-        bindings:
-          myInput:
-            consumer:
-              requeue-reject: false
-              acknowledge-mode: manual
-              recovery-interval: 3000
-              durable-subscription: true
-              max-concurrency: 5
-          delayInput:
-            consumer:
-              requeue-reject: false
-              acknowledge-mode: manual
-              recovery-interval: 3000
-              durable-subscription: true
-              max-concurrency: 5
-          delayOutput:
-            producer:
-              ttl: 6000 #延时队列里的消息6s之后就会成为死信，必须配置required-groups
-
-          dlqInput:
-            consumer:
-              requeue-reject: false
-              acknowledge-mode: manual #手动确认
-              recovery-interval: 3000
-              durable-subscription: true #持久化
-              max-concurrency: 5 #消费最大数量
-              autoBindDlq: true #为当前的队列创建一个死信队列，没有指定队列名称时以dlq结尾
-              deadLetterExchange: deadLetterInput #绑定exchange
-              deadLetterQueueName: deadLetterStream.delayStream #指定名称
 
 #swagger扫描配置
 swagger:

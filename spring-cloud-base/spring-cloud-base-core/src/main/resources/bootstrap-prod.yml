@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod,prod-redis
+    active: prod
   main:
     allow-bean-definition-overriding: true
   cloud:

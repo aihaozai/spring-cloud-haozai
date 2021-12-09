@@ -41,6 +41,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.haozai</groupId>
+            <artifactId>spring-cloud-base-mq-starter</artifactId>
+            <version>${spring-cloud-haozai.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
