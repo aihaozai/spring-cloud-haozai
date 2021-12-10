@@ -44,9 +44,10 @@ spring:
               recovery-interval: 3000
               durable-subscription: true
               max-concurrency: 5
-          delayOutput:
-            producer:
               delayed-exchange: true
+#          delayOutput:
+#            producer:
+#              delayed-exchange: true
           dlqInput:
             consumer:
               requeue-reject: false
