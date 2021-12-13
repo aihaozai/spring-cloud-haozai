@@ -4,13 +4,12 @@ import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.fundreal.model.FundRealVO;
 import com.spring.cloud.fund.fundreal.service.IFundRealService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 /**
@@ -41,12 +40,5 @@ public class FundRealController{
     @GetMapping("/getFundRealDataAnon")
     public List<FundRealVO> getFundRealDataAnon() {
         return iFundRealService.getFundRealData();
-    }
-
-    @ApiOperation("订阅实时基金数据")
-    @ApiParam(required = true, name = "多个基金代码")
-    @GetMapping("/subscribeFundReal")
-    public List<FundRealVO> subscribeFundReal(String codes) {
-        return iFundRealService.subscribeFundReal(codes);
     }
 }
