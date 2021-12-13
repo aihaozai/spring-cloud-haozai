@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import spring.cloud.base.core.model.AuthAuthority;
 
 import java.lang.reflect.Type;
 
@@ -27,7 +28,7 @@ public  class InterfaceAdapter<T> implements JsonDeserializer<T> {
         if(Authentication.class.getName().equals(interfaceType.getTypeName())){
             return UsernamePasswordAuthenticationToken.class;
         }else  if(GrantedAuthority.class.getName().equals(interfaceType.getTypeName())){
-            return SimpleGrantedAuthority.class;
+            return AuthAuthority.class;
         }
         throw new JsonParseException("no '" + interfaceType.getTypeName() + "' class name found ");
     }

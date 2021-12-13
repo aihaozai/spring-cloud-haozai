@@ -24,4 +24,9 @@ public class AuthAuthority implements GrantedAuthority {
     public String getAuthority() {
         return code;
     }
+
+    @Override
+    public int hashCode() {
+        return this.code.hashCode();
+    }
 }
