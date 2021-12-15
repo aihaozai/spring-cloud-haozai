@@ -28,7 +28,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private final ObjectMapper objectMapper;
 
-    private static String API = "v2/api-docs";
+    private final static String API = "v2/api-docs";
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {

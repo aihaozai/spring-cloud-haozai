@@ -1,0 +1,43 @@
+{
+  "properties": [
+    {
+      "name": "elasticsearch.host",
+      "type": "java.lang.String",
+      "description": "Description for elasticsearch.host."
+    },
+    {
+      "name": "elasticsearch.port",
+      "type": "java.lang.Integer",
+      "description": "Description for elasticsearch.port."
+    },
+    {
+      "name": "elasticsearch.scheme",
+      "type": "java.lang.String",
+      "description": "Description for elasticsearch.scheme."
+    },
+    {
+      "name": "elasticsearch.connectTimeOut",
+      "type": "java.lang.Integer",
+      "description": "Description for elasticsearch.connectTimeOut."
+    },
+    {
+      "name": "elasticsearch.socketTimeOut",
+      "type": "java.lang.Integer",
+      "description": "Description for elasticsearch.socketTimeOut."
+    },
+    {
+      "name": "elasticsearch.connectionRequestTimeOut",
+      "type": "java.lang.Integer",
+      "description": "Description for elasticsearch.connectionRequestTimeOut."
+    },
+    {
+      "name": "elasticsearch.maxConnectTotal",
+      "type": "java.lang.Integer",
+      "description": "Description for elasticsearch.maxConnectTotal."
+    },
+    {
+      "name": "elasticsearch.maxConnectPerRoute",
+      "type": "java.lang.Integer",
+      "description": "Description for elasticsearch.maxConnectPerRoute."
+    }
+  ] }

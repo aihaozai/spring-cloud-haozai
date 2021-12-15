@@ -9,6 +9,18 @@ spring:
   application:
     name: cloud-elasticsearch
 
+
+elasticsearch:
+  host: 175.27.243.44
+  port: 9200
+  scheme: http
+  connectTimeOut: 1000
+  socketTimeOut: 30000
+  connectionRequestTimeOut: 500
+  maxConnectTotal: 100
+  maxConnectPerRoute: 100
+
+
 ##xxl-job
 xxl:
   job:
