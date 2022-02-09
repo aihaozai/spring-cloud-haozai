@@ -20,21 +20,6 @@ import java.io.IOException;
 @EnableBinding(value = {StreamClient.class})
 public class StreamReceiver {
 
-
-    @StreamListener(MqConstant.IN_PUT)
-    public void receive(Message message) throws IOException {
-        Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
-        Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
-        log.info("接收到消息：{}" , message);
-        //        for(;;){
-//            log.info("接收到消息：{}" , message);
-//        }
-
-//        if(deliveryTag!=null&&channel!=null){
-//            channel.basicAck(deliveryTag,true);
-//        }
-    }
-
     @StreamListener(MqConstant.DELAY_IN_PUT)
     public void receiveDelay(Message message) throws IOException {
         Channel channel = (Channel) message.getHeaders().get(AmqpHeaders.CHANNEL);
