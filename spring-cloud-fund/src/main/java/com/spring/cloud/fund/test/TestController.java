@@ -1,11 +1,11 @@
 package com.spring.cloud.fund.test;
 
-import com.spring.cloud.fund.mq.client.StreamClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import spring.cloud.base.mq.starter.base.client.StreamClient;
 
 /**
  * @author haozai
@@ -19,7 +19,6 @@ public class TestController {
 
     private final TestService testService;
     private final StreamClient streamClient;
-
     @GetMapping("/test1")
     public String test1(){
         System.out.println(111);
@@ -31,8 +30,8 @@ public class TestController {
     public String test2(){
 //        System.out.println(2222);
 //        testService.test2();
-        streamClient.delayOutput().send(MessageBuilder.withPayload("Hello World...").build());
-
+        streamClient.delayOutput().send(MessageBuilder.withPayload("Hello World...").setHeader("x-delay", 1000 * 6 * 1).setHeader("ytyt", "oooo").build());
+        //rabbitTemplate.convertAndSend("delayOutput","7777777777");
         return "dfdsfsda";
     }
 }

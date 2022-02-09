@@ -13,4 +13,7 @@ public class RolePermissionQueryCriteria {
 
     @Query(type = Query.Type.EQUAL)
     private String name;
+
+    @Query(type = Query.Type.EQUAL)
+    private String userId;
 }

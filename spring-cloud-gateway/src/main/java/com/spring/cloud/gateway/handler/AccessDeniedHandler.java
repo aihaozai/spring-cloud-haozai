@@ -1,9 +1,10 @@
 package com.spring.cloud.gateway.handler;
 
-import cn.hutool.json.JSONObject;
+
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBufferFactory;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.server.authorization.ServerAccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -19,13 +20,15 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 public class AccessDeniedHandler implements ServerAccessDeniedHandler {
+    private static final JSONObject RESPONSE = new JSONObject();
+
     @Override
     public Mono<Void> handle(ServerWebExchange serverWebExchange, AccessDeniedException e) {
-        log.info("拒绝通过---请求链接:{},原因:{}", serverWebExchange.getRequest().getPath(), e.getMessage());
-        JSONObject object = new JSONObject();
-        object.putOnce("message", e.getMessage());
+        log.error("拒绝通过---请求链接:{},原因:{}", serverWebExchange.getRequest().getPath(), e.getMessage());
+
+        RESPONSE.put("msg", e.getMessage());
         DataBufferFactory bufferFactory = serverWebExchange.getResponse().bufferFactory();
-        return serverWebExchange.getResponse().writeWith(Flux.just(bufferFactory.wrap(object.toString().getBytes())));
+        return serverWebExchange.getResponse().writeWith(Flux.just(bufferFactory.wrap(RESPONSE.toString().getBytes())));
 
     }
 }

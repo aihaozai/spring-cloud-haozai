@@ -1,7 +1,7 @@
 package spring.cloud.base.fund.service;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author haozai
@@ -11,11 +11,11 @@ public interface IBaseSearchFundService {
 
     /**
      * 爬取实时基金
+     *
      * @param fundList
      * @param clazz
-     * @param <T>
-     * @return
-     * @throws IOException
+     * @param threadPool
+     * @return java.util.List<T>
      */
-    <T> List<T> searchFundRealData(List<String> fundList,Class<T> clazz);
+    <T> List<T> searchFundRealData(List<String> fundList, Class<T> clazz, ExecutorService threadPool);
 }

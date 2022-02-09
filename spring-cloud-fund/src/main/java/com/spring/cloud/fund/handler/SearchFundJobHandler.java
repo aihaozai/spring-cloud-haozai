@@ -4,19 +4,14 @@ import com.spring.cloud.fund.fund.entity.Fund;
 import com.spring.cloud.fund.fund.service.IFundService;
 import com.spring.cloud.fund.funddetail.entity.FundDetail;
 import com.spring.cloud.fund.funddetail.service.IFundDetailService;
-import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.service.IFundRealService;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.job.core.util.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
-import spring.cloud.base.fund.service.IBaseSearchFundService;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author haozai

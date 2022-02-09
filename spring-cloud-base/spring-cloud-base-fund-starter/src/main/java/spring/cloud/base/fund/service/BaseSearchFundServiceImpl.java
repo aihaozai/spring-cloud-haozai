@@ -1,15 +1,14 @@
 package spring.cloud.base.fund.service;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.thread.ThreadFactoryBuilder;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 import spring.cloud.base.fund.util.FundDataUtil;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -25,21 +24,10 @@ public class BaseSearchFundServiceImpl implements IBaseSearchFundService{
     private final FundDataUtil fundDataUtil;
 
     @Override
-    public <T> List<T>  searchFundRealData(List<String> fundList, Class<T> clazz){
-        long time = System.currentTimeMillis();
-        ExecutorService threadPool = new ThreadPoolExecutor(100,200,200L,
-                TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(1100),new ThreadFactoryBuilder().setNamePrefix("thread-call-runner-%d").build());
-
+    public <T> List<T> searchFundRealData(List<String> fundList, Class<T> clazz,ExecutorService threadPool){
         AtomicInteger num = new AtomicInteger();
         List<T> result =new ArrayList<>();
         this.executeSearch(threadPool,fundList,num,result,clazz);
-        threadPool.shutdown();
-        while(true){
-            if(threadPool.isTerminated()){
-                log.info("失败数量："+num.get()+"爬取基金实时数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
-                break;
-            }
-        }
         return result;
     }
 

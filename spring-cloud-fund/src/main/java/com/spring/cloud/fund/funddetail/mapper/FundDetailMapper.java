@@ -31,5 +31,5 @@ public interface FundDetailMapper extends BaseMapper<FundDetail> {
      */
     @Select(" select f.id, f.fund_code, f.fund_name, f.fund_type, f.company_code, f.company_name, f.one_n, f.six_y, f.three_y, f.one_y, s.subscribeId " +
             " from fund_detail f left join ( select id as subscribeId, fund_code from fund_subscribe where user_id =#{userId} ) s on f.fund_code = s.fund_code  ${ew.customSqlSegment} ")
-    Page<FundDetail> subscribePage(Page page, Long userId, @Param(Constants.WRAPPER) QueryWrapper predicate);
+    Page<FundDetail> subscribePage(Page page,@Param("userId") Long userId, @Param(Constants.WRAPPER) QueryWrapper predicate);
 }

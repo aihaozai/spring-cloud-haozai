@@ -8,11 +8,11 @@ services:
       - 11800:11800 # agent 上报数据的端口，这是 gRPC 端口
       - 12800:12800 # ui 读取数据的端口， 这是 http 端口
     environment:
-      #- SW_STORAGE=elasticsearch7
-      #- SW_STORAGE_ES_CLUSTER_NODES=es:9200
+      - SW_STORAGE=elasticsearch7
+      - SW_STORAGE_ES_CLUSTER_NODES=175.27.243.44:9200
       - SW_CLUSTER=nacos
       - SW_CLUSTER_NACOS_HOST_PORT=1.117.205.58:8848
-      - SW_CLUSTER_NACOS_USERNAME = nacos
+      - SW_CLUSTER_NACOS_USERNAME=nacos
       - SW_CLUSTER_NACOS_PASSWORD=haozai
 
   skywaling-ui:

@@ -1,17 +1,14 @@
-package com.spring.cloud.fund.mq.receiver;
+package com.spring.cloud.fund.receiver;
 
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
-import com.spring.cloud.fund.mq.client.StreamClient;
-import com.spring.cloud.fund.mq.constant.MqConstant;
+import spring.cloud.base.mq.starter.base.client.StreamClient;
+import spring.cloud.base.mq.starter.base.constant.MqConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 
 /**
@@ -44,7 +41,7 @@ public class StreamReceiver {
         Long deliveryTag = (Long) message.getHeaders().get(AmqpHeaders.DELIVERY_TAG);
         log.info("延迟接收到消息：{}" , message);
         if(deliveryTag!=null&&channel!=null){
-            //channel.basicReject(deliveryTag,false);
+            channel.basicAck(deliveryTag,true);
         }
     }
 
@@ -56,6 +53,7 @@ public class StreamReceiver {
         if(deliveryTag!=null&&channel!=null){
 
         }
+        int num = 1/0;
     }
 
     @StreamListener(MqConstant.DEAD_LETTER_IN_PUT)

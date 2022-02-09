@@ -45,12 +45,6 @@ public class FundSubscribeController{
     @ApiOperation("当前用户获取所有订阅基金")
     @GetMapping("/code")
     public List code() {
-        LambdaQueryWrapper<FundSubscribe> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(FundSubscribe::getUserId, OAuth2ResourceUtil.getUserId());
-        List<FundSubscribe> list = fundSubscribeService.list(queryWrapper);
-        if(CollectionUtil.isNotEmpty(list)){
-            return list.stream().map(FundSubscribe::getFundCode).collect(Collectors.toList());
-        }
-        return null;
+        return fundSubscribeService.subscribeCode();
     }
 }

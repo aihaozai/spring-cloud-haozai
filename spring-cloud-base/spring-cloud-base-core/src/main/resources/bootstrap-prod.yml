@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod,prod-redis
+    active: prod
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -29,3 +29,11 @@ jasypt:
 tx-lcn:
   client:
     manager-address: ${TX_PUBLIC_IP}:8070
+
+logging:
+  level:
+    com:
+      alibaba:
+        nacos:
+          client:
+            naming: error

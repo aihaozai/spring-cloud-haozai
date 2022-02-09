@@ -1,0 +1,10 @@
+version: '3'
+services:
+  kibana:
+    image: kibana:7.14.2
+    container_name: kibana
+    restart: always
+    ports:
+      - 5601:5601
+    volumes:
+      - /data/kibana/config:/usr/share/kibana/config

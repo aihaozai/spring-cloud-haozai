@@ -37,19 +37,9 @@ import static com.spring.cloud.elasticsearch.constant.ElasticSearchConstant.SPLI
 @AllArgsConstructor
 public class SearchFundServiceImpl implements ISearchFundService {
 
-    private final IBaseSearchFundService baseSearchFundService;
-
     private final ElasticSearchService elasticSearchService;
 
     private final RestHighLevelClient client;
-
-    @Override
-    public void searchFundRealData(List<String> fundCodeList) throws IOException {
-        long time = System.currentTimeMillis();
-        List<FundRealDataDTO> result = baseSearchFundService.searchFundRealData(fundCodeList,FundRealDataDTO.class);
-        this.insertFundData(result);
-        log.info("插入数据结束，耗时："+(System.currentTimeMillis()-time)/1000);
-    }
 
     @Override
     public void createFundIndex(List<String> fundCodeList) {

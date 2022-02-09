@@ -1,6 +1,6 @@
-package com.spring.cloud.fund.mq.client;
+package spring.cloud.base.mq.starter.base.client;
 
-import com.spring.cloud.fund.mq.constant.MqConstant;
+import spring.cloud.base.mq.starter.base.constant.MqConstant;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.SubscribableChannel;
@@ -11,21 +11,6 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface StreamClient {
 
-    /**
-     *
-     * 消息输入
-     * @return org.springframework.messaging.SubscribableChannel
-     */
-    @Input(MqConstant.IN_PUT)
-    SubscribableChannel input();
-
-    /**
-     *
-     * 消息输出
-     * @return org.springframework.messaging.SubscribableChannel
-     */
-    @Output(MqConstant.OUT_PUT)
-    SubscribableChannel output();
 
     /**
      *
@@ -60,14 +45,6 @@ public interface StreamClient {
      */
     @Input(MqConstant.DLQ_IN_PUT)
     SubscribableChannel dlqInput();
-
-    /**
-     *
-     * 死信队列输出
-     * @return org.springframework.messaging.SubscribableChannel
-     */
-    @Output(MqConstant.DEAD_LETTER_OUT_PUT)
-    SubscribableChannel deadLetterOutput();
 
     /**
      *

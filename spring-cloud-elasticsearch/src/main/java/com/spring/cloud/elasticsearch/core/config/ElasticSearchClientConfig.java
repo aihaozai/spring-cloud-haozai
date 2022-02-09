@@ -1,9 +1,13 @@
 package com.spring.cloud.elasticsearch.core.config;
 
+import lombok.AllArgsConstructor;
 import org.apache.http.HttpHost;
+import org.apache.http.client.config.RequestConfig.Builder;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -17,12 +21,30 @@ import java.nio.charset.StandardCharsets;
  * @description 客户端配置
  * @date 2021/4/20  22:20
  */
+@AllArgsConstructor
 @Configuration
+@EnableConfigurationProperties(ElasticSearchProperties.class)
 public class ElasticSearchClientConfig {
+
+    private final ElasticSearchProperties elasticSearchProperties;
 
     @Bean
     public RestClientBuilder restClientBuilder() {
-        return RestClient.builder(new HttpHost("127.0.0.1", 9200, "http"));
+        RestClientBuilder builder = RestClient.builder(new HttpHost(elasticSearchProperties.getHost(), elasticSearchProperties.getPort(), elasticSearchProperties.getScheme()));
+
+        builder.setRequestConfigCallback(requestConfigBuilder -> {
+            requestConfigBuilder.setConnectTimeout(elasticSearchProperties.getConnectTimeOut());
+            requestConfigBuilder.setSocketTimeout(elasticSearchProperties.getSocketTimeOut());
+            requestConfigBuilder.setConnectionRequestTimeout(elasticSearchProperties.getConnectionRequestTimeOut());
+            return requestConfigBuilder;
+        });
+
+        builder.setHttpClientConfigCallback(httpClientBuilder -> {
+            httpClientBuilder.setMaxConnTotal(elasticSearchProperties.getMaxConnectTotal());
+            httpClientBuilder.setMaxConnPerRoute(elasticSearchProperties.getMaxConnectPerRoute());
+            return httpClientBuilder;
+        });
+        return builder;
     }
 
     @Bean

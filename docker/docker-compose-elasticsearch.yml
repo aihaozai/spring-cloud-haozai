@@ -1,0 +1,16 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.14.2
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - TAKE_FILE_OWNERSHIP=true
+    volumes:
+      - /data/es/logs:/usr/share/elasticsearch/logs
+      - /data/es/data:/usr/share/elasticsearch/data

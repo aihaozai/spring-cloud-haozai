@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: dev,dev-redis,swagger
+    active: dev,dev-redis,swagger,dev-mq
   application:
     name: cloud-oauth
   datasource:
@@ -31,4 +31,4 @@ swagger:
 
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework.security: INFO

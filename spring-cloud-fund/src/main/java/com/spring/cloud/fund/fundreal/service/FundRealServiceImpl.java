@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.spring.cloud.fund.fundreal.entity.FundReal;
 import com.spring.cloud.fund.fundreal.mapper.FundRealMapper;
 import com.spring.cloud.fund.fundreal.model.FundRealVO;
+import com.spring.cloud.fund.fundsubscribe.service.IFundSubscribeService;
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,6 +30,8 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
     private final FundRealMapper fundRealMapper;
 
+    private final IFundSubscribeService subscribeService;
+
     @Override
     public void insertBatch(List<FundReal> fundRealList) {
         this.fundRealMapper.insertBatch(fundRealList);
@@ -40,7 +44,7 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
 
     @Override
     public List<FundRealVO> getFundRealData() {
-        return this.getFundReal(null);
+        return this.getFundReal(subscribeService.subscribeCode());
     }
 
     @Override
@@ -53,22 +57,18 @@ public class FundRealServiceImpl extends ServiceImpl<FundRealMapper, FundReal> i
         this.fundRealMapper.addIndex();
     }
 
-    @Override
-    public List<FundRealVO> subscribeFundReal(String codes) {
-        return this.getFundReal(codes);
-    }
-
-    private List<FundRealVO> getFundReal(String codes){
+    private List<FundRealVO> getFundReal(List<String> codeList){
+        if (CollectionUtils.isEmpty(codeList)) {
+            return null;
+        }
         DecimalFormat df = new DecimalFormat("######0.00");
         String date = this.queryLastDate();
 
         QueryWrapper<FundReal> fundRealQueryWrapper = new QueryWrapper<>();
         fundRealQueryWrapper.eq("searchtime",date);
-        if(StringUtils.isNotBlank(codes)){
-            fundRealQueryWrapper.in("fundcode",codes.split(","));
-        }
+        fundRealQueryWrapper.in("fundcode",codeList);
 
-        List<FundRealVO> voList = fundRealMapper.fundList(new QueryWrapper<>().in("fund_code",codes.split(",")));
+        List<FundRealVO> voList = fundRealMapper.fundList(new QueryWrapper<>().in("fund_code",codeList));
         List<FundReal> fundRealList = super.list(fundRealQueryWrapper);
         voList.forEach(f-> {
                     List<FundReal> filterList = fundRealList.stream()
