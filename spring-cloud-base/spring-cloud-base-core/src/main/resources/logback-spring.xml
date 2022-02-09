@@ -93,8 +93,6 @@
 
     <springProfile name="prod">
         <root level="info">
-            <appender-ref ref="file_info"/>
-            <appender-ref ref="file_error"/>
             <appender-ref ref="skywalking_log"/>
         </root>
     </springProfile>
